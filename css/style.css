@@ -1643,9 +1643,6 @@ pre .css ~ * .id {
 .footer-right {
   float: right;
 }
-.footer-center {
-  float: center;
-}
 .share {
   padding: 0px 75px 30px 40px;
   margin-bottom: 15px;
