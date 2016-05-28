@@ -1624,7 +1624,9 @@ pre .id,
 pre .css ~ * .id {
   color: #fd971f;
 }
-#footer {
+#footer,
+busuanzi_container_site_pv,
+busuanzi_container_page_pv {
   font-size: 12px;
   font-family: Menlo, Monaco, "Andale Mono", "lucida console", "Courier New", monospace;
   text-shadow: 0 1px #fff;
@@ -1634,7 +1636,9 @@ pre .css ~ * .id {
   width: 100%;
   text-align: center;
 }
-#footer .outer {
+#footer .outer,
+busuanzi_container_site_pv .outer,
+busuanzi_container_page_pv .outer {
   padding: 0 30px;
 }
 .footer-left {
