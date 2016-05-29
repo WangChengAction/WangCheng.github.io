@@ -6,37 +6,31 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <title>Ch_1_初识Python网络爬虫 | code_Wang Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#初识爬虫
-学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。
+  <meta name="description" content="初识爬虫学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。
 好，让我们一步一步来。
 环境：Python3.5  | MacOs X EICaption
-##浏览器信息的获取过程
-假设我有一台主机，然后准备连接一个服务器：
+浏览器信息的获取过程:假设我有一台主机，然后准备连接一个服务器：
 
-首先我的主机会发送一连串的比">
+首先我的主机会发送一连串的比特值，这">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ch_1_初识Python网络爬虫">
 <meta property="og:url" content="http://yoursite.com/2016/05/28/Ch-1-初始Python网络爬虫/index.html">
 <meta property="og:site_name" content="code_Wang Site">
-<meta property="og:description" content="#初识爬虫
-学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。
+<meta property="og:description" content="初识爬虫学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。
 好，让我们一步一步来。
 环境：Python3.5  | MacOs X EICaption
-##浏览器信息的获取过程
-假设我有一台主机，然后准备连接一个服务器：
+浏览器信息的获取过程:假设我有一台主机，然后准备连接一个服务器：
 
-首先我的主机会发送一连串的比">
-<meta property="og:updated_time" content="2016-05-29T00:12:59.000Z">
+首先我的主机会发送一连串的比特值，这">
+<meta property="og:updated_time" content="2016-05-29T00:27:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ch_1_初识Python网络爬虫">
-<meta name="twitter:description" content="#初识爬虫
-学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。
+<meta name="twitter:description" content="初识爬虫学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。
 好，让我们一步一步来。
 环境：Python3.5  | MacOs X EICaption
-##浏览器信息的获取过程
-假设我有一台主机，然后准备连接一个服务器：
+浏览器信息的获取过程:假设我有一台主机，然后准备连接一个服务器：
 
-首先我的主机会发送一连串的比">
+首先我的主机会发送一连串的比特值，这">
   
     <link rel="alternative" href="/atom.xml" title="code_Wang Site" type="application/atom+xml">
   
@@ -116,7 +110,7 @@
 						
 							<li><a href="/">主页</a></li>
 				        
-							<li><a href="/categories/随笔">随笔</a></li>
+							<li><a href="/categories/notes">Notes</a></li>
 				        
 							<li><a href="/categories/python">Python</a></li>
 				        
@@ -146,7 +140,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/blog-test-hexo/" style="font-size: 10px;">blog_test,hexo</a> <a href="/tags/python-scraping/" style="font-size: 10px;">python | scraping</a>
+						<a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/scraping/" style="font-size: 10px;">scraping</a>
 					</div>
 				</section>
 				
@@ -198,7 +192,7 @@
 				
 					<li><a href="/">主页</a></li>
 		        
-					<li><a href="/categories/随笔">随笔</a></li>
+					<li><a href="/categories/notes">Notes</a></li>
 		        
 					<li><a href="/categories/python">Python</a></li>
 		        
@@ -254,7 +248,7 @@
       <div class="article-info article-info-post">
         
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python-scraping/">python | scraping</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
 	</div>
 
         
@@ -269,12 +263,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#初识爬虫</p>
-<p>学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。</p>
+        <h1 id="初识爬虫"><a href="#初识爬虫" class="headerlink" title="初识爬虫"></a>初识爬虫</h1><p>学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。</p>
 <p>好，让我们一步一步来。</p>
 <p>环境：Python3.5  | MacOs X EICaption</p>
-<p>##浏览器信息的获取过程</p>
-<p>假设我有一台主机，然后准备连接一个服务器：</p>
+<h3 id="浏览器信息的获取过程"><a href="#浏览器信息的获取过程" class="headerlink" title="浏览器信息的获取过程:"></a>浏览器信息的获取过程:</h3><p>假设我有一台主机，然后准备连接一个服务器：</p>
 <ol>
 <li><p>首先我的主机会发送一连串的比特值，这些比特值构成的信息包括两个部分，一是请求头，二是消息体；其中，请求头中包括我的本地路由器的Mac地址以及我将要连接的服务器的IP地址，然后消息体中包含了我发出的请求；</p>
 </li>
@@ -285,14 +277,13 @@
 <li>网络服务器收到服务器处理器传过来的数据：这是一个GET请求；请求文件index.html；</li>
 <li>网络服务器应用找到对应的html文件，然后打包成一个新的数据包发回到我的路由器中，然后传到我的主机，到这儿，浏览器的信息即获取成功。</li>
 </ol>
-<p>‘</p>
+<!--0-->
 <pre><code>from urllib.request import urlopen
 
 html = urlopen(&quot;http://www.baidu.com&quot;)
 
 print(html.read())
-</code></pre><p>`</p>
-
+</code></pre>
       
     </div>
     
