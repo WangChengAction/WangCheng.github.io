@@ -124,7 +124,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/cookbook/" style="font-size: 15px;">cookbook</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scraping/" style="font-size: 10px;">scraping</a>
+						<a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/cookbook/" style="font-size: 15px;">cookbook</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scraping/" style="font-size: 15px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
 					</div>
 				</section>
 				
@@ -207,6 +207,81 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="pages-Ch-2-Urllib库" class="article article-type-pages" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/31/Ch-2-Urllib库/" class="article-date">
+  	<time datetime="2016-05-31T07:37:28.000Z" itemprop="datePublished">2016-05-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/05/31/Ch-2-Urllib库/">Ch-2-Urllib库</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Urllib是python的标准库，包含了一些处理Url的模块：</p>
+<ul>
+<li>urllib.request 用于打开和读取urls</li>
+<li>urllib.error 包含一些urllib.request内抛出的异常</li>
+<li>urllib.parse 主要用于对Url进行分析</li>
+<li>urllib.robotparser 用于解析robots.txt文件</li>
+</ul>
+<p>以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他其实是一个协议而非命令，搜索引擎访问网站的时候要看的第一个文件就是robot.txt，他可以告诉爬虫程序在服务器上什么文件是可以被查看的。</p>
+<blockquote>
+<p> 比如：<br>    当一个搜索爬虫访问一个站点，它首先会检查该站点目录下是否存在robots.txt，如果存在，爬虫就会按照该文件中的内容来确定访问的范围；如果不存在，所有爬虫则均能访问网站上所有没有被口令保护的页面。</p>
+</blockquote>
+<p>好，接下来我们分别看这四个模块。</p>
+<h1 id="urlllib-request"><a href="#urlllib-request" class="headerlink" title="urlllib.request"></a>urlllib.request</h1><p>urllib.request定义了一些类和函数，来帮助我们打开和读取一些urls。<br>它定义了如下函数：<br><!--0--></p>
+<pre><code>urllib.request.urlopen(url,data=None,[timeout,]*,cafile=None,capath=None,cadefault=False，context=None)
+</code></pre><p>打开一个url，即可以是一段字符串，也可以是一个Request对象。<br>data表示以Get或Post的方式提交到url的数据。</p>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/urllib/">urllib</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/python/">python</a>
+	</div>
+
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="pages-Cookbook-1-2从任意程度的可迭代对象中分解元素" class="article article-type-pages" itemscope itemprop="blogPost">
   
@@ -412,7 +487,10 @@ ValueError: not enough values to unpack (expected 3, got 2)
 html = urlopen(&quot;http://www.baidu.com&quot;)
 
 print(html.read())
-</code></pre>
+</code></pre><p>上面的这段代码会输出”wwww.baidu.com”这个页面的全部Html代码，<br><!--0--></p>
+<pre><code>from urllib.request import urlopen
+</code></pre><p>这句话是查找Python的urllib库内的request模块，然后导入这个模块内的一个函数urlopen，这个函数的作用是用来打开并读取一个从网络获取的远程的对象。<br>而urllib是python的标准库，包含了从网络请求数据，处理cookie，改变请求头，用户代理等一系列的函数。<br>具体内容可以参考urllib的文档：[<a href="https://docs.python.org/3.5/library/urllib.html" target="_blank" rel="external">https://docs.python.org/3.5/library/urllib.html</a>]</p>
+
       
     </div>
     

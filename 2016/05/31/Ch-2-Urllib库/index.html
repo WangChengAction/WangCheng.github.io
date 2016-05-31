@@ -4,17 +4,39 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Category: notes | code_Wang Site</title>
+  <title>Ch-2-Urllib库 | code_Wang Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Never Give Up!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="code_Wang Site">
-<meta property="og:url" content="http://yoursite.com/categories/notes/index.html">
+  <meta name="description" content="Urllib是python的标准库，包含了一些处理Url的模块：
+
+urllib.request 用于打开和读取urls
+urllib.error 包含一些urllib.request内抛出的异常
+urllib.parse 主要用于对Url进行分析
+urllib.robotparser 用于解析robots.txt文件
+
+以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ch-2-Urllib库">
+<meta property="og:url" content="http://yoursite.com/2016/05/31/Ch-2-Urllib库/index.html">
 <meta property="og:site_name" content="code_Wang Site">
-<meta property="og:description" content="Never Give Up!">
+<meta property="og:description" content="Urllib是python的标准库，包含了一些处理Url的模块：
+
+urllib.request 用于打开和读取urls
+urllib.error 包含一些urllib.request内抛出的异常
+urllib.parse 主要用于对Url进行分析
+urllib.robotparser 用于解析robots.txt文件
+
+以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他">
+<meta property="og:updated_time" content="2016-05-31T08:09:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="code_Wang Site">
-<meta name="twitter:description" content="Never Give Up!">
+<meta name="twitter:title" content="Ch-2-Urllib库">
+<meta name="twitter:description" content="Urllib是python的标准库，包含了一些处理Url的模块：
+
+urllib.request 用于打开和读取urls
+urllib.error 包含一些urllib.request内抛出的异常
+urllib.parse 主要用于对Url进行分析
+urllib.robotparser 用于解析robots.txt文件
+
+以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他">
   
     <link rel="alternative" href="/atom.xml" title="code_Wang Site" type="application/atom+xml">
   
@@ -206,57 +228,127 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
+      <div class="body-wrap"><article id="pages-Ch-2-Urllib库" class="article article-type-pages" itemscope itemprop="blogPost">
   
-  
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2016" class="archive-year">2016</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-pages">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2016/05/27/My-new-post/" class="archive-article-date">
-  	<time datetime="2016-05-27T09:00:17.000Z" itemprop="datePublished">May 27</time>
+    <div class="article-meta">
+      <a href="/2016/05/31/Ch-2-Urllib库/" class="article-date">
+  	<time datetime="2016-05-31T07:37:28.000Z" itemprop="datePublished">2016-05-31</time>
 </a>
-        </div>
-    	 
+    </div>
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2016/05/27/My-new-post/">My new post</a>
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Ch-2-Urllib库
     </h1>
   
 
-        <div class="article-info info-on-right">
-          
+      </header>
+      
+      <div class="article-info article-info-post">
+        
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/blog-test/">blog_test</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/urllib/">urllib</a></li></ul>
 	</div>
 
-          
+        
 	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/notes/">notes</a>
+	<a class="article-category-link" href="/categories/python/">python</a>
 	</div>
 
 
-        </div>
         <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
+      </div>
+      
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Urllib是python的标准库，包含了一些处理Url的模块：</p>
+<ul>
+<li>urllib.request 用于打开和读取urls</li>
+<li>urllib.error 包含一些urllib.request内抛出的异常</li>
+<li>urllib.parse 主要用于对Url进行分析</li>
+<li>urllib.robotparser 用于解析robots.txt文件</li>
+</ul>
+<p>以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他其实是一个协议而非命令，搜索引擎访问网站的时候要看的第一个文件就是robot.txt，他可以告诉爬虫程序在服务器上什么文件是可以被查看的。</p>
+<blockquote>
+<p> 比如：<br>    当一个搜索爬虫访问一个站点，它首先会检查该站点目录下是否存在robots.txt，如果存在，爬虫就会按照该文件中的内容来确定访问的范围；如果不存在，所有爬虫则均能访问网站上所有没有被口令保护的页面。</p>
+</blockquote>
+<p>好，接下来我们分别看这四个模块。</p>
+<h1 id="urlllib-request"><a href="#urlllib-request" class="headerlink" title="urlllib.request"></a>urlllib.request</h1><p>urllib.request定义了一些类和函数，来帮助我们打开和读取一些urls。<br>它定义了如下函数：<br><!--0--></p>
+<pre><code>urllib.request.urlopen(url,data=None,[timeout,]*,cafile=None,capath=None,cadefault=False，context=None)
+</code></pre><p>打开一个url，即可以是一段字符串，也可以是一个Request对象。<br>data表示以Get或Post的方式提交到url的数据。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/30/Cookbook-1-2从任意程度的可迭代对象中分解元素/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Cookbook 1.2从任意程度的可迭代对象中分解元素</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Ch-2-Urllib库" data-title="Ch-2-Urllib库" data-url="http://yoursite.com/2016/05/31/Ch-2-Urllib库/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
 
 </div>
       <footer id="footer">
@@ -290,10 +382,10 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
-		isCategory: true,
+		isCategory: false,
 		open_in_new: false
 	}
 </script>
