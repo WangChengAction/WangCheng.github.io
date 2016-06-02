@@ -26,7 +26,7 @@ urllib.parse 主要用于对Url进行分析
 urllib.robotparser 用于解析robots.txt文件
 
 以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他">
-<meta property="og:updated_time" content="2016-06-01T08:45:12.000Z">
+<meta property="og:updated_time" content="2016-06-01T15:31:35.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ch-2-Urllib库">
 <meta name="twitter:description" content="Urllib是python的标准库，包含了一些处理Url的模块：
@@ -146,7 +146,7 @@ urllib.robotparser 用于解析robots.txt文件
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/cookbook/" style="font-size: 15px;">cookbook</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scraping/" style="font-size: 15px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
+						<a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scraping/" style="font-size: 20px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
 					</div>
 				</section>
 				
@@ -377,7 +377,9 @@ print(html.read())
 <p>第三种异常类型<br><!--0--></p>
 <pre><code>urllib.error.ContentTooShortError(msg,content)
 </code></pre><p>这个异常是当函数urlretrieve()查询到的下载数据的数量少于期望的数量时抛出的。</p>
-
+<h1 id="urllib-parse"><a href="#urllib-parse" class="headerlink" title="urllib.parse"></a>urllib.parse</h1><p>parse的源代码在这里：[<a href="https://hg.python.org/cpython/file/3.5/Lib/urllib/parse.py" target="_blank" rel="external">https://hg.python.org/cpython/file/3.5/Lib/urllib/parse.py</a>]<br>这个模块定义了许多处理URL的函数，它可以对URL进行解析，将其解析成不同的部分，同样也可以将不同的部分拼装成URL，甚至可以将相对URL转换成绝对URL。<br>这个模块已经被设计为在相对Url上匹配Internet RFC。它支持下列的Url模式：<code>file</code>, <code>ftp</code>, <code>gopher</code>, <code>hdl</code>, <code>http</code>, <code>https</code>, <code>imap</code>, <code>mailto</code>, <code>mms</code>, <code>news</code>, <code>nntp</code>, <code>prospero</code>, <code>rsync</code>, <code>rtsp</code>, <code>rtspu</code>, <code>sftp</code>, <code>shttp</code>, <code>sip</code>, <code>sips</code>, <code>snews</code>, <code>svn</code>, <code>svn+ssh</code>, <code>telnet</code>, <code>wais</code>.<br>Urllib.parser模块定义的这些函数有两大功能：网址解析和Url引用。下面的内容中我们将会详细进行解释：<br><strong>Url Parsing （URL解析）</strong><br>Url解析部分的函数主要是用于将Url字符串解析成不同的部分，或者将不同部分的Url部分合并成Url字符串。<br><!--0--></p>
+<pre><code>urllib.parse.urlparse(urlstring,scheme=&quot;,allow_fragments=True)
+</code></pre>
       
     </div>
     
@@ -387,8 +389,8 @@ print(html.read())
 <nav id="article-nav">
   
   
-    <a href="/2016/05/30/Cookbook-1-2从任意程度的可迭代对象中分解元素/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Cookbook 1.2从任意程度的可迭代对象中分解元素</div>
+    <a href="/2016/05/28/Ch-1-初识Python网络爬虫/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Ch_1_初识Python网络爬虫</div>
       <strong class="article-nav-caption">></strong>
     </a>
   
