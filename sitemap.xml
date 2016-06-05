@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/31/Ch-2-Urllib%E5%BA%93/</loc>
+    
+    <lastmod>2016-06-05T09:44:18.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/28/Ch-1-%E5%88%9D%E8%AF%86Python%E7%BD%91%E7%BB%9C%E7%88%AC%E8%99%AB/</loc>
+    
+    <lastmod>2016-05-31T07:19:20.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/2016/05/27/My-new-post/</loc>
+    
+    <lastmod>2016-05-29T00:30:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/categories/index.html</loc>
+    
+    <lastmod>2016-05-27T15:08:39.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/notes/index.html</loc>
+    
+    <lastmod>2016-05-27T15:05:22.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://yoursite.com/tags/index.html</loc>
+    
+    <lastmod>2016-05-27T15:04:55.000Z</lastmod>
+    
+  </url>
+  
+</urlset>

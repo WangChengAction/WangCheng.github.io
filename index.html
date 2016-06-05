@@ -234,6 +234,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+        
+            <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-urlllib-request模块"><span class="toc-text">1 urlllib.request模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-urlopen"><span class="toc-text">1.1 urlopen()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Request"><span class="toc-text">1.2 Request()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-response"><span class="toc-text">1.3 response()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-urllib-error模块"><span class="toc-text">2 urllib.error模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-URLError"><span class="toc-text">2.1 URLError()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-HTTPError"><span class="toc-text">2.2 HTTPError()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-ContentTooShortError"><span class="toc-text">2.3 ContentTooShortError()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-urllib-parse模块"><span class="toc-text">3 urllib.parse模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-urlparse"><span class="toc-text">3.1 urlparse()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-parse-qs"><span class="toc-text">3.2 parse_qs()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-parse-qsl"><span class="toc-text">3.3 parse_qsl()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-urlunparse"><span class="toc-text">3.4 urlunparse()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-urlsplit"><span class="toc-text">3.5 urlsplit()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-urlunsplit"><span class="toc-text">3.6 urlunsplit()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-urljoin"><span class="toc-text">3.7 urljoin()</span></a></li></ol></li></ol>
+            </div>
+        
         <p>Urllib是python的标准库，包含了一些处理Url的模块：</p>
 <ul>
 <li>urllib.request 用于打开和读取urls</li>
@@ -246,7 +252,8 @@
 <p> 比如：<br>    当一个搜索爬虫访问一个站点，它首先会检查该站点目录下是否存在robots.txt，如果存在，爬虫就会按照该文件中的内容来确定访问的范围；如果不存在，所有爬虫则均能访问网站上所有没有被口令保护的页面。</p>
 </blockquote>
 <p>好，接下来我们分别看这四个模块。</p>
-<h1 id="urlllib-request"><a href="#urlllib-request" class="headerlink" title="urlllib.request"></a>urlllib.request</h1><p>urllib.request定义了一些类和函数，来帮助我们打开和读取一些urls。<br>它定义了如下函数：<br><!--0--></p>
+<h1 id="1-urlllib-request模块"><a href="#1-urlllib-request模块" class="headerlink" title="1 urlllib.request模块"></a>1 urlllib.request模块</h1><p>urllib.request定义了一些类和函数，来帮助我们打开和读取一些urls。<br>它定义了如下函数：</p>
+<h2 id="1-1-urlopen"><a href="#1-1-urlopen" class="headerlink" title="1.1 urlopen()"></a>1.1 urlopen()</h2><!--0-->
 <pre><code>urllib.request.urlopen(url,data=None,[timeout,]*,cafile=None,capath=None,cadefault=False，context=None)
 </code></pre><p>打开一个url，即可以是一段字符串，也可以是一个Request对象。<br>data必须是一个byte对象，它指定了想要传给服务器的额外数据。若没有额外数据（即Get方法），就可以用默认值None。data也可以是可迭代对象，此时Content-length值就需要在header中指明。目前，http请求是唯一使用data的请求，如果提供了data参数，那么默认的请求类型就不是Get而是Post了。<br>timeout是第三个参数，用来设置等待多久超时，为了解决一些网站实现响应过慢而造成的影响。<br>另外几个参数，context是用来描述SSL选择的，其余的没有使用过。<br>该函数总是返回一个对象，用于Context Manager，并且有以下几个方法：</p>
 <ol>
@@ -258,7 +265,8 @@
 <p>可以这样使用：<br><!--0--></p>
 <pre><code>html = urllib.request.urlopen(&quot;www.baidu.com&quot;)
 print(html.read())
-</code></pre><p>另外比较常用的函数还有：<br><!--0--></p>
+</code></pre><p>另外比较常用的函数还有：</p>
+<h2 id="1-2-Request"><a href="#1-2-Request" class="headerlink" title="1.2 Request()"></a>1.2 Request()</h2><!--0-->
 <pre><code>urllib.request.Request(url,data=None,headers={},origin_req_host=None,univerifiable=False,method=None)
 </code></pre><p>这个类是对url请求的抽象，实例化方法为：<br><!--0--></p>
 <pre><code>req = urllib.request.Request(&quot;www.baidu.com&quot;,data,{},None,False,None)
@@ -271,14 +279,15 @@ print(html.read())
 <li>application/x-www-form-urlencoded：浏览器提交web表单时使用</li>
 </ul>
 <p>origin_req_host和unverifable只是用于对第三方Http Cookie的处理。<br>origin_req_host应该是最初的transaction的请求主机，通过<strong>RF2965</strong>进行定义。它默认为<code>“http.cookiejar.request_host(self)”</code><br>method是指定http请求方式，这个必须是string类型，如‘GET’。若提供了这个参数，他会储存在method属性内，可以通过get_method()方法使用。</p>
-<!--0-->
+<h2 id="1-3-response"><a href="#1-3-response" class="headerlink" title="1.3 response()"></a>1.3 response()</h2><!--0-->
 <pre><code>urllib.response()
 </code></pre><p>urllib.response模块定义了操作响应的一些函数和对象。它典型的响应对象是一个addinfourl实例，通过定义一个info()方法，来返回headers和定义geturl()方法，来返回url。通常这些函数都是通过urllib.request内部调用的。<br>我们在调用urllib.request.urlopen()时就会返回一个response对象</p>
 <p>常用的函数就这些，接下来我们看urllib.error()</p>
-<h1 id="urllib-error"><a href="#urllib-error" class="headerlink" title="urllib.error"></a>urllib.error</h1><p>urllib.error模块定义了一些异常类，作用与由urllib.request引发的异常上，其基本的异常类是URLError。<br>接下来是urllib.error内包含的一些异常：<br><!--0--></p>
+<h1 id="2-urllib-error模块"><a href="#2-urllib-error模块" class="headerlink" title="2 urllib.error模块"></a>2 urllib.error模块</h1><p>urllib.error模块定义了一些异常类，作用与由urllib.request引发的异常上，其基本的异常类是URLError。<br>接下来是urllib.error内包含的一些异常：</p>
+<h2 id="2-1-URLError"><a href="#2-1-URLError" class="headerlink" title="2.1 URLError()"></a>2.1 URLError()</h2><!--0-->
 <pre><code>urllib.error.URLError
 </code></pre><p>handler发生异常的时候回抛这个错误，它有一个reason属性，是一个用来描述错误的字符串。<br>当网络连接出现问题（本地端、服务器端）时，就有可能出现这种异常，我们可以用try-except来捕获这种异常。</p>
-<!--0-->
+<h2 id="2-2-HTTPError"><a href="#2-2-HTTPError" class="headerlink" title="2.2 HTTPError()"></a>2.2 HTTPError()</h2><!--0-->
 <pre><code>urllib.error.HTTPError
 </code></pre><p>HTTPError用来处理外部HTTP异常的时候很有用,比如验证请求。它是URLError的子类，有三个属性：code（Http的状态码），reason（对error的描述，它通常是一个字符串），headers（造成错误的Http请求的响应header）。当我们使用urlopen发出一个请求时，服务器端会有一个应答，而这个应答中包含http的状态码（如404，403等），而其他不能处理的，urlopen就会产生一个HTTPError，对应相应的状态码。HTTP的状态码由RFC 2616定义，表示网页服务器Http响应状态的3位数字代码。<br>我们可以看一下常用的一些状态码，所有状态码的第一个数字代表了响应的五种状态之一。</p>
 <ul>
@@ -339,12 +348,71 @@ print(html.read())
 </ul>
 </li>
 </ul>
-<p>第三种异常类型<br><!--0--></p>
+<p>第三种异常类型</p>
+<h2 id="2-3-ContentTooShortError"><a href="#2-3-ContentTooShortError" class="headerlink" title="2.3 ContentTooShortError()"></a>2.3 ContentTooShortError()</h2><!--0-->
 <pre><code>urllib.error.ContentTooShortError(msg,content)
 </code></pre><p>这个异常是当函数urlretrieve()查询到的下载数据的数量少于期望的数量时抛出的。</p>
-<h1 id="urllib-parse"><a href="#urllib-parse" class="headerlink" title="urllib.parse"></a>urllib.parse</h1><p>parse的源代码在这里：[<a href="https://hg.python.org/cpython/file/3.5/Lib/urllib/parse.py" target="_blank" rel="external">https://hg.python.org/cpython/file/3.5/Lib/urllib/parse.py</a>]<br>这个模块定义了许多处理URL的函数，它可以对URL进行解析，将其解析成不同的部分，同样也可以将不同的部分拼装成URL，甚至可以将相对URL转换成绝对URL。<br>这个模块已经被设计为在相对Url上匹配Internet RFC。它支持下列的Url模式：<code>file</code>, <code>ftp</code>, <code>gopher</code>, <code>hdl</code>, <code>http</code>, <code>https</code>, <code>imap</code>, <code>mailto</code>, <code>mms</code>, <code>news</code>, <code>nntp</code>, <code>prospero</code>, <code>rsync</code>, <code>rtsp</code>, <code>rtspu</code>, <code>sftp</code>, <code>shttp</code>, <code>sip</code>, <code>sips</code>, <code>snews</code>, <code>svn</code>, <code>svn+ssh</code>, <code>telnet</code>, <code>wais</code>.<br>Urllib.parser模块定义的这些函数有两大功能：网址解析和Url引用。下面的内容中我们将会详细进行解释：<br><strong>Url Parsing （URL解析）</strong><br>Url解析部分的函数主要是用于将Url字符串解析成不同的部分，或者将不同部分的Url部分合并成Url字符串。<br><!--0--></p>
+<h1 id="3-urllib-parse模块"><a href="#3-urllib-parse模块" class="headerlink" title="3 urllib.parse模块"></a>3 urllib.parse模块</h1><p>parse的源代码在这里：[<a href="https://hg.python.org/cpython/file/3.5/Lib/urllib/parse.py" target="_blank" rel="external">https://hg.python.org/cpython/file/3.5/Lib/urllib/parse.py</a>]<br>这个模块定义了许多处理URL的函数，它可以对URL进行解析，将其解析成不同的部分，同样也可以将不同的部分拼装成URL，甚至可以将相对URL转换成绝对URL。<br>这个模块已经被设计为在相对Url上匹配Internet RFC。它支持下列的Url模式：<code>file</code>, <code>ftp</code>, <code>gopher</code>, <code>hdl</code>, <code>http</code>, <code>https</code>, <code>imap</code>, <code>mailto</code>, <code>mms</code>, <code>news</code>, <code>nntp</code>, <code>prospero</code>, <code>rsync</code>, <code>rtsp</code>, <code>rtspu</code>, <code>sftp</code>, <code>shttp</code>, <code>sip</code>, <code>sips</code>, <code>snews</code>, <code>svn</code>, <code>svn+ssh</code>, <code>telnet</code>, <code>wais</code>.<br>Urllib.parser模块定义的这些函数有两大功能：网址解析和Url引用。下面的内容中我们将会详细进行解释：<br><strong>Url Parsing （URL解析）</strong><br>Url解析部分的函数主要是用于将Url字符串解析成不同的部分，或者将不同部分的Url部分合并成Url字符串。</p>
+<h2 id="3-1-urlparse"><a href="#3-1-urlparse" class="headerlink" title="3.1 urlparse()"></a>3.1 urlparse()</h2><!--0-->
 <pre><code>urllib.parse.urlparse(urlstring,scheme=&quot;,allow_fragments=True)
-</code></pre>
+</code></pre><p>这个函数是将URL解析成六个Components，返回一个六元组。它与URl的通用架构相符合，即<code>schema://netloc/path;parameters?query#fragment</code>。每个元组项是一个字符串或为空。组件不能被解析为更小的部分，%后面也不会被解析，分隔符号并不是解析结果的一部分，除非用斜线转义。代码示例如下：<br><!--0--></p>
+<pre><code>&gt;&gt;&gt; from urllib.parse import urlparse
+&gt;&gt;&gt; o = urlparse(&apos;https://docs.python.org/3.5/library/urllib.parse.html#url-parsing&apos;)
+&gt;&gt;&gt; o
+ParseResult(scheme=&apos;https&apos;, netloc=&apos;docs.python.org&apos;, path=&apos;/3.5/library/urllib.parse.html&apos;, params=&apos;&apos;, query=&apos;&apos;, fragment=&apos;url-parsing&apos;)
+&gt;&gt;&gt; o.scheme
+&apos;https&apos;
+&gt;&gt;&gt; o.geturl()
+&apos;https://docs.python.org/3.5/library/urllib.parse.html#url-parsing&apos;
+&gt;&gt;&gt; urlparse(&apos;help/Python.html&apos;)
+ParseResult(scheme=&apos;&apos;, netloc=&apos;&apos;, path=&apos;help/Python.html&apos;, params=&apos;&apos;, query=&apos;&apos;, fragment=&apos;&apos;)
+&gt;&gt;&gt; urlparse(&apos;www.cwi.nl/%7Eguido/Python.html&apos;)
+ParseResult(scheme=&apos;&apos;, netloc=&apos;&apos;, path=&apos;www.cwi.nl/%7Eguido/Python.html&apos;, params=&apos;&apos;, query=&apos;&apos;, fragment=&apos;&apos;)
+</code></pre><p>Urlparse 只有当正确的添加‘//’时才能识别出netloc字段，如上例子，后两个网址netlic的值都为空。<br>这里面：</p>
+<ul>
+<li>scheme：Url scheme specifier</li>
+<li>netloc：Network location part</li>
+<li>path：Hierarchical path</li>
+<li>params：parameters for last path element</li>
+<li>query：Query component</li>
+<li><p>fragment：Fragment identifier</p>
+<h2 id="3-2-parse-qs"><a href="#3-2-parse-qs" class="headerlink" title="3.2 parse_qs()"></a>3.2 parse_qs()</h2><!--0-->
+<p>  urllib.parse.parse_qs(qs,keep_blank_values=False,strict_parsing=False,encoding=’utf-8’,errors=’replace’)</p>
+</li>
+</ul>
+<p>上述函数是解析给出字符串参数的查询字符串，返回一个字典类型，字典的Key是唯一的查询变量名，Value是每个名字值的列表。</p>
+<h2 id="3-3-parse-qsl"><a href="#3-3-parse-qsl" class="headerlink" title="3.3 parse_qsl()"></a>3.3 parse_qsl()</h2><!--0-->
+<pre><code>urllib.parse.parse_qsl(qs, keep_blank_values=False, strict_parsing=False, encoding=&apos;utf-8&apos;, errors=&apos;replace&apos;)
+</code></pre><p>上述函数同样是解析给出字符串参数的查询字符串，不同的是该函数返回的是一个名字列表。</p>
+<h2 id="3-4-urlunparse"><a href="#3-4-urlunparse" class="headerlink" title="3.4 urlunparse()"></a>3.4 urlunparse()</h2><!--0-->
+<pre><code>urllib.parse.urlunparse(parts)
+</code></pre><p>这个函数将<code>urlparse()</code>返回的六元组构建成一个正确格式的URL。</p>
+<h2 id="3-5-urlsplit"><a href="#3-5-urlsplit" class="headerlink" title="3.5 urlsplit()"></a>3.5 urlsplit()</h2><!--0-->
+<pre><code>urllib.parse.urlsplit(urlstring,schema=&quot;,allow_fragments=True)
+</code></pre><p>它与<code>urlparse()</code>相似，用法基本一致，但略有不同，split函数在分割的时候，path属性和params属性是在一起的。如：<br><!--0--></p>
+<pre><code>&gt;&gt;&gt; from urllib.parse import urlparse
+&gt;&gt;&gt; from urllib.parse import urlsplit
+&gt;&gt;&gt; o = urlparse(&apos;https://docs.python.org/3.5/library/urllib.parse.html#url-parsing&apos;)
+&gt;&gt;&gt; p = urlsplit(&apos;https://docs.python.org/3.5/library/urllib.parse.html#url-parsing&apos;)
+&gt;&gt;&gt; o
+ParseResult(scheme=&apos;https&apos;, netloc=&apos;docs.python.org&apos;, path=&apos;/3.5/library/urllib.parse.html&apos;, params=&apos;&apos;, query=&apos;&apos;, fragment=&apos;url-parsing&apos;)
+&gt;&gt;&gt; p
+SplitResult(scheme=&apos;https&apos;, netloc=&apos;docs.python.org&apos;, path=&apos;/3.5/library/urllib.parse.html&apos;, query=&apos;&apos;, fragment=&apos;url-parsing&apos;)
+</code></pre><p>我们可以看到split函数并没有params属性。它主要是用来分析Urlstring，返回的是一个五元组。</p>
+<h2 id="3-6-urlunsplit"><a href="#3-6-urlunsplit" class="headerlink" title="3.6 urlunsplit()"></a>3.6 urlunsplit()</h2><!--0-->
+<pre><code>urllib.parse.urlunsplit(parts)
+</code></pre><p>这个函数的作用与<code>urlunparse()</code>类似，但它合并的是<code>urlsplit()</code>函数返回的元组，将其合并成一个完整的Url字符串。</p>
+<h2 id="3-7-urljoin"><a href="#3-7-urljoin" class="headerlink" title="3.7 urljoin()"></a>3.7 urljoin()</h2><!--0-->
+<pre><code>urllib.parse.urljoin(base,url,allow_fragments=True)
+</code></pre><p>这个函数主要用来拼接Url，它以base为基地址，然后同url中的相对地址结合形成一个绝对地址。通俗的说，它使用基础Url的组成部分，尤其是解决方案、网络位置和部分路径，来提供相对Url所缺少的部分。例如：<br><!--0--></p>
+<pre><code>&gt;&gt;&gt; from urllib.parse import urljoin
+&gt;&gt;&gt; urljoin(&apos;http://www.cwi.nl/%7Eguido/Python.html&apos;, &apos;FAQ.html&apos;)
+&apos;http://www.cwi.nl/%7Eguido/FAQ.html&apos;
+</code></pre><p>注意：如果url是绝对url（即由<code>//</code>或<code>scheme://</code>开始的），那么这个url的主机名或scheme会出现在结果中。例如：<br><!--0--></p>
+<pre><code>&gt;&gt;&gt; urljoin(&apos;http://www.cwi.nl/%7Eguido/Python.html&apos;,&apos;//www.python.org/%7Eguido&apos;)
+&apos;http://www.python.org/%7Eguido&apos;
+</code></pre><p>若去掉url前面的<code>//</code>，则不会出现这种情况。所以，如果你不希望出现这种情况，应该先用<code>urlsplit()</code>和<code>urlunsplit()</code>对url进行预处理,消除可能的scheme和netloc部分。</p>
+
       
     </div>
     
@@ -404,6 +472,7 @@ print(html.read())
     
     <div class="article-entry" itemprop="articleBody">
       
+        
         <h1 id="初识爬虫"><a href="#初识爬虫" class="headerlink" title="初识爬虫"></a>初识爬虫</h1><p>学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。</p>
 <p>好，让我们一步一步来。</p>
 <p>环境：Python3.5  | MacOs X EICaption</p>
@@ -487,6 +556,7 @@ print(html.read())
     
     <div class="article-entry" itemprop="articleBody">
       
+        
         <h1 id="随笔"><a href="#随笔" class="headerlink" title="随笔"></a>随笔</h1><p>今天正式开始了在Github上写博客，先开始把之前学的东西整理一下，然后主要进行python的一些研究把，感觉自己对爬虫挺感兴趣，希望能在这条路上走下去。<br>然后，感谢亲爱的<strong>绝城</strong>一如既往的支持！</p>
 
       
