@@ -2317,3 +2317,18 @@ pre .css ~ * .id {
   height: 100%;
   overflow: hidden;
 }
+#btn {
+  width: 40px;
+  height: 40px;
+  position: fixed;
+  right: 65px;
+  bottom: 10px;
+  display: none;
+/*默认不显示*/
+  background: url("images/top_bg.png") no-repeat left top;
+/*图片的上半部分*/
+}
+#btn:hover {
+  background: url("images/top_bg.png") no-repeat 0 -39px;
+/*图片的下半部分*/
+}
