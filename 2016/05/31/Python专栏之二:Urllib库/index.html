@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Python专栏之二：Urllib库 | code_Wang Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Urllib是python的标准库，包含了一些处理Url的模块：
+
+urllib.request 用于打开和读取urls
+urllib.error 包含一些urllib.request内抛出的异常
+urllib.parse 主要用于对Url进行分析
+urllib.robotparser 用于解析robots.txt文件
+
+以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python专栏之二：Urllib库">
+<meta property="og:url" content="http://yoursite.com/2016/05/31/Python专栏之二:Urllib库/index.html">
+<meta property="og:site_name" content="code_Wang Site">
+<meta property="og:description" content="Urllib是python的标准库，包含了一些处理Url的模块：
+
+urllib.request 用于打开和读取urls
+urllib.error 包含一些urllib.request内抛出的异常
+urllib.parse 主要用于对Url进行分析
+urllib.robotparser 用于解析robots.txt文件
+
+以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他">
+<meta property="og:updated_time" content="2016-06-05T14:02:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python专栏之二：Urllib库">
+<meta name="twitter:description" content="Urllib是python的标准库，包含了一些处理Url的模块：
+
+urllib.request 用于打开和读取urls
+urllib.error 包含一些urllib.request内抛出的异常
+urllib.parse 主要用于对Url进行分析
+urllib.robotparser 用于解析robots.txt文件
+
+以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他">
+  
+    <link rel="alternative" href="/atom.xml" title="code_Wang Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://www.yangshuai.net/wp-content/uploads/2012/01/812.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Cheng Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/categories/notes">Notes</a></li>
+				        
+							<li><a href="/categories/python">Python</a></li>
+				        
+							<li><a href="/categories/html5">Html5</a></li>
+				        
+							<li><a href="/categories/学习笔记">学习笔记</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scraping/" style="font-size: 20px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/WangChengAction">我的github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">BTH软工小硕一枚、喜欢吃东西、喜欢跑步、喜欢我女朋友~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Cheng Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="http://www.yangshuai.net/wp-content/uploads/2012/01/812.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Cheng Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/categories/notes">Notes</a></li>
+		        
+					<li><a href="/categories/python">Python</a></li>
+		        
+					<li><a href="/categories/html5">Html5</a></li>
+		        
+					<li><a href="/categories/学习笔记">学习笔记</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="pages-Python专栏之二:Urllib库" class="article article-type-pages" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/05/31/Python专栏之二:Urllib库/" class="article-date">
+  	<time datetime="2016-05-31T07:37:28.000Z" itemprop="datePublished">2016-05-31</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python专栏之二：Urllib库
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/urllib/">urllib</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/python/">python</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+            <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-urlllib-request模块"><span class="toc-text">1 urlllib.request模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-urlopen"><span class="toc-text">1.1 urlopen()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Request"><span class="toc-text">1.2 Request()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-response"><span class="toc-text">1.3 response()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-urllib-error模块"><span class="toc-text">2 urllib.error模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-URLError"><span class="toc-text">2.1 URLError()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-HTTPError"><span class="toc-text">2.2 HTTPError()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-ContentTooShortError"><span class="toc-text">2.3 ContentTooShortError()</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-urllib-parse模块"><span class="toc-text">3 urllib.parse模块</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-urlparse"><span class="toc-text">3.1 urlparse()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-parse-qs"><span class="toc-text">3.2 parse_qs()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-parse-qsl"><span class="toc-text">3.3 parse_qsl()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-urlunparse"><span class="toc-text">3.4 urlunparse()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-urlsplit"><span class="toc-text">3.5 urlsplit()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-urlunsplit"><span class="toc-text">3.6 urlunsplit()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-urljoin"><span class="toc-text">3.7 urljoin()</span></a></li></ol></li></ol>
+            </div>
+        
+        <p>Urllib是python的标准库，包含了一些处理Url的模块：</p>
+<ul>
+<li>urllib.request 用于打开和读取urls</li>
+<li>urllib.error 包含一些urllib.request内抛出的异常</li>
+<li>urllib.parse 主要用于对Url进行分析</li>
+<li>urllib.robotparser 用于解析robots.txt文件</li>
+</ul>
+<p>以上是官方文档的原文，我翻译了一下，其中robot.txt是一个文本文件，他其实是一个协议而非命令，搜索引擎访问网站的时候要看的第一个文件就是robot.txt，他可以告诉爬虫程序在服务器上什么文件是可以被查看的。<br><a id="more"></a></p>
+<blockquote>
+<p> 比如：<br>    当一个搜索爬虫访问一个站点，它首先会检查该站点目录下是否存在robots.txt，如果存在，爬虫就会按照该文件中的内容来确定访问的范围；如果不存在，所有爬虫则均能访问网站上所有没有被口令保护的页面。</p>
+</blockquote>
+<p>好，接下来我们分别看这四个模块。</p>
+<h1 id="1-urlllib-request模块"><a href="#1-urlllib-request模块" class="headerlink" title="1 urlllib.request模块"></a>1 urlllib.request模块</h1><p>urllib.request定义了一些类和函数，来帮助我们打开和读取一些urls。<br>它定义了如下函数：</p>
+<h2 id="1-1-urlopen"><a href="#1-1-urlopen" class="headerlink" title="1.1 urlopen()"></a>1.1 urlopen()</h2><!--0-->
+<pre><code>urllib.request.urlopen(url,data=None,[timeout,]*,cafile=None,capath=None,cadefault=False，context=None)
+</code></pre><p>打开一个url，即可以是一段字符串，也可以是一个Request对象。<br>data必须是一个byte对象，它指定了想要传给服务器的额外数据。若没有额外数据（即Get方法），就可以用默认值None。data也可以是可迭代对象，此时Content-length值就需要在header中指明。目前，http请求是唯一使用data的请求，如果提供了data参数，那么默认的请求类型就不是Get而是Post了。<br>timeout是第三个参数，用来设置等待多久超时，为了解决一些网站实现响应过慢而造成的影响。<br>另外几个参数，context是用来描述SSL选择的，其余的没有使用过。<br>该函数总是返回一个对象，用于Context Manager，并且有以下几个方法：</p>
+<ol>
+<li>geturl() – 返回检索到的Url，通常用于判断是否出现重新导向。</li>
+<li>info() – 返回页面的元信息，诸如headers等。</li>
+<li>getcode() – 返回response的http状态码。</li>
+<li>read() – 返回http页面的内容 </li>
+</ol>
+<p>可以这样使用：<br><!--0--></p>
+<pre><code>html = urllib.request.urlopen(&quot;www.baidu.com&quot;)
+print(html.read())
+</code></pre><p>另外比较常用的函数还有：</p>
+<h2 id="1-2-Request"><a href="#1-2-Request" class="headerlink" title="1.2 Request()"></a>1.2 Request()</h2><!--0-->
+<pre><code>urllib.request.Request(url,data=None,headers={},origin_req_host=None,univerifiable=False,method=None)
+</code></pre><p>这个类是对url请求的抽象，实例化方法为：<br><!--0--></p>
+<pre><code>req = urllib.request.Request(&quot;www.baidu.com&quot;,data,{},None,False,None)
+</code></pre><p>其中：<br>url，data与之前urlopen中的用法相同。<br>headers必须是一个字典。他通常被用于“模仿”用户代理的头，用于通过浏览器来标识自己–一些Http服务只允许普通的浏览器的请求而抵制一些脚本。例如：Mozilla Firefox通过这样来标识它自己<code>“Mozilla/5.0 (X11; U; Linux i686) Gecko/20071127 Firefox/2.0.0.11”</code>,而urllib默认的用户代理是<code>“Python-urllib/2.6”</code>。<br>比如我们可以构建下面的headers：<br><code>headers = { &#39;User-Agent&#39; : &#39;Mozilla/4.0 (compatible; MSIE 5.5; Windows NT)&#39;,&#39;Referer&#39;:&#39;http://www.zhihu.com/articles&#39; }</code><br>这样，在传送请求时把headers传入Request参数里，这样就能应付“防盗机制”了。<br>另外headers有一些属性需要注意下：</p>
+<ul>
+<li>User-Agent：有些服务器或Proxy会通过该值来判断是否是浏览器发出的请求</li>
+<li>Content-type：在使用Rest接口时，服务器回来检查该值，用来确定HTTP Body中的内容该如何进行解析(在使用服务器提供的RESTful或SOAP服务时，Content-Type设置错误会导致服务器拒绝服务)</li>
+<li>application/xml：在XML RPC，如RESTful/SOAP调用时使用</li>
+<li>application/json：在JSON RPC调用时使用</li>
+<li>application/x-www-form-urlencoded：浏览器提交web表单时使用</li>
+</ul>
+<p>origin_req_host和unverifable只是用于对第三方Http Cookie的处理。<br>origin_req_host应该是最初的transaction的请求主机，通过<strong>RF2965</strong>进行定义。它默认为<code>“http.cookiejar.request_host(self)”</code><br>method是指定http请求方式，这个必须是string类型，如‘GET’。若提供了这个参数，他会储存在method属性内，可以通过get_method()方法使用。</p>
+<h2 id="1-3-response"><a href="#1-3-response" class="headerlink" title="1.3 response()"></a>1.3 response()</h2><!--0-->
+<pre><code>urllib.response()
+</code></pre><p>urllib.response模块定义了操作响应的一些函数和对象。它典型的响应对象是一个addinfourl实例，通过定义一个info()方法，来返回headers和定义geturl()方法，来返回url。通常这些函数都是通过urllib.request内部调用的。<br>我们在调用urllib.request.urlopen()时就会返回一个response对象</p>
+<p>常用的函数就这些，接下来我们看urllib.error()</p>
+<h1 id="2-urllib-error模块"><a href="#2-urllib-error模块" class="headerlink" title="2 urllib.error模块"></a>2 urllib.error模块</h1><p>urllib.error模块定义了一些异常类，作用与由urllib.request引发的异常上，其基本的异常类是URLError。<br>接下来是urllib.error内包含的一些异常：</p>
+<h2 id="2-1-URLError"><a href="#2-1-URLError" class="headerlink" title="2.1 URLError()"></a>2.1 URLError()</h2><!--0-->
+<pre><code>urllib.error.URLError
+</code></pre><p>handler发生异常的时候回抛这个错误，它有一个reason属性，是一个用来描述错误的字符串。<br>当网络连接出现问题（本地端、服务器端）时，就有可能出现这种异常，我们可以用try-except来捕获这种异常。</p>
+<h2 id="2-2-HTTPError"><a href="#2-2-HTTPError" class="headerlink" title="2.2 HTTPError()"></a>2.2 HTTPError()</h2><!--0-->
+<pre><code>urllib.error.HTTPError
+</code></pre><p>HTTPError用来处理外部HTTP异常的时候很有用,比如验证请求。它是URLError的子类，有三个属性：code（Http的状态码），reason（对error的描述，它通常是一个字符串），headers（造成错误的Http请求的响应header）。当我们使用urlopen发出一个请求时，服务器端会有一个应答，而这个应答中包含http的状态码（如404，403等），而其他不能处理的，urlopen就会产生一个HTTPError，对应相应的状态码。HTTP的状态码由RFC 2616定义，表示网页服务器Http响应状态的3位数字代码。<br>我们可以看一下常用的一些状态码，所有状态码的第一个数字代表了响应的五种状态之一。</p>
+<ul>
+<li>1xx消息：代表请求已被接受，需要继续处理。这类响应是临时响应，只包含状态行和某些可选的响应头信息，并以空行结束。如<ul>
+<li>100 Continue，客户端应继续发送请求</li>
+<li>101 Switching Protocols，服务器端已经理解了客户端请求，并将通过Upgrade消息头通知客户端采用不同的协议来完成这个请求。</li>
+<li>102 Processing，代表处理将被继续执行</li>
+</ul>
+</li>
+<li>2xx成功：代表请求已成功被服务器接收，理解并接受。如<ul>
+<li><strong>200 OK，请求已成功，请求所希望的响应头或数据体随此响应返回。</strong></li>
+<li>201 Created，请求已经被实现，而且有一个新的资源已经依据请求的需要而创建，且其URI已经随Location头信息返回。</li>
+<li>202 Accepted，服务器已接受请求，但尚未处理。</li>
+<li>203 Non-Authoritative Information，服务器已成功处理了请求，但返回的实体头部元信息不是在原始服务器上有效的确定集合，而是来自本地或者第三方的拷贝。</li>
+<li>204 No Content，服务器成功处理了请求，但不需要返回任何实体内容，并且希望返回更新了的元信息。</li>
+<li>205 Reset Content，服务器成功处理了请求，且没有返回任何内容。但是与204响应不同，返回此状态码的响应要求请求者重置文档视图。</li>
+<li>206 Partial Content，服务器已经成功处理了部分GET请求。</li>
+<li>207 Multi-Status，代表之后的消息体将是一个XML消息，并且可能依照之前子请求数量的不同，包含一系列独立的响应代码。</li>
+</ul>
+</li>
+<li>3xx重定向：代表需要客户端采取进一步的操作才能完成请求。通常这些状态码用来重定向，后续的请求地址（重定向目标）在本次响应的Location域中指明。如<ul>
+<li>300 Multiple Choices，被请求的资源有一系列可供选择的回馈信息，每个都有自己特定的地址和浏览器驱动的商议信息。用户或浏览器能够自行选择一个首选的地址进行重定向。</li>
+<li><strong>301 Moved Permanently，被请求的资源已永久移动到新位置，并且将来任何对此资源的引用都应该使用本响应返回的若干个Url之一。</strong></li>
+<li>302 Found，请求的资源现在临时从不同的Url响应请求。</li>
+<li>303 See Other，对应当前请求的响应可以在另一个Url上被找到，且客户端应当才去GET的方式访问那个资源。303响应禁止被缓存。</li>
+<li>304 Not Modified，如果客户端发送了一个带条件的GET请求且该请求已被允许，而文档的内容（自上次访问以来或者根据请求的条件）并没有改变，则服务器应当返回这个状态码。304响应禁止包含消息体。</li>
+<li>305 Use Proxy，被请求的资源必须通过指定的代理才能被访问。</li>
+<li>307 Temporary Redirect，请求的资源现在临时从不同的URL响应请求。</li>
+</ul>
+</li>
+<li>4xx客户端错误：这类的状态码代表了客户端看起来可能发生了错误，妨碍了服务器的处理。除非响应的是一个Head请求，否则服务器就应该返回一个解释当前错误状况的实体，以及这是临时的还是永久的状况。如<ul>
+<li>400 Bad Request，由于包含语法错误，当前请求无法被服务器理解。</li>
+<li>401 Unauthorized，当前请求需要用户验证。该响应必须包含一个适用于被请求资源的WWW-Authenticate信息头用以询问用户信息。</li>
+<li>402 Payment Required，为了将来可能的需求而预留的。</li>
+<li>403 Forbidden，服务器已经理解请求，但是拒绝执行它。</li>
+<li><strong>404 Not Found，请求失败，请求所希望得到的资源未被在服务器上发现。没有信息能够告诉用户这个状况到底是暂时的还是永久的。</strong></li>
+<li>405 Method Not Allowed，请求行中指定的请求方法不能被用于请求相应的资源。该响应必须返回一个Allow头信息用以表示处当前资源能够接收的请求方法列表。</li>
+<li>406 Not Acceptable，请求的资源的内容特性无法满足请求头中的条件，因而无法生成响应实体。</li>
+<li>407 Proxy Authentication Required，与401响应类似，只不过客户端必须在代理服务器上进行身份验证。</li>
+<li>408 Request Timeout，请求超时。客户端没有在服务器预备等待的时间内完成一个请求的发送。</li>
+<li>409 Conflict，由于和被请求的资源的当前状态之间存在冲突，请求无法完成。</li>
+<li>410 Gone，被请求的资源在服务器上已经不再可用，而且没有任何已知的转发地址。</li>
+<li>411 Length Required，服务器拒绝在没有定义Content-Length头的情况下接受请求。</li>
+<li>412 Precondition Failed，服务器在验证在请求的头字段中给出先决条件时，没能满足其中的一个或多个。</li>
+<li>413 Request Entity Too Large，服务器拒绝处理当前请求，因为该请求提交的实体数据大小超过了服务器愿意或者能够处理的范围。</li>
+<li>414 Request-URL Too Long，请求的URI长度超过了服务器能够解释的长度，因此服务器拒绝对该请求提供服务。</li>
+<li>415 Unsupported Media Type，对于当前请求的方法和所请求的资源，请求中提交的实体并不是服务器中所支持的格式，因此请求被拒绝。</li>
+</ul>
+</li>
+<li>5xx服务器错误：代表服务器在处理请求的过程中有错误或异常状态发生，也有可能是服务器意识到以当前的软硬件资源无法完成对请求的处理。如<ul>
+<li>500 Internal Server Error，服务器遇到了一个未曾预料的状况，导致了它无法完成对请求的处理。</li>
+<li>501 Not Implemented，服务器不支持当前请求所需要的某个功能。</li>
+<li>502 Bad Gateway，作为网关或者代理工作的服务器尝试执行请求时，从上游服务器接收到无效的响应。</li>
+<li>503 Service Unavailable，由于临时的服务器维护或者过载，服务器当前无法处理请求。</li>
+<li>504 Gateway Timeout，作为网关或者代理工作的服务器尝试执行请求时，未能及时从上游服务器（URI标识出的服务器，例如HTTP、FTP、LDAP）或者辅助服务器（例如DNS）收到响应。</li>
+<li>505 HTTP Version Not Supported，服务器不支持，或者拒绝支持在请求中使用的HTTP版本。</li>
+<li>506 Variant Also Negotiates，代表服务器存在内部配置错误：被请求的协商变元资源被配置为在透明内容协商中使用自己，因此在一个协商处理中不是一个合适的重点。</li>
+</ul>
+</li>
+</ul>
+<p>第三种异常类型</p>
+<h2 id="2-3-ContentTooShortError"><a href="#2-3-ContentTooShortError" class="headerlink" title="2.3 ContentTooShortError()"></a>2.3 ContentTooShortError()</h2><!--0-->
+<pre><code>urllib.error.ContentTooShortError(msg,content)
+</code></pre><p>这个异常是当函数urlretrieve()查询到的下载数据的数量少于期望的数量时抛出的。</p>
+<h1 id="3-urllib-parse模块"><a href="#3-urllib-parse模块" class="headerlink" title="3 urllib.parse模块"></a>3 urllib.parse模块</h1><p>parse的源代码在这里：[<a href="https://hg.python.org/cpython/file/3.5/Lib/urllib/parse.py" target="_blank" rel="external">https://hg.python.org/cpython/file/3.5/Lib/urllib/parse.py</a>]<br>这个模块定义了许多处理URL的函数，它可以对URL进行解析，将其解析成不同的部分，同样也可以将不同的部分拼装成URL，甚至可以将相对URL转换成绝对URL。<br>这个模块已经被设计为在相对Url上匹配Internet RFC。它支持下列的Url模式：<code>file</code>, <code>ftp</code>, <code>gopher</code>, <code>hdl</code>, <code>http</code>, <code>https</code>, <code>imap</code>, <code>mailto</code>, <code>mms</code>, <code>news</code>, <code>nntp</code>, <code>prospero</code>, <code>rsync</code>, <code>rtsp</code>, <code>rtspu</code>, <code>sftp</code>, <code>shttp</code>, <code>sip</code>, <code>sips</code>, <code>snews</code>, <code>svn</code>, <code>svn+ssh</code>, <code>telnet</code>, <code>wais</code>.<br>Urllib.parser模块定义的这些函数有两大功能：网址解析和Url引用。下面的内容中我们将会详细进行解释：<br><strong>Url Parsing （URL解析）</strong><br>Url解析部分的函数主要是用于将Url字符串解析成不同的部分，或者将不同部分的Url部分合并成Url字符串。</p>
+<h2 id="3-1-urlparse"><a href="#3-1-urlparse" class="headerlink" title="3.1 urlparse()"></a>3.1 urlparse()</h2><!--0-->
+<pre><code>urllib.parse.urlparse(urlstring,scheme=&quot;,allow_fragments=True)
+</code></pre><p>这个函数是将URL解析成六个Components，返回一个六元组。它与URl的通用架构相符合，即<code>schema://netloc/path;parameters?query#fragment</code>。每个元组项是一个字符串或为空。组件不能被解析为更小的部分，%后面也不会被解析，分隔符号并不是解析结果的一部分，除非用斜线转义。代码示例如下：<br><!--0--></p>
+<pre><code>&gt;&gt;&gt; from urllib.parse import urlparse
+&gt;&gt;&gt; o = urlparse(&apos;https://docs.python.org/3.5/library/urllib.parse.html#url-parsing&apos;)
+&gt;&gt;&gt; o
+ParseResult(scheme=&apos;https&apos;, netloc=&apos;docs.python.org&apos;, path=&apos;/3.5/library/urllib.parse.html&apos;, params=&apos;&apos;, query=&apos;&apos;, fragment=&apos;url-parsing&apos;)
+&gt;&gt;&gt; o.scheme
+&apos;https&apos;
+&gt;&gt;&gt; o.geturl()
+&apos;https://docs.python.org/3.5/library/urllib.parse.html#url-parsing&apos;
+&gt;&gt;&gt; urlparse(&apos;help/Python.html&apos;)
+ParseResult(scheme=&apos;&apos;, netloc=&apos;&apos;, path=&apos;help/Python.html&apos;, params=&apos;&apos;, query=&apos;&apos;, fragment=&apos;&apos;)
+&gt;&gt;&gt; urlparse(&apos;www.cwi.nl/%7Eguido/Python.html&apos;)
+ParseResult(scheme=&apos;&apos;, netloc=&apos;&apos;, path=&apos;www.cwi.nl/%7Eguido/Python.html&apos;, params=&apos;&apos;, query=&apos;&apos;, fragment=&apos;&apos;)
+</code></pre><p>Urlparse 只有当正确的添加‘//’时才能识别出netloc字段，如上例子，后两个网址netlic的值都为空。<br>这里面：</p>
+<ul>
+<li>scheme：Url scheme specifier</li>
+<li>netloc：Network location part</li>
+<li>path：Hierarchical path</li>
+<li>params：parameters for last path element</li>
+<li>query：Query component</li>
+<li><p>fragment：Fragment identifier</p>
+<h2 id="3-2-parse-qs"><a href="#3-2-parse-qs" class="headerlink" title="3.2 parse_qs()"></a>3.2 parse_qs()</h2><!--0-->
+<p>  urllib.parse.parse_qs(qs,keep_blank_values=False,strict_parsing=False,encoding=’utf-8’,errors=’replace’)</p>
+</li>
+</ul>
+<p>上述函数是解析给出字符串参数的查询字符串，返回一个字典类型，字典的Key是唯一的查询变量名，Value是每个名字值的列表。</p>
+<h2 id="3-3-parse-qsl"><a href="#3-3-parse-qsl" class="headerlink" title="3.3 parse_qsl()"></a>3.3 parse_qsl()</h2><!--0-->
+<pre><code>urllib.parse.parse_qsl(qs, keep_blank_values=False, strict_parsing=False, encoding=&apos;utf-8&apos;, errors=&apos;replace&apos;)
+</code></pre><p>上述函数同样是解析给出字符串参数的查询字符串，不同的是该函数返回的是一个名字列表。</p>
+<h2 id="3-4-urlunparse"><a href="#3-4-urlunparse" class="headerlink" title="3.4 urlunparse()"></a>3.4 urlunparse()</h2><!--0-->
+<pre><code>urllib.parse.urlunparse(parts)
+</code></pre><p>这个函数将<code>urlparse()</code>返回的六元组构建成一个正确格式的URL。</p>
+<h2 id="3-5-urlsplit"><a href="#3-5-urlsplit" class="headerlink" title="3.5 urlsplit()"></a>3.5 urlsplit()</h2><!--0-->
+<pre><code>urllib.parse.urlsplit(urlstring,schema=&quot;,allow_fragments=True)
+</code></pre><p>它与<code>urlparse()</code>相似，用法基本一致，但略有不同，split函数在分割的时候，path属性和params属性是在一起的。如：<br><!--0--></p>
+<pre><code>&gt;&gt;&gt; from urllib.parse import urlparse
+&gt;&gt;&gt; from urllib.parse import urlsplit
+&gt;&gt;&gt; o = urlparse(&apos;https://docs.python.org/3.5/library/urllib.parse.html#url-parsing&apos;)
+&gt;&gt;&gt; p = urlsplit(&apos;https://docs.python.org/3.5/library/urllib.parse.html#url-parsing&apos;)
+&gt;&gt;&gt; o
+ParseResult(scheme=&apos;https&apos;, netloc=&apos;docs.python.org&apos;, path=&apos;/3.5/library/urllib.parse.html&apos;, params=&apos;&apos;, query=&apos;&apos;, fragment=&apos;url-parsing&apos;)
+&gt;&gt;&gt; p
+SplitResult(scheme=&apos;https&apos;, netloc=&apos;docs.python.org&apos;, path=&apos;/3.5/library/urllib.parse.html&apos;, query=&apos;&apos;, fragment=&apos;url-parsing&apos;)
+</code></pre><p>我们可以看到split函数并没有params属性。它主要是用来分析Urlstring，返回的是一个五元组。</p>
+<h2 id="3-6-urlunsplit"><a href="#3-6-urlunsplit" class="headerlink" title="3.6 urlunsplit()"></a>3.6 urlunsplit()</h2><!--0-->
+<pre><code>urllib.parse.urlunsplit(parts)
+</code></pre><p>这个函数的作用与<code>urlunparse()</code>类似，但它合并的是<code>urlsplit()</code>函数返回的元组，将其合并成一个完整的Url字符串。</p>
+<h2 id="3-7-urljoin"><a href="#3-7-urljoin" class="headerlink" title="3.7 urljoin()"></a>3.7 urljoin()</h2><!--0-->
+<pre><code>urllib.parse.urljoin(base,url,allow_fragments=True)
+</code></pre><p>这个函数主要用来拼接Url，它以base为基地址，然后同url中的相对地址结合形成一个绝对地址。通俗的说，它使用基础Url的组成部分，尤其是解决方案、网络位置和部分路径，来提供相对Url所缺少的部分。例如：<br><!--0--></p>
+<pre><code>&gt;&gt;&gt; from urllib.parse import urljoin
+&gt;&gt;&gt; urljoin(&apos;http://www.cwi.nl/%7Eguido/Python.html&apos;, &apos;FAQ.html&apos;)
+&apos;http://www.cwi.nl/%7Eguido/FAQ.html&apos;
+</code></pre><p>注意：如果url是绝对url（即由<code>//</code>或<code>scheme://</code>开始的），那么这个url的主机名或scheme会出现在结果中。例如：<br><!--0--></p>
+<pre><code>&gt;&gt;&gt; urljoin(&apos;http://www.cwi.nl/%7Eguido/Python.html&apos;,&apos;//www.python.org/%7Eguido&apos;)
+&apos;http://www.python.org/%7Eguido&apos;
+</code></pre><p>若去掉url前面的<code>//</code>，则不会出现这种情况。所以，如果你不希望出现这种情况，应该先用<code>urlsplit()</code>和<code>urlunsplit()</code>对url进行预处理,消除可能的scheme和netloc部分。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/28/Python专栏之一:初识爬虫/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python专栏之一：初识爬虫</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+  
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+        <span class="donate_txt">
+            &uarr;<br>
+                    感谢您的支持！
+        </span>
+        <br>
+    </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+            <!-- 支付宝打赏图案 -->
+            <img src="/img/zhifubao.jpg" alt="支付宝打赏"> 
+            <!-- 微信打赏图案 -->
+            <img src="/img/weixin.jpg" alt="微信打赏">  
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+
+  
+  
+    <div class="article-footer-copyright">
+    <p><span>本文标题:</span><a href="/2016/05/31/Python专栏之二:Urllib库/">Python专栏之二：Urllib库</a></p>
+    <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
+    <p><span>发布时间:</span>2016/05/31 - 15:37:28</p>
+    <p><span>最后更新:</span>2016/06/05 - 22:02:20</p>
+    <p>
+        <span>原始链接:</span><a class="post-url" href="/2016/05/31/Python专栏之二:Urllib库/" title="Python专栏之二：Urllib库">http://yoursite.com/2016/05/31/Python专栏之二:Urllib库/</a>
+        <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/05/31/Python专栏之二:Urllib库/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        <script src="/js/clipboard.min.js"></script>
+        <script> var clipboard = new Clipboard('.copy-path'); </script>
+    </p>
+    <p>
+        <span>许可协议:</span><i class="fa fa-creative-commons"></i><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="中国大陆 (CC BY-NC-SA 4.0 CN)"> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </p>
+</div>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Python专栏之二:Urllib库" data-title="Python专栏之二：Urllib库" data-url="http://yoursite.com/2016/05/31/Python专栏之二:Urllib库/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Cheng Wang
+    	</div>
+        <div class="footer-center">
+            <span id="busuanzi_container_site_uv">
+            本站访客数<span id="busuanzi_value_site_uv"></span>人次
+            </span>
+            <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+            </span>
+        </div>
+    </div>
+  </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<div>
+   <a href="javascript:;" id="totop" title="回到顶部"></a> 
+</div>
+
+<script src="/js/totop.js"></script>
+
+
+  </div>
+</body>
+</html>
