@@ -851,8 +851,54 @@ a {
   padding-left: 8px;
   font-size: 12px;
 }
+.donate_bar {
+  text-align: center;
+  margin-top: 5%;
+}
+.donate_bar a.btn_donate {
+  display: inline-block;
+  width: 82px;
+  height: 82px;
+  margin-left: auto;
+  margin-right: auto;
+  background: url("http://img.t.sinajs.cn/t5/style/images/apps_PRF/e_media/btn_reward.gif") no-repeat;
+  -webkit-transition: background 0s;
+  -moz-transition: background 0s;
+  -o-transition: background 0s;
+  -ms-transition: background 0s;
+  -webkit-transition: background 0s;
+  -moz-transition: background 0s;
+  -ms-transition: background 0s;
+  transition: background 0s;
+}
+.donate_bar a.btn_donate:hover {
+  background-position: 0 -82px;
+}
+.donate_bar .donate_txt {
+  display: block;
+  color: #9d9d9d;
+  font: 14px/2 "Microsoft Yahei";
+}
+.donate_bar.hidden {
+  display: none;
+}
+.post-donate {
+  margin-top: 80px;
+}
+#donate_guide {
+  height: 210px;
+  width: 420px;
+  margin: 0 auto;
+}
+#donate_guide img {
+  height: 150px;
+  height: 150px;
+}
 .body-wrap {
   margin-bottom: 80px;
+}
+.share_addthis {
+  margin: 30px;
 }
 .article {
   margin: 30px;
@@ -860,6 +906,7 @@ a {
   border: 1px solid #ddd;
   background: #fff;
   -webkit-transition: all 0.2s ease-in;
+/*为文字添加黑幕遮挡*/
 }
 .article.show {
   visibility: visible;
@@ -875,6 +922,10 @@ a {
 }
 .article img {
   max-width: 100%;
+}
+.article .heimu {
+  background-color: #252525 !important;
+  color: #252525 !important;
 }
 @-webkit-keyframes cd-bounce-1 {
   0% {
@@ -1025,10 +1076,11 @@ a {
 }
 .article-entry h1 {
   margin-top: 30px;
+  font-weight: bold;
 }
 .article-entry h2 {
   margin-top: 20px;
-  font-weight: 300;
+  font-weight: bold;
   color: #574c4c;
   padding-bottom: 5px;
   border-bottom: 1px solid #ddd;
@@ -1216,6 +1268,44 @@ a {
 }
 #toc .toc-child {
   padding-left: 1.5em;
+}
+.copyright {
+  width: 90%;
+  max-width: 45em;
+  margin: 0 auto;
+  padding: 0.5em 1.8em;
+  border: 1px solid #d3d3d3;
+  font-size: 0.93em;
+  line-height: 2em;
+  word-break: break-word;
+  background: #4d4d4d;
+  color: #808080;
+}
+.copyright span {
+  margin-right: 1em;
+  color: #808080;
+  font-weight: normal;
+}
+.copyright a {
+  color: #808080;
+}
+.copyright a:hover {
+  font-weight: normal;
+  color: #eaeaea;
+  text-decoration: underline;
+}
+.copyright:hover p .copy-path::after {
+  content: "复制";
+}
+.copyright .post-url:hover {
+  font-weight: normal;
+}
+.copyright .copy-path {
+  margin-left: 1em;
+}
+.copyright .copy-path:hover {
+  color: #eaeaea;
+  cursor: pointer;
 }
 @-moz-keyframes cd-bounce-1 {
   0% {
@@ -2316,19 +2406,4 @@ pre .css ~ * .id {
   padding: 0;
   height: 100%;
   overflow: hidden;
-}
-#btn {
-  width: 40px;
-  height: 40px;
-  position: fixed;
-  right: 65px;
-  bottom: 10px;
-  display: none;
-/*默认不显示*/
-  background: url("images/top_bg.png") no-repeat left top;
-/*图片的上半部分*/
-}
-#btn:hover {
-  background: url("images/top_bg.png") no-repeat 0 -39px;
-/*图片的下半部分*/
 }
