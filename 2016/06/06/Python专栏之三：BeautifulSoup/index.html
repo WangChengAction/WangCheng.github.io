@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Python专栏之三：BeautifulSoup | code_Wang Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="该文档绝大部分是根据官方文档进行整理，便于自己进行总结归纳。
+
+1 Introduction我们在做爬虫的时候，不免会遇到BeautifulSoup，BeautifulSoupm的名字取自刘易斯在《爱丽丝梦游仙境》里的同名诗歌。那么这个库是用来做什么的呢？简单的说就是通过定位Html标签来从网页中提取数据，官方文档介绍：
+
+BeautifulSoup是一个可以从Html或Xml文件中提取数据的P">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python专栏之三：BeautifulSoup">
+<meta property="og:url" content="http://yoursite.com/2016/06/06/Python专栏之三：BeautifulSoup/index.html">
+<meta property="og:site_name" content="code_Wang Site">
+<meta property="og:description" content="该文档绝大部分是根据官方文档进行整理，便于自己进行总结归纳。
+
+1 Introduction我们在做爬虫的时候，不免会遇到BeautifulSoup，BeautifulSoupm的名字取自刘易斯在《爱丽丝梦游仙境》里的同名诗歌。那么这个库是用来做什么的呢？简单的说就是通过定位Html标签来从网页中提取数据，官方文档介绍：
+
+BeautifulSoup是一个可以从Html或Xml文件中提取数据的P">
+<meta property="og:updated_time" content="2016-06-14T08:19:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python专栏之三：BeautifulSoup">
+<meta name="twitter:description" content="该文档绝大部分是根据官方文档进行整理，便于自己进行总结归纳。
+
+1 Introduction我们在做爬虫的时候，不免会遇到BeautifulSoup，BeautifulSoupm的名字取自刘易斯在《爱丽丝梦游仙境》里的同名诗歌。那么这个库是用来做什么的呢？简单的说就是通过定位Html标签来从网页中提取数据，官方文档介绍：
+
+BeautifulSoup是一个可以从Html或Xml文件中提取数据的P">
+  
+    <link rel="alternative" href="/atom.xml" title="code_Wang Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/photo.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Cheng Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/categories/notes">Notes</a></li>
+				        
+							<li><a href="/categories/python">Python</a></li>
+				        
+							<li><a href="/categories/html">Html</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/Database/" style="font-size: 10px;">Database</a> <a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/book-note/" style="font-size: 10px;">book note</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/notes/" style="font-size: 10px;">notes</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/scraping/" style="font-size: 20px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/WangChengAction">我的github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">BTH软工小硕一枚、喜欢吃东西、喜欢跑步、喜欢我女朋友~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Cheng Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/photo.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Cheng Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/categories/notes">Notes</a></li>
+		        
+					<li><a href="/categories/python">Python</a></li>
+		        
+					<li><a href="/categories/html">Html</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="pages-Python专栏之三：BeautifulSoup" class="article article-type-pages" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/06/Python专栏之三：BeautifulSoup/" class="article-date">
+  	<time datetime="2016-06-06T09:11:07.000Z" itemprop="datePublished">2016-06-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python专栏之三：BeautifulSoup
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/BeautifulSoup/">BeautifulSoup</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/python/">python</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+            <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-Introduction"><span class="toc-text">1 Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-运行环境"><span class="toc-text">2 运行环境</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-模块安装"><span class="toc-text">3 模块安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-BeautifulSoup安装"><span class="toc-text">3.1 BeautifulSoup安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-安装中可能出现的问题"><span class="toc-text">3.2 安装中可能出现的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-安装解析器"><span class="toc-text">3.3 安装解析器</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-BautifulSoup的使用"><span class="toc-text">4 BautifulSoup的使用</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-对象的种类"><span class="toc-text">5 对象的种类</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1-Tag对象"><span class="toc-text">5.1 Tag对象</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-1-name属性"><span class="toc-text">5.1.1 name属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-2-attrs属性"><span class="toc-text">5.1.2 attrs属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-1-2-1-多值属性"><span class="toc-text">5.1.2.1 多值属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2-NavigablSing对象"><span class="toc-text">5.2 NavigablSing对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3-BautifulSoup对象"><span class="toc-text">5.3 BautifulSoup对象</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-4-Comment对象"><span class="toc-text">5.4 Comment对象</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-遍历文档树"><span class="toc-text">6 遍历文档树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#6-1-子节点"><span class="toc-text">6.1 子节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-1-tag的名字"><span class="toc-text">6.1.1 tag的名字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-2-contents和-children"><span class="toc-text">6.1.2 .contents和.children</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-3-descendants"><span class="toc-text">6.1.3 .descendants</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-4-string"><span class="toc-text">6.1.4 .string</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-5-strings和stripped-strings"><span class="toc-text">6.1.5 .strings和stripped_strings</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-2-父节点"><span class="toc-text">6.2 父节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-1-parent和-parents"><span class="toc-text">6.2.1 .parent和.parents</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-3-兄弟节点"><span class="toc-text">6.3 兄弟节点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-1-next-sibling和-previous-sibling"><span class="toc-text">6.3.1 .next_sibling和.previous_sibling</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-2-next-siblings和-previous-siblings"><span class="toc-text">6.3.2 .next_siblings和.previous_siblings</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-4-回退和前进"><span class="toc-text">6.4 回退和前进</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-1-next-element和-previous-element"><span class="toc-text">6.4.1 .next_element和.previous.element</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-2-next-elements和previous-elements"><span class="toc-text">6.4.2 next_elements和previous_elements</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-搜索文档树"><span class="toc-text">7 搜索文档树</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#7-1-过滤器"><span class="toc-text">7.1 过滤器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-1-字符串"><span class="toc-text">7.1.1 字符串</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-2-正则表达式"><span class="toc-text">7.1.2 正则表达式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-3-列表"><span class="toc-text">7.1.3 列表</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-4-True"><span class="toc-text">7.1.4 True</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-5-定义方法"><span class="toc-text">7.1.5 定义方法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-2-find-all"><span class="toc-text">7.2 find_all()</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-1-name参数"><span class="toc-text">7.2.1 name参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-2-keyword参数"><span class="toc-text">7.2.2 keyword参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-3-按CSS搜索"><span class="toc-text">7.2.3 按CSS搜索</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-4-text参数"><span class="toc-text">7.2.4 text参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-5-limit参数"><span class="toc-text">7.2.5 limit参数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-6-recursiv参数"><span class="toc-text">7.2.6 recursiv参数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-3-find"><span class="toc-text">7.3 find()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-4-find-parents-和find-parent"><span class="toc-text">7.4 find_parents()和find_parent()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-5-find-next-siblings-和find-next-sibling"><span class="toc-text">7.5 find_next_siblings()和find_next_sibling()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-6-find-previous-siblings-和sinf-previous-sibling"><span class="toc-text">7.6 find_previous_siblings()和sinf_previous_sibling()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-7-find-all-next-和find-next"><span class="toc-text">7.7 find_all_next()和find_next()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-8-find-all-previous-和find-previous"><span class="toc-text">7.8 find_all_previous()和find_previous()</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-9-CSS选择器"><span class="toc-text">7.9 CSS选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-输出"><span class="toc-text">8 输出</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-格式化输出"><span class="toc-text">8.1 格式化输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-压缩输出"><span class="toc-text">8.2 压缩输出</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-get-text"><span class="toc-text">8.3 get_text()</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-解析部分文档"><span class="toc-text">9 解析部分文档</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-SoupStrainer"><span class="toc-text">9.1 SoupStrainer</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-常见问题"><span class="toc-text">10 常见问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-代码诊断"><span class="toc-text">10.1 代码诊断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#11-总结"><span class="toc-text">11 总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#参考文献："><span class="toc-text">参考文献：</span></a></li></ol>
+            </div>
+        
+        <blockquote>
+<p>该文档绝大部分是根据<a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc.zh/" target="_blank" rel="external">官方文档</a>进行整理，便于自己进行总结归纳。</p>
+</blockquote>
+<h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h1><p>我们在做爬虫的时候，不免会遇到BeautifulSoup，BeautifulSoupm的名字取自刘易斯在《爱丽丝梦游仙境》里的同名诗歌。那么这个库是用来做什么的呢？简单的说就是通过定位Html标签来从网页中提取数据，官方文档介绍：</p>
+<blockquote>
+<p>BeautifulSoup是一个可以从Html或Xml文件中提取数据的Python库，它提供一些简单的、python 式的函数用来处理导航、搜索、修改分析树等功能。它是一个工具箱，通过解析文档为用户提供需要抓取的数据，因为简单，所以不需要多少代码就可以写出一个完整的应用程序。<br><a id="more"></a><br>Beautiful Soup 自动将输入文档转换为 Unicode 编码，输出文档转换为 utf-8 编码。你不需要考虑编码方式，除非文档没有指定一个编码方式，这时，Beautiful Soup 就不能自动识别编码方式了。然后，你仅仅需要说明一下原始编码方式就可以了。<br>Beautiful Soup 已成为和 lxml、html6lib 一样出色的 python 解释器，为用户灵活地提供不同的解析策略或强劲的速度。</p>
+</blockquote>
+<h1 id="2-运行环境"><a href="#2-运行环境" class="headerlink" title="2 运行环境"></a>2 运行环境</h1><ul>
+<li>Mac ox</li>
+<li>Python 3.5.1</li>
+</ul>
+<h1 id="3-模块安装"><a href="#3-模块安装" class="headerlink" title="3 模块安装"></a>3 模块安装</h1><h2 id="3-1-BeautifulSoup安装"><a href="#3-1-BeautifulSoup安装" class="headerlink" title="3.1 BeautifulSoup安装"></a>3.1 BeautifulSoup安装</h2><p>由于BeautifulSoup库并非Python标准库，因此需要单独安装。<br>由因为Mac系统自带有python2.7，所以我们在安装pip时要注意安装pip3:</p>
+<pre><code>$sudo easy_install pip3
+</code></pre><p>安装好了pip3包管理器之后，运行：</p>
+<pre><code>$pip3 install beautifulsoup
+</code></pre><p>即可安装好库文件。这样，Beautifulsoup就成为了设备内的一个python库，我们可以通过：</p>
+<pre><code>&gt;&gt; from bs4 import BeautifulSoup
+</code></pre><p>来在程序中导入包文件。</p>
+<h2 id="3-2-安装中可能出现的问题"><a href="#3-2-安装中可能出现的问题" class="headerlink" title="3.2 安装中可能出现的问题"></a>3.2 安装中可能出现的问题</h2><ul>
+<li>如果代码抛出了<code>ImportError</code>的异常: “No module named HTMLParser”,这是因为你在Python3版本中执行Python2版本的代码.</li>
+<li>如果代码抛出了<code>ImportError</code>的异常: “No module named html.parser”, 这是因为你在Python2版本中执行Python3版本的代码.<br>如果遇到上述2种情况,最好的解决方法是重新安装BeautifulSoup4.</li>
+<li>如果在ROOT_TAG_NAME = u’[document]’代码处遇到<code>SyntaxError</code>“Invalid syntax”错误,需要将把BS4的Python代码版本从Python2转换到Python3. 可以重新安装BS4:</li>
+</ul>
+<pre><code>$ python3 setup.py install
+</code></pre><p>或者bs4的目录中执行Python代码版本转换脚本:</p>
+<pre><code>$ 2to3-3.2 -w bs4
+</code></pre><h2 id="3-3-安装解析器"><a href="#3-3-安装解析器" class="headerlink" title="3.3 安装解析器"></a>3.3 安装解析器</h2><p>BeautifulSoup支持Python标准库中的HTML解析器，如<code>html.parser</code>,还支持一些第三方的解析器,比如<code>lxml</code>。</p>
+<ul>
+<li>lxml：可以用来解析Html和xml文档，以非常底层的实现而闻名于世，大部分源代码是用C写的，所以速度快且文档容错能力较强。并且如果要解析Xml文档的话，lxml是唯一支持xml的解析器。我们可以使用pip3安装这个第三方库：</li>
+</ul>
+<pre><code>$ pip3 install lxml
+</code></pre><ul>
+<li>html.parser：这是<a href="https://docs.python.org/3.5/library/html.parser.html" target="_blank" rel="external">python自带的解析库</a>，执行速度适中，文档容错能力强。因为它不用另外进行安装，所以使用起来很方便。</li>
+</ul>
+<h1 id="4-BautifulSoup的使用"><a href="#4-BautifulSoup的使用" class="headerlink" title="4 BautifulSoup的使用"></a>4 BautifulSoup的使用</h1><p>BeautifulSoup库最常用的对象就是BeautifulSoup对象，将一段文档传入其构造方法，就可得到一个文档的对象：</p>
+<pre><code>&gt;&gt; from bs4 import BeautifulSoup
+&gt;&gt; from urllib.request import urlopen
+
+&gt;&gt; h = urlopen(&apos;http://wangchengaction.github.io&apos;)
+&gt;&gt; bsObj = BeautifulSoup(h,&apos;html.parser&apos;)
+&gt;&gt; print(bsObj.h1)
+&gt;&gt; print(bsObj.p.get_text())
+&lt;h1 class=&quot;header-author&quot;&gt;&lt;a href=&quot;/&quot;&gt;Cheng Wang&lt;/a&gt;&lt;/h1&gt;
+python | html5 | javascript | database | Everything I Want
+</code></pre><p>从输出结果中我们可以看到，BeautifulSoup将网页中的<code>h1</code>标签和<code>p</code>标签的文本内容用<code>&#39;html.parser&#39;</code>解析器解析后提取了出来。<br>所以，其实任何Html文件的任意节点信息都能被提取出来，只要目标信息的旁边或附近有标记就行。</p>
+<h1 id="5-对象的种类"><a href="#5-对象的种类" class="headerlink" title="5 对象的种类"></a>5 对象的种类</h1><p>BeautifulSoup可以将Html文档转换成一个树型结构，其中的每个节点都是Python对象，而所有的对象可以归纳为4种：<code>Tag</code>,<code>NavigableString</code>,<code>BeautifulSoup</code>,<code>Comment</code>。我们之前最常用的就是<code>beautifulSoup</code>对象。</p>
+<h2 id="5-1-Tag对象"><a href="#5-1-Tag对象" class="headerlink" title="5.1 Tag对象"></a>5.1 Tag对象</h2><p><code>Tag</code>对象简单来说就是Html或者Xml中的一个个标签。如我们上例中的h1、p等都是<code>Tag</code>。那么我们如何获取<code>Tag</code>呢？</p>
+<pre><code>&gt;&gt; from bs4 import BeautifulSoup
+&gt;&gt; from urllib.request import urlopen
+
+&gt;&gt; h = urlopen(&apos;http://wangchengaction.github.io&apos;)
+&gt;&gt; bsObj = BeautifulSoup(h,&apos;html.parser&apos;)
+&gt;&gt; print(bsObj.h1)
+&gt;&gt; print(bsObj.p)
+&gt;&gt; print(bsObj.a)
+&gt;&gt; print(bsObj.li)
+&gt;&gt; print(bsObj.img)
+
+&lt;h1 class=&quot;header-author&quot;&gt;&lt;a href=&quot;/&quot;&gt;Cheng Wang&lt;/a&gt;&lt;/h1&gt;
+&lt;p class=&quot;header-subtitle&quot;&gt;python | html5 | javascript | database | Everything I Want&lt;/p&gt;
+&lt;a class=&quot;profilepic&quot; href=&quot;/&quot;&gt;&lt;img class=&quot;js-avatar&quot; lazy-src=&quot;/img/photo.jpg&quot;&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;li&gt;菜单&lt;/li&gt;
+&lt;img class=&quot;js-avatar&quot; lazy-src=&quot;/img/photo.jpg&quot;&gt;&lt;/img&gt;
+</code></pre><p>这是获取一些Tag对象，并且我们还可以验证一下这些对象的类型：</p>
+<pre><code>&gt;&gt; print(type(bsObj.h1))
+&gt;&gt; print(type(bsObj.p))
+&gt;&gt; print(type(bsObj.a))
+&lt;class &apos;bs4.element.Tag&apos;&gt;
+&lt;class &apos;bs4.element.Tag&apos;&gt;
+&lt;class &apos;bs4.element.Tag&apos;&gt;
+</code></pre><p>从结果我们可以看出，以上所得的标签类型都是<code>bs4.element.Tag</code>。<br>Tag有两个重要的属性：name和attrs，下面我们分别来看一下。</p>
+<h3 id="5-1-1-name属性"><a href="#5-1-1-name属性" class="headerlink" title="5.1.1 name属性"></a>5.1.1 name属性</h3><p>每个Tag都有自己的名字，这个名字通过<code>.name</code>来获取，比如：</p>
+<pre><code>&gt;&gt; print(bsObj.name)
+&gt;&gt; print(bsObj.h1.name)
+[document]
+h1
+</code></pre><p>除了bsObj对象本身的名字是[document]外，别的标签的输出值都是标签本身的名字。</p>
+<h3 id="5-1-2-attrs属性"><a href="#5-1-2-attrs属性" class="headerlink" title="5.1.2 attrs属性"></a>5.1.2 attrs属性</h3><p>一个<code>Tag</code>可能有很多个属性。Tag属性的操作方法与字典相同：</p>
+<pre><code>&gt;&gt; print(bsObj.h1[&apos;class&apos;])
+&gt;&gt; print(bsObj.p[&apos;class&apos;])
+[&apos;header-author&apos;]
+[&apos;header-subtitle&apos;]
+</code></pre><p>也可以直接<code>.attrs</code>的方式获取属性：</p>
+<pre><code>&gt;&gt; print(bsObj.h1.attrs)
+&gt;&gt; print(bsObj.p.attrs)
+{&apos;class&apos;: [&apos;header-author&apos;]}
+{&apos;class&apos;: [&apos;header-subtitle&apos;]}
+</code></pre><p>两种方法的结果是相同的，只是一个返回的是列表，一个返回的是字典。<br><code>Tag</code>的属性可以被添加、删除和修改，其操作方式与字典相同。下面我们首先看属性是如何进行修改的：</p>
+<pre><code>&gt;&gt; bsObj.h1[&apos;class&apos;] = &apos;wangcheng&apos;
+&gt;&gt; bsObj.p[&apos;class&apos;] = &apos;papapa&apos;
+&gt;&gt; print(bsObj.h1[&apos;class&apos;])
+&gt;&gt; print(bsObj.p[&apos;class&apos;])
+wangcheng
+papapa
+</code></pre><p>从结果中我们可以看到，修改之后的h1的class属性从原来的<code>[&#39;header-author&#39;]</code>变成了修改之后的<code>wangcheng</code>。<br>而p的class属性由之前的<code>[&#39;header-subtitle&#39;]</code>变成了修改之后的<code>papapa</code>。接下来我们看属性的删除：</p>
+<pre><code>&gt;&gt; del bsObj.h1[&apos;class&apos;]
+&gt;&gt; del bsObj.p[&apos;class&apos;]
+&gt;&gt; print(bsObj.h1)
+&gt;&gt; print(bsObj.p)
+&lt;h1&gt;&lt;a href=&quot;/&quot;&gt;Cheng Wang&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;python | html5 | javascript | database | Everything I Want&lt;/p&gt;
+</code></pre><p>通过<code>del</code>分别对h1和p的class属性进行删除操作，得到的结果中不再存在<code>class</code>属性。与上文中例子相对比，可以明显的看出之间的区别。<br>属性删除之后，就无法进行获取了：</p>
+<pre><code>&gt;&gt; print(bsObj.h1[&apos;class&apos;])
+&gt;&gt; print(bsObj.p[&apos;class&apos;])
+KeyError: &apos;class&apos;
+</code></pre><p>因为我们已经将<code>h1</code>标签的<code>class</code>属性删除了，所以这里再获取就会抛出<code>KeyError</code>的异常。<br>我们可以用<code>get</code>来检查一下：</p>
+<pre><code>&gt;&gt; print(bsObj.h1.get(&apos;class&apos;))
+&gt;&gt; print(bsObj.p.get(&apos;class&apos;))
+None
+None
+</code></pre><p>返回的结果是<code>None</code>，说明我们确实已经删除成功了。</p>
+<h4 id="5-1-2-1-多值属性"><a href="#5-1-2-1-多值属性" class="headerlink" title="5.1.2.1 多值属性"></a>5.1.2.1 多值属性</h4><p>比如<code>class</code>，比如打开百度百科的页面，在其源码中我们可以看到许多<code>Tag</code>有多个<code>class</code>属性。还有一些属性，比如：<code>rel</code>,<code>rev</code>,<code>accept-charset</code>,<code>header</code>,<code>accesskey</code>等都是多值属性。在BeautifulSoup中多只属性的返回类型是<code>list</code>。</p>
+<pre><code>&gt;&gt; css_soup = BeautifulSoup(&apos;&lt;p class=&quot;body strikeout&quot;&gt;&lt;/p&gt;&apos;)
+&gt;&gt; css_soup.p[&apos;class&apos;]
+[&quot;body&quot;, &quot;strikeout&quot;]
+</code></pre><h2 id="5-2-NavigablSing对象"><a href="#5-2-NavigablSing对象" class="headerlink" title="5.2 NavigablSing对象"></a>5.2 NavigablSing对象</h2><p>我们用<code>Tag</code>已经得到了标签的内容，接下来就要想办法获取标签内部的文字，BeautifulSoup用<code>NavigableString</code>类来包装<code>Tag</code>内的字符串，我们可以通过<code>.string</code>来进行获取。</p>
+<pre><code>&gt;&gt; from bs4 import BeautifulSoup
+&gt;&gt; from urllib.request import urlopen
+
+&gt;&gt; h = urlopen(&apos;http://wangchengaction.github.io&apos;)
+&gt;&gt; bsObj = BeautifulSoup(h,&apos;html.parser&apos;)
+&gt;&gt; print(bsObj.h1.string)
+&gt;&gt; print(type(bsObj.h1.string))
+&gt;&gt; print(bsObj.p.string)
+&gt;&gt; print(type(bsObj.p.string))
+
+Cheng Wang
+&lt;class &apos;bs4.element.NavigableString&apos;&gt;
+python | html5 | javascript | database | Everything I Want
+&lt;class &apos;bs4.element.NavigableString&apos;&gt;
+</code></pre><p>这样就轻松获取了标签中的内容，通过<code>type</code>查看它的类型，发现是一个<code>NavigableString</code>类型。而且，我们可以通过<code>unicode()</code>方法，<strong>(python3中没有预定义的unicode类型了，内置字符串是<code>str</code>，但是<code>str</code>中的字符都是unicode编码的)</strong>将<code>NavigableString</code>对象转换成<code>Unicode</code>对象：</p>
+<pre><code>&gt;&gt; unicode_h1_string = str(bsObj.h1.string)
+&gt;&gt; print(unicode_h1_string)
+&gt;&gt; print(type(unicode_h1_string))
+
+Cheng Wang
+&lt;class &apos;str&apos;&gt;
+</code></pre><p>Python3中没有了<code>unicode()</code>方法，如果使用，会抛出<code>NameError: name &#39;unicode&#39; is not defined</code>异常。</p>
+<h2 id="5-3-BautifulSoup对象"><a href="#5-3-BautifulSoup对象" class="headerlink" title="5.3 BautifulSoup对象"></a>5.3 BautifulSoup对象</h2><p><code>BeautifulSoup</code>对象表示的是一个文档的全部内容。大部分时候，可以把它当做<code>Tag</code>对象，比如：</p>
+<pre><code>&gt;&gt; print(type(bsObj.name))
+&gt;&gt; print(bsObj.name)
+&gt;&gt; print(bsObj.attrs)
+
+&lt;class &apos;str&apos;&gt;
+[document]
+{}
+</code></pre><p>我们可以看到<code>BeautifulSoup</code>对象名字的类型是<code>str</code>，然后<code>attrs</code>返回的是一个空字典。</p>
+<h2 id="5-4-Comment对象"><a href="#5-4-Comment对象" class="headerlink" title="5.4 Comment对象"></a>5.4 Comment对象</h2><p>html文档中，除了以上提到的三个部分外，还有一个部分，就是文档的注释：</p>
+<pre><code>&gt;&gt; markup = &apos;&lt;h1 class=&quot;header-author&quot;&gt;&lt;a href=&quot;/&quot;&gt;&lt;!-- Cheng Wang --&gt;&lt;/a&gt;&lt;/h1&gt;&apos;
+&gt;&gt; soup = BeautifulSoup(markup,&apos;html.parser&apos;)
+&gt;&gt; print(soup.h1)
+&gt;&gt; print(soup.h1.string)
+&gt;&gt; print(type(soup.h1.string))
+
+&lt;h1 class=&quot;header-author&quot;&gt;&lt;a href=&quot;/&quot;&gt;&lt;!-- Cheng Wang --&gt;&lt;/a&gt;&lt;/h1&gt;
+Cheng Wang
+&lt;class &apos;bs4.element.Comment&apos;&gt;
+</code></pre><p><code>Comment</code>对象是一个特殊类型的<code>NavigableString</code>对象。我们看上例，<code>h1</code>中的<code>.string</code>部分其实是注释，并非是我们需要的文本，如果在之前没有判断的话，就容易出现问题，所以我们应最好在使用前做出判断。</p>
+<h1 id="6-遍历文档树"><a href="#6-遍历文档树" class="headerlink" title="6 遍历文档树"></a>6 遍历文档树</h1><h2 id="6-1-子节点"><a href="#6-1-子节点" class="headerlink" title="6.1 子节点"></a>6.1 子节点</h2><p>一个Tag可能包含多个字符串或其他Tag，这些都是这个Tag的子节点。</p>
+<h3 id="6-1-1-tag的名字"><a href="#6-1-1-tag的名字" class="headerlink" title="6.1.1 tag的名字"></a>6.1.1 tag的名字</h3><p>可以直接通过点取属性的方式获取，但只能获取当前名字的第一个Tag：</p>
+<pre><code>&gt;&gt; print(bsObj.a)
+&gt;&gt; print(bsObj.title)
+
+&lt;a class=&quot;profilepic&quot; href=&quot;/&quot;&gt;&lt;img class=&quot;js-avatar&quot; lazy-src=&quot;/img/photo.jpg&quot;&gt;&lt;/img&gt;&lt;/a&gt;
+&lt;title&gt;code_Wang Site&lt;/title&gt;
+</code></pre><p>若是想获得全部的<code>a</code>标签，可以通过<code>find_all()</code>方法，这个我们在下面详细来说。</p>
+<h3 id="6-1-2-contents和-children"><a href="#6-1-2-contents和-children" class="headerlink" title="6.1.2 .contents和.children"></a>6.1.2 .contents和.children</h3><p>这两个属性仅包含<em>直接子节点</em>，其中<code>.contents</code>属性可以将tag的子节点以列表的方式输出:</p>
+<pre><code>&gt;&gt; body_doc = &quot;&lt;body&gt;&lt;h1&gt;The Dormouse&apos;s story&lt;/h1&gt;&lt;p&gt;Hello&lt;/p&gt;&lt;p&gt;world&lt;/p&gt;&lt;/body&gt;&quot;
+&gt;&gt; body_soup = BeautifulSoup(body_doc,&apos;html.parser&apos;)
+
+&gt;&gt; body_tag = body_soup.body
+&gt;&gt; print(body_tag.contents)
+[&lt;h1&gt;The Dormouse&apos;s story&lt;/h1&gt;, &lt;p&gt;Hello&lt;/p&gt;, &lt;p&gt;world&lt;/p&gt;]
+&gt;&gt; h1_tag = body_tag.contents[0]
+&gt;&gt; print(h1_tag)
+&lt;h1&gt;The Dormouse&apos;s story&lt;/h1&gt;
+&gt;&gt; print(h1_tag.contents)
+[&quot;The Dormouse&apos;s story&quot;]
+&gt;&gt; p_tag = body_tag.contents[1]
+&gt;&gt; print(p_tag.contents)
+[&apos;Hello&apos;]
+</code></pre><p>字符串没有<code>.contents</code>属性，因为字符串没有子节点，所以会报错：</p>
+<pre><code>&gt;&gt; text = h1_tag.contents[0]
+&gt;&gt; print(text.contents)
+
+AttributeError: &apos;NavigableString&apos; object has no attribute &apos;contents&apos;
+</code></pre><p>通过tag的<code>.children</code>生成器，可以对tag子节点进行循环：</p>
+<pre><code>&gt;&gt; for child in body_tag.children:
+...    print(child)
+
+&lt;h1&gt;The Dormouse&apos;s story&lt;/h1&gt;
+&lt;p&gt;Hello&lt;/p&gt;
+&lt;p&gt;world&lt;/p&gt;
+</code></pre><h3 id="6-1-3-descendants"><a href="#6-1-3-descendants" class="headerlink" title="6.1.3 .descendants"></a>6.1.3 .descendants</h3><p>上例中<code>.contents</code>和<code>.children</code>都是作用于直接子节点。我们如果想要查看子孙结点的话，可以使用<code>.decendants</code>属性，它可对所有tag的子孙结点进行递归循环：</p>
+<pre><code>&gt;&gt; for child in body_tag.descendants:
+...     print(child)
+
+&lt;h1&gt;The Dormouse&apos;s story&lt;/h1&gt;
+The Dormouse&apos;s story
+&lt;p&gt;Hello&lt;/p&gt;
+Hello
+&lt;p&gt;world&lt;/p&gt;
+world
+</code></pre><p>我们可与上例中<code>.children</code>进行对比，可以明显的看到，<code>.children</code>仅仅是显示了其直接子节点，如：<code>h1</code>,<code>p</code>，而<code>.descendants</code>则是将其子孙节点都显示了出来，如其子节点<code>h1</code>的子节点<code>&#39;The Dormouse&#39;s story&#39;</code>。</p>
+<h3 id="6-1-4-string"><a href="#6-1-4-string" class="headerlink" title="6.1.4 .string"></a>6.1.4 .string</h3><p>如果<code>tag</code>只有一个<code>NavigableString</code>类型的子节点，如上例中的<code>h1</code>，那么这个<code>tag</code>可以使用<code>.string</code>得到子节点，如果<code>tag</code>包含多个子节点，tag就无法确定<code>.string</code>应该调用哪个子节点内容了，输出结果将是<code>None</code>：</p>
+<pre><code>&gt;&gt; print(h1_tag.string)
+The Dormouse&apos;s story
+&gt;&gt; print(body_tag.string)
+None
+</code></pre><p>若是一个<code>tag</code>仅有一个子节点，那么这个<code>tag</code>也可以使用<code>.string</code>方法，输出结果与其唯一子节点的<code>.string</code>结果相同。</p>
+<h3 id="6-1-5-strings和stripped-strings"><a href="#6-1-5-strings和stripped-strings" class="headerlink" title="6.1.5 .strings和stripped_strings"></a>6.1.5 .strings和stripped_strings</h3><p>若<code>tag</code>中包含多个字符串，可以用<code>.strings</code>来循环获取：</p>
+<pre><code>&gt;&gt; html = &apos;&apos;&apos;
+&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;&lt;/head&gt;
+&lt;body&gt;
+&lt;p class=&quot;title&quot; name=&quot;dromouse&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;
+&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were
+&lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;,
+&lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and
+&lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;
+and they lived at the bottom of a well.&lt;/p&gt;
+&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;
+&apos;&apos;&apos;
+
+&gt;&gt; soup = BeautifulSoup(html,&apos;html.parser&apos;)
+&gt;&gt; for string in soup.strings:
+...    print(repr(string))
+
+&apos;\n&apos;
+&quot;The Dormouse&apos;s story&quot;
+&apos;\n&apos;
+&apos;\n&apos;
+&quot;The Dormouse&apos;s story&quot;
+&apos;\n&apos;
+&apos;Once upon a time there were three little sisters; and their names were\n&apos;
+&apos;,\n&apos;
+&apos;Lacie&apos;
+&apos; and\n&apos;
+&apos;Tillie&apos;
+&apos;;\nand they lived at the bottom of a well.&apos;
+&apos;\n&apos;
+&apos;...&apos;
+&apos;\n&apos;
+</code></pre><p>我们发现输出字符内含有许多空格或空行，这时候，可以使用<code>stripped_strings</code>去除多于的空白内容：</p>
+<pre><code>&gt;&gt; for string in soup.stripped_strings:
+...    print(repr(string))
+
+&quot;The Dormouse&apos;s story&quot;
+&quot;The Dormouse&apos;s story&quot;
+&apos;Once upon a time there were three little sisters; and their names were&apos;
+&apos;,&apos;
+&apos;Lacie&apos;
+&apos;and&apos;
+&apos;Tillie&apos;
+&apos;;\nand they lived at the bottom of a well.&apos;
+&apos;...&apos;
+</code></pre><p>这样，空格行会被忽略掉，段首和段末的空白会被删除。</p>
+<h2 id="6-2-父节点"><a href="#6-2-父节点" class="headerlink" title="6.2 父节点"></a>6.2 父节点</h2><p>在文档树中，每个tag都有其父节点，这个父节点也是被包含在某个<code>tag</code>中</p>
+<h3 id="6-2-1-parent和-parents"><a href="#6-2-1-parent和-parents" class="headerlink" title="6.2.1 .parent和.parents"></a>6.2.1 .parent和.parents</h3><p>我们可以通过<code>.parent</code>属性获取某个元素的父节点。通过<code>.parents</code>可以递归的获取元素的所有父辈结点，接下来我们先看<code>/parent</code>的使用：</p>
+<pre><code>&gt;&gt; title_text = soup.title.string
+&gt;&gt; print(title_text)
+&gt;&gt; print(title_text.parent)
+&gt;&gt; print(title_text.parent.parent)
+
+The Dormouse&apos;s story
+&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;
+&lt;head&gt;&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;&lt;/head&gt;
+</code></pre><p>这个例子中，我们先找出了title字符串的内容，然后通过<code>.parent</code>找出了其父节点<code>title</code>，然后通过两次<code>.parnet</code>，找出了其父节点的父节点<code>head</code>，但是这样比较麻烦，我们再看<code>.parents</code>的用法，我们尝试遍历<code>a</code>标签到根节点的所有结点：</p>
+<pre><code>&gt;&gt; link = soup.a
+&gt;&gt; print(link)
+
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;
+
+&gt;&gt; for parent in link.parents:
+...    if parent is None:
+...            print(parent)
+...    else:
+...            print(parent.name)
+
+p
+body
+html
+[document]
+</code></pre><h2 id="6-3-兄弟节点"><a href="#6-3-兄弟节点" class="headerlink" title="6.3 兄弟节点"></a>6.3 兄弟节点</h2><p>可以说处在同一级的所有节点，互为兄弟节点。</p>
+<h3 id="6-3-1-next-sibling和-previous-sibling"><a href="#6-3-1-next-sibling和-previous-sibling" class="headerlink" title="6.3.1 .next_sibling和.previous_sibling"></a>6.3.1 .next_sibling和.previous_sibling</h3><p>文档树中，我们使用这两个属性进行兄弟结点的查询。<code>next_sibling</code>获取该节点的下一个兄弟节点，而<code>previous_sibling</code>则是获取该结点的上一个兄弟节点(有时候实际文档中的tag的<code>.next_sibling</code>和<code>.previous_sibling</code>属性通常是字符串或空白,因为字符串和空白也可以被视作一个结点)：</p>
+<pre><code>&gt;&gt; print(repr(soup.title.next_sibling))
+None
+&gt;&gt; print(repr(soup.head.next_sibling))
+&apos;\n&apos;
+&gt;&gt; print(repr(soup.head.next_sibling.next_sibling))
+&lt;body&gt;
+&lt;p class=&quot;title&quot; name=&quot;dromouse&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;
+&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;,
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;
+and they lived at the bottom of a well.&lt;/p&gt;
+&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;
+&lt;/body&gt;
+
+&gt;&gt; print(repr(soup.a.previous_sibling))
+&apos;Once upon a time there were three little sisters; and their names were\n&apos;
+
+&gt;&gt; print(repr(soup.a.previous_sibling.previous_sibling))
+None
+</code></pre><p>从上例中，我们可以看到<code>title</code>并没有后一个兄弟结点（其根本就没有兄弟节点）；<code>head</code>的后一个兄弟结点是<code>&#39;\n&#39;</code>换行，再后一个兄弟节点是<code>body</code>；<code>a</code>的前一个兄弟结点是一串字符串加一个换行，再前一个兄弟结点没有了，故返回<code>None</code>。</p>
+<h3 id="6-3-2-next-siblings和-previous-siblings"><a href="#6-3-2-next-siblings和-previous-siblings" class="headerlink" title="6.3.2 .next_siblings和.previous_siblings"></a>6.3.2 .next_siblings和.previous_siblings</h3><p>通过这两个属性我们可以对当前节点的兄弟节点进行迭代输出：</p>
+<pre><code>&gt;&gt; for sibling in soup.a.next_siblings:
+...    print(repr(sibling))
+
+&apos;,\n&apos;
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;
+&apos; and\n&apos;
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;
+&apos;;\nand they lived at the bottom of a well.&apos;
+
+&gt;&gt; for sibling in soup.find(id=&quot;link3&quot;).previous_siblings:
+...    print(repr(sibling))
+
+&apos; and\n&apos;
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;
+&apos;,\n&apos;
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;
+&apos;Once upon a time there were three little sisters; and their names were\n&apos;
+</code></pre><h2 id="6-4-回退和前进"><a href="#6-4-回退和前进" class="headerlink" title="6.4 回退和前进"></a>6.4 回退和前进</h2><h3 id="6-4-1-next-element和-previous-element"><a href="#6-4-1-next-element和-previous-element" class="headerlink" title="6.4.1 .next_element和.previous.element"></a>6.4.1 .next_element和.previous.element</h3><p>与<code>.next_sibling</code>不同，这两个元素并非是针对兄弟节点，而是所有结点，不论是否处于同一层次：</p>
+<pre><code>&gt;&gt; print(repr(soup.title.next_element))
+&quot;The Dormouse&apos;s story&quot;
+
+&gt;&gt; print(repr(soup.head.next_element))
+&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;
+
+&gt;&gt; print(repr(soup.head.next_element.next_element))
+&quot;The Dormouse&apos;s story&quot;
+
+&gt;&gt; print(repr(soup.a.previous_element))
+&apos;Once upon a time there were three little sisters; and their names were\n&apos;
+
+&gt;&gt; print(repr(soup.a.previous_element.previous_element))
+&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;,
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;
+and they lived at the bottom of a well.&lt;/p&gt;
+</code></pre><p>从与<code>next_sibling</code>和<code>previous_sibling</code>的对比中我们可以看出不同之处：</p>
+<ul>
+<li><code>title</code>的<code>next_sibling</code>的结果是<code>None</code>，因为其没有兄弟结点；而其<code>next_element</code>的值为<code>&quot;The Dormouse&#39;s story&quot;</code>,它的结果是<code>title</code>标签被解析后的解析内容。</li>
+<li><code>head</code>标签的<code>next_sibling</code>的结果是<code>\n</code>，再<code>next_sibling</code>的结果则是<code>body</code>；而其<code>next_element</code>的值为<code>&lt;title&gt;The Dormouse&#39;s story&lt;/title&gt;</code>,再<code>next_element</code>的值则是对<code>title</code>的内容的解析。<h3 id="6-4-2-next-elements和previous-elements"><a href="#6-4-2-next-elements和previous-elements" class="headerlink" title="6.4.2 next_elements和previous_elements"></a>6.4.2 next_elements和previous_elements</h3>通过这两个属性可以向前或者向后迭代访问文档的解析内容，不分层次：</li>
+</ul>
+<pre><code>&gt;&gt; for element in soup.find(id=&quot;link3&quot;).next_elements:
+...    print(repr(element))
+&apos;Tillie&apos;
+&apos;;\nand they lived at the bottom of a well.&apos;
+&apos;\n&apos;
+&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;
+&apos;...&apos;
+&apos;\n&apos;
+</code></pre><h1 id="7-搜索文档树"><a href="#7-搜索文档树" class="headerlink" title="7 搜索文档树"></a>7 搜索文档树</h1><p>BeaytifulSoup中有许多搜索方法，我们把重点放在<code>find()</code>和<code>find_all()</code>这两个方法上。但在这之前，我们首先介绍一下过滤器的类型，因为这会在我们搜索文档树的时候提供帮助。</p>
+<h2 id="7-1-过滤器"><a href="#7-1-过滤器" class="headerlink" title="7.1 过滤器"></a>7.1 过滤器</h2><p>过滤器大概有这么几种类型：字符串、正则、列表、True或者定义一个方法。</p>
+<h3 id="7-1-1-字符串"><a href="#7-1-1-字符串" class="headerlink" title="7.1.1 字符串"></a>7.1.1 字符串</h3><p>搜索中传入字符串参数，BeautifulSoup将会查找与该字符串匹配的内容：</p>
+<pre><code>&gt;&gt; print(soup.find_all(&apos;a&apos;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot;,href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+</code></pre><p>这样就查找了文档中所有的<code>a</code>标签，并以列表的形式返回。</p>
+<h3 id="7-1-2-正则表达式"><a href="#7-1-2-正则表达式" class="headerlink" title="7.1.2 正则表达式"></a>7.1.2 正则表达式</h3><p>正则表达式的部分我们会在另一个专栏中做详细介绍，这里只举一个简单的例子：</p>
+<pre><code>&gt;&gt; import re
+&gt;&gt; for tag in soup.find_all(re.compile(&apos;^b&apos;)):
+...        print(tag.name)
+body
+b
+</code></pre><p>正则表达式需要首先引入<code>re</code>包，再进行匹配。上例中找出所有以<code>b</code>开头的标签。</p>
+<h3 id="7-1-3-列表"><a href="#7-1-3-列表" class="headerlink" title="7.1.3 列表"></a>7.1.3 列表</h3><p>如果传入列表参数，BeautifulSoup会将与列表中任一元素匹配的内容返回：</p>
+<pre><code>&gt;&gt; print(soup.find_all([&quot;a&quot;,&quot;b&quot;,&quot;title&quot;]))
+[&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;, 
+&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+</code></pre><p>上例中的代码找到文档中所有的<code>a</code>标签，<code>b</code>标签和<code>title</code>标签。</p>
+<h3 id="7-1-4-True"><a href="#7-1-4-True" class="headerlink" title="7.1.4 True"></a>7.1.4 True</h3><p><code>True</code>可以匹配任何值,如下例：</p>
+<pre><code>&gt;&gt; print(soup.find_all(&quot;a&quot;,href=True)) #查询文档中所有含href的a标签
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+</code></pre><p>或者我们可以匹配所有标签，但是由于其中重复标签过多，所以我们可以把这些标签放在一个<code>set</code>内：</p>
+<pre><code>&gt;&gt; tag_list = set()
+&gt;&gt; for tag in soup.find_all(True):
+...        tag_list.add(tag.name)
+...        print(tag_list)
+{&apos;b&apos;, &apos;head&apos;, &apos;html&apos;, &apos;p&apos;, &apos;a&apos;, &apos;title&apos;, &apos;body&apos;}
+</code></pre><p>这样就打印出了文档中包含的所有标签。</p>
+<h3 id="7-1-5-定义方法"><a href="#7-1-5-定义方法" class="headerlink" title="7.1.5 定义方法"></a>7.1.5 定义方法</h3><p>如果没有合适的过滤器，那么还可以定义一个方法，使其接收一个元素参数，若方法返回<code>True</code>则表示当前元素匹配并且被找到，如果不是，则返回<code>False</code>。<br>下面方法校验了当前元素，如果包含<code>class</code>属性却不包含<code>id</code>属性，那么将返回<code>True</code>：</p>
+<pre><code>def has_class_but_no_id(tag):
+    return tag.has_atr(&apos;class&apos;) and not tag.has_attr(&apos;id&apos;)
+</code></pre><p>将这个方法作为参数传入<code>find_all()</code>方法，将得到所有含<code>class</code>而不含<code>id</code>的标签：</p>
+<pre><code>[&lt;p class=&quot;title&quot; name=&quot;dromouse&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;, &lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;,
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;
+and they lived at the bottom of a well.&lt;/p&gt;, &lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;]
+</code></pre><p>可以看到，结果中只有<code>p</code>，没有<code>a</code>（p中包含的a不算，因为它属于p），也没有<code>html</code>和<code>head</code>，因为其中没有定义<code>class</code>属性。<br>下面代码找到所有被文字包含的节点内容：</p>
+<pre><code>&gt;&gt; from bs4 import NavigableString
+&gt;&gt; #若上一个元素和下一个元素的类型是NavigableString，则返回True
+&gt;&gt; def surrounded_by_strings(tag):
+...        return (isinstance(tag.next_element,NavigableString)
+...                        and isinstance(tag.previous_element,NavigableString))
+...
+...        for tag in soup.find_all(surrounded_by_strings):
+...                print(tag.name)
+
+body
+p
+a
+a
+a
+p
+</code></pre><p>下面我们具体看下搜索的细节。</p>
+<h2 id="7-2-find-all"><a href="#7-2-find-all" class="headerlink" title="7.2 find_all()"></a>7.2 find_all()</h2><pre><code>find_all(name,attrs,recursive,text,**kwargs)
+</code></pre><p>该函数搜索当前标签的所有标签子节点，并判断是否符合过滤器条件：</p>
+<pre><code>&gt;&gt; print(soup.find_all(&apos;p&apos;,&apos;title&apos;))
+[&lt;p class=&quot;title&quot; name=&quot;dromouse&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;]
+
+&gt;&gt; print(soup.find_all(id=&apos;link2&apos;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;]
+</code></pre><h3 id="7-2-1-name参数"><a href="#7-2-1-name参数" class="headerlink" title="7.2.1 name参数"></a>7.2.1 name参数</h3><p>查找所有名字为<code>name</code>的tag，其中，字符串会被自动忽略掉。</p>
+<blockquote>
+<p>搜索<code>name</code>参数的值可以是任一类型的过滤器，字符串，正则，列表，方法或者True。</p>
+</blockquote>
+<h3 id="7-2-2-keyword参数"><a href="#7-2-2-keyword参数" class="headerlink" title="7.2.2 keyword参数"></a>7.2.2 keyword参数</h3><p>若一个指定名字的参数不是搜索内置的参数名 ,搜索时会把该参数当做指定名字<code>tag</code>的属性来搜索，比如上例中的<code>id=&#39;link2&#39;</code>，就是搜索每一个<code>tag</code>的<code>id</code>属性，看是否匹配。<br>如果传入<code>href</code>参数，BeautifulSoup会搜索每个<code>tag</code>的<code>href</code>属性：</p>
+<pre><code>&gt;&gt; print(soup.find_all(href = re.compile(&apos;elsie&apos;)))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]
+</code></pre><p>同样，我们还可以查找所有包含<code>href</code>属性的tag，无论其<code>href</code>属性的值是什么：</p>
+<pre><code>&gt;&gt; print(soup.find_all(href=True))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+</code></pre><p>我们还可以使用多个指定名字的参数同时过滤<code>tag</code>的多个属性：</p>
+<pre><code>&gt;&gt; print(soup.find_all(href=re.compile(&apos;elsie&apos;),id=&apos;link1&apos;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]
+</code></pre><p>有些<code>tag</code>属性无法搜索，比如html5中的<code>data-*</code>属性，但我们可以通过<code>find_all()</code>方法的<code>attrs</code>参数定义一个字典参数来搜索包含特殊属性的tag：</p>
+<pre><code>&gt;&gt; data_soup = BeautifulSoup(&apos;&lt;div data-foo=&quot;value&quot;&gt;foo!&lt;/div&gt;&apos;)
+&gt;&gt; print(data_soup.find_all(data-foo=&apos;value&apos;))
+SyntaxError: keyword can&apos;t be an expression
+
+&gt;&gt; print(data_soup.find_all(attrs={&quot;data-foo&quot;:&quot;value&quot;}))
+[&lt;div data-foo=&quot;value&quot;&gt;foo!&lt;/div&gt;]
+</code></pre><h3 id="7-2-3-按CSS搜索"><a href="#7-2-3-按CSS搜索" class="headerlink" title="7.2.3 按CSS搜索"></a>7.2.3 按CSS搜索</h3><p>按照css类名搜索tag的功能比较实用，但是标识css类名的关键字<code>class</code>在python中是保留字，若使用其作为参数的话会导致语法错误，我们可以通过<code>class_</code>参数来代替<code>class</code>,搜索有指定css类名的标签：</p>
+<pre><code>&gt;&gt; soup.find_all(&quot;a&quot;,class_ = &quot;sister&quot;)
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+</code></pre><p><code>class</code>参数同样能接收不同类型的过滤器、字符串、正则、方法或<code>True</code>：</p>
+<pre><code>&gt;&gt; print(soup.find_all(class_ = re.compile(&apos;itl&apos;)))
+[&lt;p class=&quot;title&quot; name=&quot;dromouse&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;]
+
+&gt;&gt; def has_six_characters(css_class):
+...        return css_class is not None and len(css_class) == 6
+
+&gt;&gt; print(soup.find_all(class_ = has_six_characters))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+</code></pre><p>tag的<code>class</code>是多值属性。按照CSS类名搜索tag时，可以分别搜索tag中的每个css类名：</p>
+<pre><code>&gt;&gt; css_soup = BeautifulSoup(&apos;&lt;p class=&quot;body strikeout&quot;&gt;&lt;/p&gt;&apos;,&apos;html.parser&apos;)
+&gt;&gt; print(css_soup.find_all(&quot;p&quot;, class_=&quot;strikeout&quot;))
+[&lt;p class=&quot;body strikeout&quot;&gt;&lt;/p&gt;]
+&gt;&gt; print(css_soup.find_all(&quot;p&quot;, class_=&quot;body&quot;))
+[&lt;p class=&quot;body strikeout&quot;&gt;&lt;/p&gt;]
+</code></pre><p>搜索<code>class</code>属性时也可以通过css值完全匹配，但是完全匹配的时候，要符合顺序，若顺序不符合，将搜索不到结果：</p>
+<pre><code>&gt;&gt; css_soup.find_all(&quot;p&quot;, class_=&quot;body strikeout&quot;)
+[&lt;p class=&quot;body strikeout&quot;&gt;&lt;/p&gt;]
+
+&gt;&gt; print(css_soup.find_all(&quot;p&quot;, class_=&quot;strikeout body&quot;))
+[]
+</code></pre><h3 id="7-2-4-text参数"><a href="#7-2-4-text参数" class="headerlink" title="7.2.4 text参数"></a>7.2.4 text参数</h3><p>通过<code>text</code>参数可以搜索文档中的字符串内容，它同样接收字符串、正则、列表、True等。</p>
+<pre><code>&gt;&gt; print(soup.find_all(text=&apos;Elsie&apos;))#Elise在注释中，故为空
+[]
+
+&gt;&gt; print(soup.find_all(text=[&apos;Elsie&apos;,&apos;Tillie&apos;,&apos;Lacie&apos;]))
+[&apos;Lacie&apos;,&apos;Tillie&apos;]
+
+&gt;&gt; print(soup.find_all(text=re.compile(&apos;Dormouse&apos;)))
+[&quot;The Dormouse&apos;s story&quot;, &quot;The Dormouse&apos;s story&quot;]
+
+&gt;&gt; def is_the_only_string_within_a_tag(s):
+...        return (s == s.parent.string)
+
+&gt;&gt; print(soup.find_all(text=is_the_only_string_within_a_tag))
+[&quot;The Dormouse&apos;s story&quot;, &quot;The Dormouse&apos;s story&quot;, &apos; Elsie &apos;, &apos;Lacie&apos;, &apos;Tillie&apos;, &apos;...&apos;]
+</code></pre><p><code>text</code>参数还可以与其他参数混合使用，来过滤tag，如搜索内容里包含“Lacie”的<code>a</code>标签：</p>
+<pre><code>&gt;&gt; print(soup.find_all(&quot;a&quot;,text = &quot;Lacie&quot;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;]
+</code></pre><h3 id="7-2-5-limit参数"><a href="#7-2-5-limit参数" class="headerlink" title="7.2.5 limit参数"></a>7.2.5 limit参数</h3><p><code>find_all()</code>方法返回全部的搜索结构，如果文档树很大，那么搜索会很慢。如果我们并不需要全部的结果，可以使用<code>limit</code>参数来限制返回结果的数量，当搜索到的结果数量到达<code>limit</code>时，就停止搜索返回结果。<br>如，文档树中有三个tag符合搜索条件，但只返回了一个，因为我们限制了数量：</p>
+<pre><code>&gt;&gt; print(soup.find_all(&quot;a&quot;,limit=1))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]
+</code></pre><h3 id="7-2-6-recursiv参数"><a href="#7-2-6-recursiv参数" class="headerlink" title="7.2.6 recursiv参数"></a>7.2.6 recursiv参数</h3><p>调用tag的<code>find_all()</code>方法时，BeautifulSoup会检索当前tag的所有子孙结点，如果只想搜索tag的直接子节点，可以使用参数<code>recursive=False</code>，如：</p>
+<pre><code>&gt;&gt; html_text = &quot;&quot;&quot;&lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;&lt;/head&gt;&quot;&quot;&quot;
+
+&gt;&gt; soup = BeautifulSoup(html_text,&quot;html.parser&quot;)
+&gt;&gt; print(soup.html.find_all(&quot;title&quot;))
+&gt;&gt; print(soup.html.find_all(&quot;title&quot;,recursive=False)) #加上recursive=False后，就只能搜索其直接子节点了
+&gt;&gt; print(soup.head.find_all(&quot;title&quot;,recursive=False))
+
+[&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;]
+[]
+[&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;]
+</code></pre><h2 id="7-3-find"><a href="#7-3-find" class="headerlink" title="7.3 find()"></a>7.3 find()</h2><pre><code>find(name,attrs,recursive,text,**kwargs)
+</code></pre><p><code>find_all()</code>方法返回文档中所有符合条件的tag，但有时候我们仅想得到一个结果，比如文档中只有一个<code>body</code>标签，或者<code>limit=1</code>的时候（这种情况下二者的唯一区别是：<code>find_all()</code>方法返回的结果是一个包含元素的列表，而<code>find()</code>直接返回结果）。<br><code>find_all()</code>方法没有找到目标时返回空列表，<code>find()</code>找不到目标时返回<code>None</code>。</p>
+<h2 id="7-4-find-parents-和find-parent"><a href="#7-4-find-parents-和find-parent" class="headerlink" title="7.4 find_parents()和find_parent()"></a>7.4 find_parents()和find_parent()</h2><pre><code>find_parents(name,attrs,recursive,text,**kwargs)
+find_parent(name,attrs,recursive,text,**kwargs)
+</code></pre><p><code>find_all()</code>和<code>find()</code>只搜索当前节点的所有子孙节点，而<code>find_parents()</code>和<code>find_parent()</code>是用来搜索当前节点的父辈节点，搜索方法与普通tag搜索方法相同：</p>
+<pre><code>&gt;&gt; a_string = soup.find(text=&quot;Lacie&quot;)
+&gt;&gt; print(a_string)
+Lacie
+
+&gt;&gt; print(a_string.find_parents(&quot;a&quot;))
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;
+
+&gt;&gt; print(a_string.find_parent(&quot;p&quot;, attrs={}, kwargs=&apos;&apos;))
+&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;,
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;
+and they lived at the bottom of a well.&lt;/p&gt;
+
+&gt;&gt; print(a_string.find_parents(&quot;p&quot;, class_=&quot;title&quot;))
+[]
+</code></pre><p>文档中的一个<code>&lt;a&gt;</code>标签是当前叶子节点的直接父节点，所以可以被找到。<code>&lt;p&gt;</code>标签是目标叶子节点的间接父辈节点，所以也可以被找到。而包含class值为’title’的<code>&lt;p&gt;标签不是目标叶子结点的父辈节点，所以通过</code>find_parents()`找不到。</p>
+<h2 id="7-5-find-next-siblings-和find-next-sibling"><a href="#7-5-find-next-siblings-和find-next-sibling" class="headerlink" title="7.5 find_next_siblings()和find_next_sibling()"></a>7.5 find_next_siblings()和find_next_sibling()</h2><pre><code>find_next_siblings( name , attrs , recursive , text , **kwargs )
+find_next_sibling( name , attrs , recursive , text , **kwargs )
+</code></pre><p>这两个方法通过<code>.next_siblings</code>属性对当前tag的所有后面解析的兄弟节点进行迭代，<code>find_next_siblings()</code>返回所有符合条件的后面的兄弟节点，<code>find_next_sibling()</code>只返回符合条件的后面的第一个节点。</p>
+<pre><code>&gt;&gt; first_link = soup.a
+&gt;&gt; print(first_link)
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;
+
+&gt;&gt; print(first_link.find_next_sibling(&quot;a&quot;, attrs={}, text=None, kwargs=&apos;&apos;))
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;
+
+&gt;&gt; print(first_link.find_next_siblings(&quot;a&quot;, attrs={}, text=None, limit=None, kwargs=&apos;&apos;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+
+&gt;&gt; print(soup.find(&quot;p&quot;,&quot;story&quot;).find_next_sibling(&quot;p&quot;, attrs={}, text=None, kwargs=&apos;&apos;))
+&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;
+</code></pre><p>首先找到第一个<code>&lt;a&gt;</code>标签节点，然后打印其下一个兄弟节点，接着打印其后的所有兄弟节点，最后是打印<code>class</code>为story的<code>&lt;p&gt;</code>标签的下一个兄弟节点。</p>
+<h2 id="7-6-find-previous-siblings-和sinf-previous-sibling"><a href="#7-6-find-previous-siblings-和sinf-previous-sibling" class="headerlink" title="7.6 find_previous_siblings()和sinf_previous_sibling()"></a>7.6 find_previous_siblings()和sinf_previous_sibling()</h2><pre><code>find_previous_siblings(name,attrs,recursive,text,**kwards)
+find_previous_sibling(name,attrs,recursive,text,**kwards)
+</code></pre><p>这两个方法通过<code>.previous.siblings</code>属性对当前tag前面的兄弟节点进行迭代，<code>find_previous_siblings()</code>返回所有符合条件的前面的兄弟节点，<code>find_previous_sibling()</code>仅返回第一个符合要求的前面的兄弟节点：</p>
+<pre><code>&gt;&gt; last_link = soup.find(&quot;a&quot;,id=&quot;link3&quot;)
+&gt;&gt; print(last_link)
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;
+
+&gt;&gt; print(last_link.find_previous_siblings(&quot;a&quot;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]
+
+&gt;&gt; print(soup.find(&quot;p&quot;,&quot;story&quot;).find_previous_sibling(&quot;p&quot;))
+&lt;p class=&quot;title&quot; name=&quot;dromouse&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;
+</code></pre><h2 id="7-7-find-all-next-和find-next"><a href="#7-7-find-all-next-和find-next" class="headerlink" title="7.7 find_all_next()和find_next()"></a>7.7 find_all_next()和find_next()</h2><pre><code>find_all_next(name,attrs,recursive,text,**kwards)
+find_next(name,attrs,recursive,text,**kward)
+</code></pre><p>这两个方法通过<code>.next_elements</code>属性对当前tag之后的tag和字符串进行迭代，<code>find_all_next()</code>方法返回所有符合条件的节点，<code>find_next()</code>方法仅返回第一个符合条件的节点：</p>
+<pre><code>&gt;&gt; print(first_link.find_all_next(text=True))
+[&apos; Elsie &apos;, &apos;,\n&apos;, &apos;Lacie&apos;, &apos; and\n&apos;, &apos;Tillie&apos;, &apos;;\nand they lived at the bottom of a well.&apos;, &apos;\n&apos;, &apos;...&apos;, &apos;\n&apos;]
+
+&gt;&gt; print(first_link.find_next(&quot;p&quot;))
+&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;
+</code></pre><p>第一个例子中,字符串 “Elsie”也被显示出来,尽管它被包含在我们开始查找的<code>&lt;a&gt;</code>标签的里面.第二个例子中,最后一个<code>&lt;p&gt;</code>标签也被显示出来,尽管它与我们开始查找位置的<code>&lt;a&gt;</code>标签不属于同一部分.例子中,搜索的重点是要匹配过滤器的条件,并且在文档中出现的顺序而不是开始查找的元素的位置.</p>
+<h2 id="7-8-find-all-previous-和find-previous"><a href="#7-8-find-all-previous-和find-previous" class="headerlink" title="7.8 find_all_previous()和find_previous()"></a>7.8 find_all_previous()和find_previous()</h2><pre><code>find_all_previous(name,attrs,recursive,text,**kwards)
+find_previous(name,attrs,recursive,text,**kwards)
+</code></pre><p>这两个方法通过<code>.previous_elements</code>属性对当前节点前面的tag和字符串进行迭代，<code>find_all_previous()</code>方法返回所有符合条件的节点，<code>find_previous()</code>方法仅返回第一个符合条件的节点：</p>
+<pre><code>&gt;&gt; print(first_link.find_all_previous(&quot;p&quot;))
+[&lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;,
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;
+and they lived at the bottom of a well.&lt;/p&gt;, &lt;p class=&quot;title&quot; name=&quot;dromouse&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;]
+
+&gt;&gt; print(first_link.find_previous(&quot;title&quot;))
+&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;
+</code></pre><p><code>find_all_previous(&quot;p&quot;)</code>返回了文档中的第一段(class=”title”的那段),但还返回了第二段,</p><p>标签包含了我们开始查找的<code>&lt;a&gt;</code>标签.不要惊讶,这段代码的功能是查找所有出现在指定<code>&lt;a&gt;</code>标签之前的<code>&lt;p&gt;</code>标签,因为这个<code>&lt;p&gt;</code>标签包含了开始的<code>&lt;a&gt;</code>标签,所以<code>&lt;p&gt;</code>标签一定是在<code>&lt;a&gt;</code>之前出现的.</p>
+<h2 id="7-9-CSS选择器"><a href="#7-9-CSS选择器" class="headerlink" title="7.9 CSS选择器"></a>7.9 CSS选择器</h2><p>BeautifulSoup支持大部分的CSS选择器，在<code>Tag</code>或<code>BeautifulSoup</code>对象的<code>.select()</code>方法中传入字符串参数，即可使用CSS选择器的语法找到tag：</p>
+<pre><code>&gt;&gt; print(soup.select(&apos;title&apos;))
+[&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;]
+
+&gt;&gt; print(soup.select(&quot;p:nth-of-type(3)&quot;))
+[&lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;]
+</code></pre><p>其中<code>:nth-of-type(n)</code> 选择器匹配属于父元素的特定类型的第 N 个子元素的每个元素.而在上例中，既是匹配<code>p</code>元素的特定类型的第三个元素。<br>或者是通过<code>tag</code>标签逐层进行查找：</p>
+<pre><code>&gt;&gt; print(soup.select(&quot;body a&quot;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+
+&gt;&gt; print(soup.select(&quot;html head title&quot;))
+[&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;]
+</code></pre><p>也可以找到某个tag标签下的直接子标签：</p>
+<pre><code>&gt;&gt; print(soup.select(&quot;head &gt; title&quot;))
+[&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;]
+
+&gt;&gt; print(soup.select(&quot;p &gt; a&quot;))
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+
+&gt;&gt; print(soup.select(&quot;p &gt; a:nth-of-type(2)&quot;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;]
+
+&gt;&gt; print(soup.select(&quot;p &gt; #link1&quot;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]
+
+&gt;&gt; print(soup.select(&quot;body &gt; a&quot;))
+[]
+</code></pre><p>找到兄弟节点标签：</p>
+<pre><code>&gt;&gt; print(soup.select(&quot;#link1 ~ .sister&quot;)) #找到link1的兄弟节点
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+
+&gt;&gt; print(soup.select(&quot;#link1 + .sister&quot;)) #找到link1的下一个兄弟节点
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;]
+</code></pre><p>通过CSS的类名进行查找：</p>
+<pre><code>&gt;&gt; print(soup.select(&quot;.sister&quot;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+
+&gt;&gt; print(soup.select(&quot;[class~=sister]&quot;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+</code></pre><p>通过tag的id查找：</p>
+<pre><code>&gt;&gt; print(soup.select(&quot;#link1&quot;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]
+
+&gt;&gt; print(soup.select(&quot;a#link2&quot;))
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;]
+</code></pre><p>通过是否存在某个属性来查找：</p>
+<pre><code>&gt;&gt; print(soup.select(&apos;p[name]&apos;))
+[&lt;p class=&quot;title&quot; name=&quot;dromouse&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;]
+</code></pre><p>通过属性的值来查找：</p>
+<pre><code>&gt;&gt; print(soup.select(&apos;a[href^=&quot;http://example.com/&quot;]&apos;)) #查找以此开头的href
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt;, 
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+
+&gt;&gt; print(soup.select(&apos;a[href$=&quot;tillie&quot;]&apos;)) #查找以tillie结尾的href
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;]
+
+&gt;&gt; print(soup.select(&apos;a[href*=&quot;.com/el&quot;]&apos;)) #查找其中包含.com/el字符串的href
+[&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;&lt;!-- Elsie --&gt;&lt;/a&gt;]
+</code></pre><p>通过语言设置来查找：</p>
+<pre><code>&gt;&gt; multilingual_markup = &quot;&quot;&quot;
+... &lt;p lang=&quot;en&quot;&gt;Hello&lt;/p&gt;
+...  &lt;p lang=&quot;en-us&quot;&gt;Howdy, y&apos;all&lt;/p&gt;
+...   &lt;p lang=&quot;en-gb&quot;&gt;Pip-pip, old fruit&lt;/p&gt;
+...    &lt;p lang=&quot;fr&quot;&gt;Bonjour mes amis&lt;/p&gt;
+...    &quot;&quot;&quot;
+&gt;&gt; multilingual_soup = BeautifulSoup(multilingual_markup)
+&gt;&gt; print(multilingual_soup.select(&apos;p[lang|=en]&apos;))
+[&lt;p lang=&quot;en&quot;&gt;Hello&lt;/p&gt;,&lt;p lang=&quot;en-us&quot;&gt;Howdy, y&apos;all&lt;/p&gt;,&lt;p lang=&quot;en-gb&quot;&gt;Pip-pip, old fruit&lt;/p&gt;]
+</code></pre><h2 id="8-输出"><a href="#8-输出" class="headerlink" title="8 输出"></a>8 输出</h2><h3 id="8-1-格式化输出"><a href="#8-1-格式化输出" class="headerlink" title="8.1 格式化输出"></a>8.1 格式化输出</h3><p><code>prettify()</code>方法将BeautifulSoup的文档树格式化后以Unicode编码输出，每个XML/HTML标签独占一行。</p>
+<pre><code>&gt;&gt; makeup = &apos;&lt;a href=&quot;http://example.com/&quot;&gt;I linked to &lt;i&gt;example.com&lt;/i&gt;&lt;/a&gt;&apos;
+&gt;&gt; makeup_soup = BeautifulSoup(makeup,&apos;html.parser&apos;)
+&gt;&gt; print(makeup_soup.prettify())
+&lt;a href=&quot;http://example.com/&quot;&gt;
+ I linked to
+ &lt;i&gt;
+    example.com
+ &lt;/i&gt;
+&lt;/a&gt;
+</code></pre><p><code>BeautifulSoup</code>对象和它的节点都可以调用<code>prettify()</code>方法：</p>
+<pre><code>&gt;&gt; print(makeup_soup.i.prettify())
+&lt;i&gt;
+ example.com
+&lt;/i&gt;
+</code></pre><h3 id="8-2-压缩输出"><a href="#8-2-压缩输出" class="headerlink" title="8.2 压缩输出"></a>8.2 压缩输出</h3><p>如果指向得到结果字符串而不重视格式，那么可以对一个<code>BeautifulSoup</code>对象或<code>Tag</code>对象使用Python的<code>str()</code>方法（<code>unicode()</code>在python3中已经没有了，所以无法使用）：</p>
+<pre><code>&gt;&gt; print(str(makeup_soup))
+&lt;a href=&quot;http://example.com/&quot;&gt;I linked to &lt;i&gt;example.com&lt;/i&gt;&lt;/a&gt;
+</code></pre><p><code>str()</code>方法返回UTF-8编码的字符串，可以指定编码的位置。<br>还可以调用<code>encode()</code>方法获得字节码:</p>
+<pre><code>&gt;&gt; print(str(makeup_soup).encode())
+b&apos;&lt;a href=&quot;http://example.com/&quot;&gt;I linked to &lt;i&gt;example.com&lt;/i&gt;&lt;/a&gt;&apos;
+</code></pre><h3 id="8-3-get-text"><a href="#8-3-get-text" class="headerlink" title="8.3 get_text()"></a>8.3 get_text()</h3><p>如果只想得到tag中包含的文本内容，那么可以调用<code>get_text()</code>方法，这个方法获取到tag中包含的所有文本内容，包括子孙tag中的内容，并将结果作为Unicode字符串返回：</p>
+<pre><code>&gt;&gt; print(repr(makeup_soup.get_text()))
+&apos;\nI linked to example.com\n&apos;
+
+&gt;&gt; print(makeup_soup.i.get_text())
+example.com
+</code></pre><p>可以通过参数指定tag的文本内容的分隔符：</p>
+<pre><code>&gt;&gt; print(repr(makeup_soup.get_text(&quot;|&quot;)))
+&apos;\nI linked to |example.com|\n&apos;
+</code></pre><p>还可以去除获得文本内容的前后空白：</p>
+<pre><code>&gt;&gt; print(repr(makeup_soup.get_text(&quot; | &quot;,strip=True)))
+&apos;I linked to | example.com&apos;
+</code></pre><h2 id="9-解析部分文档"><a href="#9-解析部分文档" class="headerlink" title="9 解析部分文档"></a>9 解析部分文档</h2><p>如果仅仅因为想要查找文档中的<code>&lt;a&gt;</code>标签而将整篇文档进行解析，有时候会特别浪费内存和时间，最快的方法就是一开始就把<code>&lt;a&gt;</code>标签以外的东西都忽略掉。<code>SoupStrainer</code>类可以定义文档的某段内容，这样搜索文档时就不必先解析整篇文档，只会解析在<code>SoupStrainer</code>中定义过的文档。创建一个<code>SoupStrainer</code>对象并作为<code>parse_only</code>参数给<code>BeautifulSoup</code>的构造方法即可。</p>
+<h3 id="9-1-SoupStrainer"><a href="#9-1-SoupStrainer" class="headerlink" title="9.1 SoupStrainer"></a>9.1 SoupStrainer</h3><p><code>SoupStrainer</code>类接收与典型搜索方法相同的参数：name/attrs/recursive/text/**kwards。下面举例说明三种<code>SoupStrainer</code>对象：</p>
+<pre><code>&gt;&gt; from bs4 import SoupStrainer
+&gt;&gt; only_a_tags = SoupStrainer(&quot;a&quot;)
+&gt;&gt; only_tags_with_id_link2 = SoupStrainer(id = &quot;link2&quot;)
+&gt;&gt; def is_short_string(string):
+...    return len(string) &lt; 10
+
+&gt;&gt;  only_short_strings = SoupStrainer(text=is_short_string)
+</code></pre><p>接下来，我们分别举例，看这三种对象做参数会有什么不同：</p>
+<pre><code>&gt;&gt; html_doc = &quot;&quot;&quot;
+... &lt;html&gt;&lt;head&gt;&lt;title&gt;The Dormouse&apos;s story&lt;/title&gt;&lt;/head&gt;
+... &lt;p class=&quot;title&quot;&gt;&lt;b&gt;The Dormouse&apos;s story&lt;/b&gt;&lt;/p&gt;
+... &lt;p class=&quot;story&quot;&gt;Once upon a time there were three little sisters; and their names were
+... &lt;a href=&quot;http://example.com/elsie&quot; class=&quot;sister&quot; id=&quot;link1&quot;&gt;Elsie&lt;/a&gt;,
+... &lt;a href=&quot;http://example.com/lacie&quot; class=&quot;sister&quot; id=&quot;link2&quot;&gt;Lacie&lt;/a&gt; and
+... &lt;a href=&quot;http://example.com/tillie&quot; class=&quot;sister&quot; id=&quot;link3&quot;&gt;Tillie&lt;/a&gt;;
+... and they lived at the bottom of a well.&lt;/p&gt;
+
+... &lt;p class=&quot;story&quot;&gt;...&lt;/p&gt;
+... &quot;&quot;&quot;
+
+&gt;&gt; print(BeautifulSoup(html_doc,&quot;html.parser&quot;,parse_only = only_a_tags).prettify())
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/elsie&quot; id=&quot;link1&quot;&gt;
+    Elsie
+&lt;/a&gt;
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;
+    Lacie
+&lt;/a&gt;
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/tillie&quot; id=&quot;link3&quot;&gt;
+    Tillie
+&lt;/a&gt;
+
+&gt;&gt; print(BeautifulSoup(html_doc,&quot;html.parser&quot;,parse_only = only_short_strings).prettify())
+Elsie
+,
+Lacie
+and
+Tillie
+...
+
+&gt;&gt; print(BeautifulSoup(html_doc,&quot;html.parser&quot;,parse_only = only_tags_with_id_link2).prettify())
+&lt;a class=&quot;sister&quot; href=&quot;http://example.com/lacie&quot; id=&quot;link2&quot;&gt;
+    Lacie
+&lt;/a&gt;
+</code></pre><p>还可以将<code>SoupStrainer</code>作为参数传入搜索文档树中提到的方法，这可能不是个常用的用法。</p>
+<h2 id="10-常见问题"><a href="#10-常见问题" class="headerlink" title="10 常见问题"></a>10 常见问题</h2><h3 id="10-1-代码诊断"><a href="#10-1-代码诊断" class="headerlink" title="10.1 代码诊断"></a>10.1 代码诊断</h3><p>如果想知道BeautifulSoup怎杨处理文档，可以将文档传入<code>diagnose()</code>方法，BeautifulSoup会输出报告，说明不同的解析器会怎样处理这段文档，并标示当前解析过程会使用哪种解析器:</p>
+<pre><code>&gt;&gt; from bs4.diagnose import diagnose
+&gt;&gt; data = open(&quot;bad.html&quot;).read()
+&gt;&gt; print(diagnose(data))
+
+Diagnostic running on Beautiful Soup 4.2.0
+Python version 2.7.3 (default, Aug  1 2012, 05:16:07)
+I noticed that html5lib is not installed. Installing it may help.
+Found lxml version 2.3.2.0
+
+Trying to parse your data with html.parser
+Here&apos;s what html.parser did with the document:
+...
+</code></pre><p><code>diagnose()</code>方法的输出结果可能帮助你找到问题的原因。</p>
+<h3 id="11-总结"><a href="#11-总结" class="headerlink" title="11 总结"></a>11 总结</h3><p>这篇文档又写了好久，其实基本是对着文档在写，但是在写的过程中对这个库有了更深入的了解，挺值得。<br>最后感谢文档的编写者和翻译者。</p>
+<h1 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h1><p>[1]. <a href="https://www.crummy.com/software/BeautifulSoup/bs4/doc/index.zh.html" target="_blank" rel="external">BeautifulSoup文档</a><br>[2]. Web Scraping with Python. By.Ryan Mitchell.</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/06/07/Mac下启动Mysql/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Mac下启动Mysql
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/05/31/Python专栏之二:Urllib库/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python专栏之二：Urllib库</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+  
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+        <span class="donate_txt">
+            &uarr;<br>
+                    感谢您的支持！
+        </span>
+        <br>
+    </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+            <!-- 支付宝打赏图案 -->
+            <img src="/img/zhifubao.jpg" alt="支付宝打赏"> 
+            <!-- 微信打赏图案 -->
+            <img src="/img/weixin.jpg" alt="微信打赏">  
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+
+  
+  
+    <div class="article-footer-copyright">
+    <p><span>本文标题:</span><a href="/2016/06/06/Python专栏之三：BeautifulSoup/">Python专栏之三：BeautifulSoup</a></p>
+    <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
+    <p><span>发布时间:</span>2016/06/06 - 17:11:07</p>
+    <p><span>最后更新:</span>2016/06/14 - 16:19:47</p>
+    <p>
+        <span>原始链接:</span><a class="post-url" href="/2016/06/06/Python专栏之三：BeautifulSoup/" title="Python专栏之三：BeautifulSoup">http://yoursite.com/2016/06/06/Python专栏之三：BeautifulSoup/</a>
+        <span class="copy-path" data-clipboard-text="原文: http://yoursite.com/2016/06/06/Python专栏之三：BeautifulSoup/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        <script src="/js/clipboard.min.js"></script>
+        <script> var clipboard = new Clipboard('.copy-path'); </script>
+    </p>
+    <p>
+        <span>许可协议:</span><i class="fa fa-creative-commons"></i><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="中国大陆 (CC BY-NC-SA 4.0 CN)"> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </p>
+</div>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Python专栏之三：BeautifulSoup" data-title="Python专栏之三：BeautifulSoup" data-url="http://yoursite.com/2016/06/06/Python专栏之三：BeautifulSoup/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Cheng Wang
+    	</div>
+        <div class="footer-center">
+            <span id="busuanzi_container_site_uv">
+            本站访客数<span id="busuanzi_value_site_uv"></span>人次
+            </span>
+            <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+            </span>
+        </div>
+    </div>
+  </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<div>
+   <a href="javascript:;" id="totop" title="回到顶部"></a> 
+</div>
+
+<script src="/js/totop.js"></script>
+
+
+  </div>
+</body>
+</html>
