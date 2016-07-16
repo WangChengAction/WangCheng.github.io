@@ -6,18 +6,20 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>tags | code_Wang Site</title>
+  <title>Python实战二：网页信息采集 | code_Wang Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Never Give Up!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://chengblog.top/tags/index.html">
+  <meta name="description" content="了解了网页的大致构成，接下来我们看如何进行页面信息的采集，这个我们主要是采用BeautifulSoup对网页进行解析。类似下面的网页：我们将其中的图片地址，价格，标题，评分和评分数量一一进行解析。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实战二：网页信息采集">
+<meta property="og:url" content="http://chengblog.top/2016/07/16/Python实战二：网页信息采集/index.html">
 <meta property="og:site_name" content="code_Wang Site">
-<meta property="og:description" content="Never Give Up!">
-<meta property="og:updated_time" content="2016-05-27T15:04:55.000Z">
+<meta property="og:description" content="了解了网页的大致构成，接下来我们看如何进行页面信息的采集，这个我们主要是采用BeautifulSoup对网页进行解析。类似下面的网页：我们将其中的图片地址，价格，标题，评分和评分数量一一进行解析。">
+<meta property="og:image" content="http://chengblog.top/images/web.png">
+<meta property="og:updated_time" content="2016-07-16T13:11:44.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tags">
-<meta name="twitter:description" content="Never Give Up!">
+<meta name="twitter:title" content="Python实战二：网页信息采集">
+<meta name="twitter:description" content="了解了网页的大致构成，接下来我们看如何进行页面信息的采集，这个我们主要是采用BeautifulSoup对网页进行解析。类似下面的网页：我们将其中的图片地址，价格，标题，评分和评分数量一一进行解析。">
+<meta name="twitter:image" content="http://chengblog.top/images/web.png">
   
     <link rel="alternative" href="/atom.xml" title="code_Wang Site" type="application/atom+xml">
   
@@ -205,11 +207,11 @@
 	</div>
 </nav>
 
-      <div class="body-wrap"><article id="page-undefined" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="pages-Python实战二：网页信息采集" class="article article-type-pages" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/tags/index.html" class="article-date">
-  	<time datetime="2016-05-27T15:03:23.000Z" itemprop="datePublished">2016-05-27</time>
+      <a href="/2016/07/16/Python实战二：网页信息采集/" class="article-date">
+  	<time datetime="2016-07-16T11:55:03.000Z" itemprop="datePublished">2016-07-16</time>
 </a>
     </div>
   
@@ -222,7 +224,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      tags
+      Python实战二：网页信息采集
     </h1>
   
 
@@ -230,6 +232,10 @@
       
       <div class="article-info article-info-post">
         
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/html/">html</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+	</div>
+
         
 
         <div class="clearfix"></div>
@@ -239,13 +245,103 @@
     <div class="article-entry" itemprop="articleBody">
       
         
+            <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                
+            </div>
         
+        <p>了解了网页的大致构成，接下来我们看如何进行页面信息的采集，这个我们主要是采用BeautifulSoup对网页进行解析。类似下面的网页：<br><img src="/images/web.png" alt="&#39;website&#39;"><br>我们将其中的图片地址，价格，标题，评分和评分数量一一进行解析。</p>
+<a id="more"></a>
+<p>代码如下：</p>
+<pre><code>from bs4 import BeautifulSoup
+
+with open(&quot;&apos;/Users/wangcheng/Desktop/Python_Combat/week1/1_2/1_2answer_of_homework/1_2_homework_required/index.html&apos;,&apos;r&apos;&quot;) as html:
+
+    Soup = BeautifulSoup(html,&apos;lxml&apos;)
+
+    titles = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; img&apos;)
+    images = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; img&apos;)
+    prices = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; div.caption &gt; h4.pull-right&apos;)
+    reviews = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; div.ratings &gt; p.pull-right&apos;)
+    stars = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; div.ratings &gt; p:nth-of-type(2)&apos;)
+
+    for title,image,price,review,star in zip(titles,images,prices,reviews,stars):
+
+        data = {
+            &apos;title&apos; : title.get_text(),
+            &apos;image&apos; : image.get(&apos;src&apos;),
+            &apos;price&apos; : price.get_text(),
+            &apos;review&apos; : review.get_text(),
+            &apos;star&apos; : len(star.find_all(&apos;span&apos;,class_=&quot;glyphicon glyphicon-star&quot;))
+        }
+    print(data)
+</code></pre><p>这样的话，我们的代码运行结果如下：</p>
+<pre><code>{&apos;title&apos;: &apos;EarPod&apos;, &apos;review&apos;: &apos;65 reviews&apos;, &apos;price&apos;: &apos;$24.99&apos;, &apos;star &apos;: 5, &apos;image&apos;: &apos;img/pic_0000_073a9256d9624c92a05dc680fc28865f.jpg&apos;}
+{&apos;title&apos;: &apos;New Pocket&apos;, &apos;review&apos;: &apos;12 reviews&apos;, &apos;price&apos;: &apos;$64.99&apos;, &apos;star &apos;: 4, &apos;image&apos;: &apos;img/pic_0005_828148335519990171_c234285520ff.jpg&apos;}
+{&apos;title&apos;: &apos;New sunglasses&apos;, &apos;review&apos;: &apos;31 reviews&apos;, &apos;price&apos;: &apos;$74.99&apos;, &apos;star &apos;: 4, &apos;image&apos;: &apos;img/pic_0006_949802399717918904_339a16e02268.jpg&apos;}
+{&apos;title&apos;: &apos;Art Cup&apos;, &apos;review&apos;: &apos;6 reviews&apos;, &apos;price&apos;: &apos;$84.99&apos;, &apos;star &apos;: 3, &apos;image&apos;: &apos;img/pic_0008_975641865984412951_ade7a767cfc8.jpg&apos;}
+{&apos;title&apos;: &apos;iphone gamepad&apos;, &apos;review&apos;: &apos;18 reviews&apos;, &apos;price&apos;: &apos;$94.99&apos;, &apos;star &apos;: 4, &apos;image&apos;: &apos;img/pic_0001_160243060888837960_1c3bcd26f5fe.jpg&apos;}
+{&apos;title&apos;: &apos;Best Bed&apos;, &apos;review&apos;: &apos;18 reviews&apos;, &apos;price&apos;: &apos;$214.5&apos;, &apos;star &apos;: 4, &apos;image&apos;: &apos;img/pic_0002_556261037783915561_bf22b24b9e4e.jpg&apos;}
+{&apos;title&apos;: &apos;iWatch&apos;, &apos;review&apos;: &apos;35 reviews&apos;, &apos;price&apos;: &apos;$500&apos;, &apos;star &apos;: 4, &apos;image&apos;: &apos;img/pic_0011_1032030741401174813_4e43d182fce7.jpg&apos;}
+{&apos;title&apos;: &apos;Park tickets&apos;, &apos;review&apos;: &apos;8 reviews&apos;, &apos;price&apos;: &apos;$15.5&apos;, &apos;star &apos;: 4, &apos;image&apos;: &apos;img/pic_0010_1027323963916688311_09cc2d7648d9.jpg&apos;}
+</code></pre><p>其实在里面的难点主要在于星星数目的统计，这里我卡了好久，开始想着用find_all查找<code>&quot;glyphicon glyphicon-star&quot;</code>，每查找到一次，count的数目加一，然后最后输出count的总数目就是星星的数目，但是总是失败，不知道为什么。<br>然后我尝试找有没有“counter”函数，能统计find_all查询到的元素的个数，但是没有找到，最后突然想到<code>find_all返回的是一个列表</code>，我只需要用一个len，就可以知道列表的元素个数，从而就可以计算出星星的数目。</p>
+<p>当然，如果我们想要搜集所有star数多于3的图片，可以将所有内容放入一个list里面，然后进行信息的比对，如下代码：</p>
+<pre><code>from bs4 import BeautifulSoup
+
+info = []
+
+with open(&quot;&apos;/Users/wangcheng/Desktop/Python_Combat/week1/1_2/1_2answer_of_homework/1_2_homework_required/index.html&apos;,&apos;r&apos;&quot;) as html:
+
+    Soup = BeautifulSoup(html,&apos;lxml&apos;)
+
+    titles = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; img&apos;)
+    images = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; img&apos;)
+    prices = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; div.caption &gt; h4.pull-right&apos;)
+    reviews = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; div.ratings &gt; p.pull-right&apos;)
+    stars = Soup.select(&apos;body &gt; div &gt; div &gt; div.col-md-9 &gt; div &gt; div &gt; div &gt; div.ratings &gt; p:nth-of-type(2)&apos;)
+
+    for title,image,price,review,star in zip(titles,images,prices,reviews,stars):
+
+        data = {
+            &apos;title&apos; : title.get_text(),
+            &apos;image&apos; : image.get(&apos;src&apos;),
+            &apos;price&apos; : price.get_text(),
+            &apos;review&apos; : review.get_text(),
+            &apos;star&apos; : len(star.find_all(&apos;span&apos;,class_=&quot;glyphicon glyphicon-star&quot;))
+        }
+    info.append(data) 
+
+    for i in info:
+        if float(i[&apos;star&apos;])&gt;3:
+            print(i[&apos;title&apos;],i[&apos;price&apos;])
+</code></pre><p>这样即可选出所有评星大于3的图片的标题和价格，结果显示如下：</p>
+<pre><code>EarPod $24.99
+New Pocket $64.99
+New sunglasses $74.99
+iphone gamepad $94.99
+Best Bed $214.5
+iWatch $500
+Park tickets $15.5
+</code></pre><p>注：之前例子中有个<code>stripped_string</code>的用法，它是获得一个父标签下所有子标签的文本信息，相当于一个高级的get_text版本。<br>例如，我们这个文章的标签，标签有两个，用get_text只能获取一个，要想获取全部的标签，就需要使用这个：</p>
+<pre><code>&apos;category&apos;: list(cate.stripped_strings)
+</code></pre><p>然后将其放入一个list中。</p>
+
       
     </div>
     
   </div>
   
     
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/16/python实战一：基础网页制作/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python实战一：基础网页制作</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
 
   
   
@@ -273,6 +369,23 @@
 </div>
 
   
+  
+    <div class="article-footer-copyright">
+    <p><span>本文标题:</span><a href="/2016/07/16/Python实战二：网页信息采集/">Python实战二：网页信息采集</a></p>
+    <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
+    <p><span>发布时间:</span>2016/07/16 - 19:55:03</p>
+    <p><span>最后更新:</span>2016/07/16 - 21:11:44</p>
+    <p>
+        <span>原始链接:</span><a class="post-url" href="/2016/07/16/Python实战二：网页信息采集/" title="Python实战二：网页信息采集">http://chengblog.top/2016/07/16/Python实战二：网页信息采集/</a>
+        <span class="copy-path" data-clipboard-text="原文: http://chengblog.top/2016/07/16/Python实战二：网页信息采集/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        <script src="/js/clipboard.min.js"></script>
+        <script> var clipboard = new Clipboard('.copy-path'); </script>
+    </p>
+    <p>
+        <span>许可协议:</span><i class="fa fa-creative-commons"></i><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="中国大陆 (CC BY-NC-SA 4.0 CN)"> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </p>
+</div>
+
   
 </article>
 
@@ -302,7 +415,7 @@
 
 <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="undefined" data-title="tags" data-url="http://chengblog.top/tags/index.html"></div>
+	<div class="ds-thread" data-thread-key="Python实战二：网页信息采集" data-title="Python实战二：网页信息采集" data-url="http://chengblog.top/2016/07/16/Python实战二：网页信息采集/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -354,7 +467,7 @@
 		mathjax: true,
 		animate: true,
 		isHome: false,
-		isPost: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
