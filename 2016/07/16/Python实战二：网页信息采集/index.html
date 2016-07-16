@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="code_Wang Site">
 <meta property="og:description" content="了解了网页的大致构成，接下来我们看如何进行页面信息的采集，这个我们主要是采用BeautifulSoup对网页进行解析。类似下面的网页：我们将其中的图片地址，价格，标题，评分和评分数量一一进行解析。">
 <meta property="og:image" content="http://chengblog.top/images/web.png">
-<meta property="og:updated_time" content="2016-07-16T13:11:44.000Z">
+<meta property="og:updated_time" content="2016-07-16T13:23:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python实战二：网页信息采集">
 <meta name="twitter:description" content="了解了网页的大致构成，接下来我们看如何进行页面信息的采集，这个我们主要是采用BeautifulSoup对网页进行解析。类似下面的网页：我们将其中的图片地址，价格，标题，评分和评分数量一一进行解析。">
@@ -284,7 +284,8 @@ with open(&quot;&apos;/Users/wangcheng/Desktop/Python_Combat/week1/1_2/1_2answer
 {&apos;title&apos;: &apos;Best Bed&apos;, &apos;review&apos;: &apos;18 reviews&apos;, &apos;price&apos;: &apos;$214.5&apos;, &apos;star &apos;: 4, &apos;image&apos;: &apos;img/pic_0002_556261037783915561_bf22b24b9e4e.jpg&apos;}
 {&apos;title&apos;: &apos;iWatch&apos;, &apos;review&apos;: &apos;35 reviews&apos;, &apos;price&apos;: &apos;$500&apos;, &apos;star &apos;: 4, &apos;image&apos;: &apos;img/pic_0011_1032030741401174813_4e43d182fce7.jpg&apos;}
 {&apos;title&apos;: &apos;Park tickets&apos;, &apos;review&apos;: &apos;8 reviews&apos;, &apos;price&apos;: &apos;$15.5&apos;, &apos;star &apos;: 4, &apos;image&apos;: &apos;img/pic_0010_1027323963916688311_09cc2d7648d9.jpg&apos;}
-</code></pre><p>其实在里面的难点主要在于星星数目的统计，这里我卡了好久，开始想着用find_all查找<code>&quot;glyphicon glyphicon-star&quot;</code>，每查找到一次，count的数目加一，然后最后输出count的总数目就是星星的数目，但是总是失败，不知道为什么。<br>然后我尝试找有没有“counter”函数，能统计find_all查询到的元素的个数，但是没有找到，最后突然想到<code>find_all返回的是一个列表</code>，我只需要用一个len，就可以知道列表的元素个数，从而就可以计算出星星的数目。</p>
+</code></pre><p>其实在里面的难点主要在于星星数目的统计，这里我卡了好久，开始想着用find_all查找<code>&quot;glyphicon glyphicon-star&quot;</code>，每查找到一次，count的数目加一，然后最后输出count的总数目就是星星的数目，但是总是失败，这是由于find_all返回的是个列表，并不是单独的一行行数据，所以我用count+1并没有办法得到预想的答案。</p>
+<p>然后我尝试找有没有类似“counter”的函数，能统计find_all查询到的元素的个数，但是没有找到，最后突然看到到文档中<code>find_all返回的是一个列表</code>，我只需要用一个len，就可以知道列表的元素个数，从而就可以计算出星星的数目。</p>
 <p>当然，如果我们想要搜集所有star数多于3的图片，可以将所有内容放入一个list里面，然后进行信息的比对，如下代码：</p>
 <pre><code>from bs4 import BeautifulSoup
 
@@ -314,7 +315,7 @@ with open(&quot;&apos;/Users/wangcheng/Desktop/Python_Combat/week1/1_2/1_2answer
     for i in info:
         if float(i[&apos;star&apos;])&gt;3:
             print(i[&apos;title&apos;],i[&apos;price&apos;])
-</code></pre><p>这样即可选出所有评星大于3的图片的标题和价格，结果显示如下：</p>
+</code></pre><p>这样即可选出所有评星大于3的图片的标题和价格，info中的内容其实就是将上面例子的结果放入一个列表之中，而i就代表每一行的内容，其最后的结果显示如下：</p>
 <pre><code>EarPod $24.99
 New Pocket $64.99
 New sunglasses $74.99
@@ -374,7 +375,7 @@ Park tickets $15.5
     <p><span>本文标题:</span><a href="/2016/07/16/Python实战二：网页信息采集/">Python实战二：网页信息采集</a></p>
     <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
     <p><span>发布时间:</span>2016/07/16 - 19:55:03</p>
-    <p><span>最后更新:</span>2016/07/16 - 21:11:44</p>
+    <p><span>最后更新:</span>2016/07/16 - 21:23:45</p>
     <p>
         <span>原始链接:</span><a class="post-url" href="/2016/07/16/Python实战二：网页信息采集/" title="Python实战二：网页信息采集">http://chengblog.top/2016/07/16/Python实战二：网页信息采集/</a>
         <span class="copy-path" data-clipboard-text="原文: http://chengblog.top/2016/07/16/Python实战二：网页信息采集/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
