@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="code_Wang Site">
 <meta property="og:description" content="了解了网页的大致构成，接下来我们看如何进行页面信息的采集，这个我们主要是采用BeautifulSoup对网页进行解析。类似下面的网页：我们将其中的图片地址，价格，标题，评分和评分数量一一进行解析。">
 <meta property="og:image" content="http://chengblog.top/images/web.png">
-<meta property="og:updated_time" content="2016-07-16T13:23:45.000Z">
+<meta property="og:updated_time" content="2016-07-17T08:54:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python实战二：网页信息采集">
 <meta name="twitter:description" content="了解了网页的大致构成，接下来我们看如何进行页面信息的采集，这个我们主要是采用BeautifulSoup对网页进行解析。类似下面的网页：我们将其中的图片地址，价格，标题，评分和评分数量一一进行解析。">
@@ -247,7 +247,7 @@
         
             <div id="toc" class="toc-article">
                 <strong class="toc-title">文章目录</strong>
-                
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
             </div>
         
         <p>了解了网页的大致构成，接下来我们看如何进行页面信息的采集，这个我们主要是采用BeautifulSoup对网页进行解析。类似下面的网页：<br><img src="/images/web.png" alt="&#39;website&#39;"><br>我们将其中的图片地址，价格，标题，评分和评分数量一一进行解析。</p>
@@ -326,6 +326,25 @@ Park tickets $15.5
 </code></pre><p>注：之前例子中有个<code>stripped_string</code>的用法，它是获得一个父标签下所有子标签的文本信息，相当于一个高级的get_text版本。<br>例如，我们这个文章的标签，标签有两个，用get_text只能获取一个，要想获取全部的标签，就需要使用这个：</p>
 <pre><code>&apos;category&apos;: list(cate.stripped_strings)
 </code></pre><p>然后将其放入一个list中。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这次我们解析的这个网页是一个本地网页，所以我们采用了open对网页的绝对地址进行了读取，然后用BeautifulSoup对网页进行解析。<br>解析了整个网页之后，因为我们想要提取网页中所有图片的图片地址，标题，商品价格，评论数和星级等诸多信息，所以我们要对这些信息进行筛选。这里我们主要借助于Google Chrome的检查功能，选中将要爬取的信息的CSS SELECTOR，进行复制，然后根据实际情况做一些修改，筛选出所需要的信息之后，我们需要将这些信息放入一个字典里边，便于进行统计查找，这时可以借助zip()。</p>
+<blockquote>
+<p>zip([seql, …])接受一系列可迭代对象作为参数，将对象中对应的元素打包成一个个tuple（元组），然后返回由这些tuples组成的list（列表）。若传入参数的长度不等，则返回list的长度和参数中长度最短的对象相同。</p>
+</blockquote>
+<p>比如：</p>
+<pre><code>&gt;&gt; z1 = [1,2,3]
+&gt;&gt; z2 = [4,5,6]
+&gt;&gt; result = zip(z1,z2)
+&gt;&gt; result
+[(1,4),(2,5),(3,6)]
+</code></pre><p>zip()配合<code>*</code>号操作符，可以将已经zip过的列表对象解压：</p>
+<pre><code>&gt;&gt; zip(*result)
+[(1,2,3),(4,5,6)]
+</code></pre><p>将各种信息放入zip中后，<code>zip(titles,images,prices,reviews,stars)</code>形成了一个列表，里面是一个一个的tuple，然后我们用data创建一个字典，然后将采集到的信息的内容传入这个字典，并进行打印，注意，image我们要获取的是图片地址，所以要用<code>image.get(&#39;src&#39;)</code>获取图片的地址属性，而star我们要获取的是星星的个数，从网页源码我们可以看到，若有星星，则span的<code>class_=&quot;glyphicon glyphicon-star&quot;</code>,若没有星星，则是<code>class_=&quot;glyphicon glyphicon-star-empty&quot;</code>,所以我们可以<code>star.find_all(&#39;span&#39;,class_=&quot;glyphicon glyphicon-star&quot;))</code>找到所有的有星星的情况，此时find_all返回的是一个列表，我们可以用len统计列表中元素的个数，即为星星的数目。</p>
+<p>当我们想要做一个查询，查询所有星级大于3的图片的题目和标签，我们可以将之前data中的信息append到一个空的列表中，然后用以下代码进行比对：</p>
+<pre><code>for i in info:
+    if float(i[&apos;star&apos;])&gt;3:
+        print(i[&apos;title&apos;],i[&apos;price&apos;])
+</code></pre><p>这样即可获得最终的结果。</p>
 
       
     </div>
@@ -375,7 +394,7 @@ Park tickets $15.5
     <p><span>本文标题:</span><a href="/2016/07/16/Python实战二：网页信息采集/">Python实战二：网页信息采集</a></p>
     <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
     <p><span>发布时间:</span>2016/07/16 - 19:55:03</p>
-    <p><span>最后更新:</span>2016/07/16 - 21:23:45</p>
+    <p><span>最后更新:</span>2016/07/17 - 16:54:33</p>
     <p>
         <span>原始链接:</span><a class="post-url" href="/2016/07/16/Python实战二：网页信息采集/" title="Python实战二：网页信息采集">http://chengblog.top/2016/07/16/Python实战二：网页信息采集/</a>
         <span class="copy-path" data-clipboard-text="原文: http://chengblog.top/2016/07/16/Python实战二：网页信息采集/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
