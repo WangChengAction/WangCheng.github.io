@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="baidu-site-verification" content="9dtmr2U4H5" />
+        <meta name="google-site-verification" content="x6k7knkmpTCLh6kFNs3JZVS6wUmetVakl9PNI3qMT_0" />
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>python实战三：爬取tripadvisor网站列表和个人收藏部分 | code_Wang Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="之前我们爬取的都是本地自己制作的一些简单网页，接下来我们尝试对真实世界的网页进行爬取。今天的主题是猫途鹰网站：”https://cn.tripadvisor.com/“
+1 背景介绍首先我们要了解的是服务器与本地的交换机制，大致就是我们个人PC向服务器发送一个Requests，服务器收到这个Requests后，会对我们做出回应，返回一个Response。这一步我们的关注点在Requests上面，在">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python实战三：爬取tripadvisor网站列表和个人收藏部分">
+<meta property="og:url" content="http://chengblog.top/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/index.html">
+<meta property="og:site_name" content="code_Wang Site">
+<meta property="og:description" content="之前我们爬取的都是本地自己制作的一些简单网页，接下来我们尝试对真实世界的网页进行爬取。今天的主题是猫途鹰网站：”https://cn.tripadvisor.com/“
+1 背景介绍首先我们要了解的是服务器与本地的交换机制，大致就是我们个人PC向服务器发送一个Requests，服务器收到这个Requests后，会对我们做出回应，返回一个Response。这一步我们的关注点在Requests上面，在">
+<meta property="og:image" content="http://chengblog.top/images/s1.png">
+<meta property="og:image" content="http://chengblog.top/images/s2.png">
+<meta property="og:image" content="http://chengblog.top/images/s3.png">
+<meta property="og:image" content="http://chengblog.top/images/s4.png">
+<meta property="og:image" content="http://chengblog.top/images/s5.png">
+<meta property="og:image" content="http://chengblog.top/images/s6.png">
+<meta property="og:updated_time" content="2016-07-17T10:56:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python实战三：爬取tripadvisor网站列表和个人收藏部分">
+<meta name="twitter:description" content="之前我们爬取的都是本地自己制作的一些简单网页，接下来我们尝试对真实世界的网页进行爬取。今天的主题是猫途鹰网站：”https://cn.tripadvisor.com/“
+1 背景介绍首先我们要了解的是服务器与本地的交换机制，大致就是我们个人PC向服务器发送一个Requests，服务器收到这个Requests后，会对我们做出回应，返回一个Response。这一步我们的关注点在Requests上面，在">
+<meta name="twitter:image" content="http://chengblog.top/images/s1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="code_Wang Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/photo.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Cheng Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/categories/notes">Notes</a></li>
+				        
+							<li><a href="/categories/python">Python</a></li>
+				        
+							<li><a href="/categories/html">Html</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/Fibonacci-Sequence/" style="font-size: 10px;">Fibonacci Sequence</a> <a href="/tags/Hanoi/" style="font-size: 10px;">Hanoi</a> <a href="/tags/Pascal-s-Triangle/" style="font-size: 10px;">Pascal's Triangle</a> <a href="/tags/Sweden/" style="font-size: 10px;">Sweden</a> <a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/notes/" style="font-size: 13.33px;">notes</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/requests/" style="font-size: 10px;">requests</a> <a href="/tags/scraping/" style="font-size: 16.67px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/WangChengAction">我的github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">BTH软工小硕一枚、喜欢吃东西、喜欢跑步、喜欢我女朋友~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Cheng Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/photo.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Cheng Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/categories/notes">Notes</a></li>
+		        
+					<li><a href="/categories/python">Python</a></li>
+		        
+					<li><a href="/categories/html">Html</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="pages-python实战三：爬取tripadvisor网站列表和个人收藏部分" class="article article-type-pages" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/" class="article-date">
+  	<time datetime="2016-07-17T09:06:39.000Z" itemprop="datePublished">2016-07-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      python实战三：爬取tripadvisor网站列表和个人收藏部分
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/requests/">requests</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+            <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-背景介绍"><span class="toc-text">1 背景介绍</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-网站爬取"><span class="toc-text">2 网站爬取</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-观光景点列表的爬取"><span class="toc-text">2-1 观光景点列表的爬取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-个人收藏景点的爬取"><span class="toc-text">2-2 个人收藏景点的爬取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-爬取全部页面的景点信息"><span class="toc-text">2-3 爬取全部页面的景点信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-简易反爬取措施"><span class="toc-text">2-4 简易反爬取措施</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-总结"><span class="toc-text">3 总结</span></a></li></ol>
+            </div>
+        
+        <p>之前我们爬取的都是本地自己制作的一些简单网页，接下来我们尝试对真实世界的网页进行爬取。<br>今天的主题是猫途鹰网站：”<a href="https://cn.tripadvisor.com/" target="_blank" rel="external">https://cn.tripadvisor.com/</a>“</p>
+<h1 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1 背景介绍"></a>1 背景介绍</h1><p>首先我们要了解的是服务器与本地的交换机制，大致就是我们个人PC向服务器发送一个Requests，服务器收到这个Requests后，会对我们做出回应，返回一个Response。<br>这一步我们的关注点在Requests上面，在Http1.1的时代，<code>Request请求目前有八种方法：Post,Get,Head,Put,Options,Connect,Trace,delete</code>。但是最常用的仍然只有Post和Get，而我呢用Python爬取信息的时候，其实就是模拟的这两种方法。</p>
+<a id="more"></a>
+<h1 id="2-网站爬取"><a href="#2-网站爬取" class="headerlink" title="2 网站爬取"></a>2 网站爬取</h1><h2 id="2-1-观光景点列表的爬取"><a href="#2-1-观光景点列表的爬取" class="headerlink" title="2-1 观光景点列表的爬取"></a>2-1 观光景点列表的爬取</h2><p>从下图中我们可以看到，纽约市的各大著名景点，然后每个经典标识有图片，有标题，有评分，有标签，我们首先就是要爬取这些内容。<br><img src="/images/s1.png" alt="&quot;image1&quot;"><br>我们可以看到下图的最后一图中是由四张小图构成的，这种类似景点集合的图片我们不准备搜集，所以在采集信息的时候要注意区分。<br><img src="/images/s2.png" alt="&#39;image2&#39;"></p>
+<p>代码如下所示：</p>
+<pre><code>from bs4 import BeautifulSoup
+import requests
+
+url = &apos;https://cn.tripadvisor.com/Attractions-g60763-Activities-New_York_City_New_York.html&apos;
+wb_data = requests.get(url)
+
+soup = BeautifulSoup(wb_data.text,&apos;lxml&apos;)
+
+#采集图片地址，名称，标签和评星状况
+
+images = soup.select(&apos;div.photo_booking.non_generic &gt; a &gt; img[width=&quot;160&quot;] &apos;)#图片暂时抓不到，因为有网站的反爬取，我们可以尝试抓取移动端
+titles = soup.select(&apos;div.property_title &gt; a[target=&quot;_blank&quot;]&apos;)
+cates = soup.select(&apos;div &gt; div.element_wrap &gt; div &gt; div.p13n_reasoning_v2 &apos;)
+stars = soup.select(&apos;div &gt; div &gt; span.rate.rate_no &gt; img&apos;)
+
+for image,title,cate,star in zip(images,titles,cates,stars):
+
+    data = {
+            &apos;title&apos; : title.get_text(),
+            &apos;image&apos; : image.get(&apos;src&apos;),
+            &apos;cate&apos; : list(cate.stripped_strings),
+            &apos;star&apos; : star.get(&apos;alt&apos;)
+            }
+    print(data)
+</code></pre><p>在爬取图片的时候，我们发现，图片集合中的图片的宽是75，而别的非集合的图片的宽和高都是160，所以我们可以用图片属性进行区分。另外在标题中，非集合的图片的连接会有一个<code>target = &quot;_blank&quot;</code>属性，用来指明点击后新网页的打开方式，这个也和集合类的有区别，所以，从这两点下手，我们可以在结果中剔除集合类的图片信息。</p>
+<p>代码运行结果如下：</p>
+<pre><code>{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;公园&apos;, &apos;景点与地标&apos;], &apos;title&apos;: &apos;中央公园&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;景点与地标&apos;, &apos;艺术博物馆&apos;], &apos;title&apos;: &apos;大都会艺术博物馆&apos;, &apos;star&apos;: &apos;5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;专业博物馆&apos;, &apos;景点与地标&apos;, &apos;纪念碑与雕像&apos;, &apos;历史景点&apos;], &apos;title&apos;: &apos;9/11纪念馆&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;观察台与观景塔&apos;, &apos;瞭望台&apos;], &apos;title&apos;: &apos;峭石之巅观景台&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;景点与地标&apos;], &apos;title&apos;: &apos;曼哈顿天际线&apos;, &apos;star&apos;: &apos;5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;景点与地标&apos;], &apos;title&apos;: &apos;百老汇&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;景观步行区&apos;, &apos;公园&apos;], &apos;title&apos;: &apos;高线公园&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;建筑物&apos;, &apos;景点与地标&apos;], &apos;title&apos;: &apos;大中央车站&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;艺术博物馆&apos;], &apos;title&apos;: &apos;弗里克美术收藏馆&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;建筑物&apos;, &apos;景点与地标&apos;, &apos;观察台与观景塔&apos;], &apos;title&apos;: &apos;帝国大厦&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;公园&apos;], &apos;title&apos;: &apos;布莱恩公园&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;纪念碑与雕像&apos;], &apos;title&apos;: &apos;Ground Zero Memorial&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;cate&apos;: [&apos;纪念碑与雕像&apos;, &apos;景点与地标&apos;], &apos;title&apos;: &apos;自由女神像&apos;, &apos;star&apos;: &apos;4.5分&apos;}
+</code></pre><p>这是第一页的前十三个景点的信息，首先给出的是图片地址，然后是分类，标题和景点评分。<br>我们可以看到所有的图片地址是相同的，这里是由于网站的反爬取措施，网站将真实的图片地址用javascript做了一层伪装，这个我们可以待会再看。</p>
+<h2 id="2-2-个人收藏景点的爬取"><a href="#2-2-个人收藏景点的爬取" class="headerlink" title="2-2 个人收藏景点的爬取"></a>2-2 个人收藏景点的爬取</h2><p>一般情况下，我们要想看到个人收藏的景点信息，必须要登录，输入帐号密码等等，但是在爬虫中我们不可能每次都输入这些繁杂的信息，这时候我们可以在Request中找到<code>Cookie</code>来作为我们的身份信息的认证，并且加上用户代理<code>User-Agent</code>。<br>这两个信息可以从Google Chrome检查的Network中获取到，如图：<br><img src="/images/s3.png" alt="&quot;image3&quot;"><br>这里的<code>Cookie</code>和下面的<code>User-Agent</code>可以直接复制到程序的<code>headers</code>中。<br>下面我们来爬取我们收藏的这三个景点的一些信息：<br><img src="/images/s4.png" alt="&#39;image4&#39;"></p>
+<p>代码如下：</p>
+<pre><code>from bs4 import BeautifulSoup
+import requests
+
+url = &apos;https://cn.tripadvisor.com/Saves#49366756&apos;
+
+headers = {
+    &apos;User-Agent&apos; : &apos;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36&apos;,
+    &apos;Cookie&apos; : &apos;TAUnique=%1%enc%3AkCg5dR1jOUE%2F57rnxvtkf3tMQUKjBViRwZXdKIpwu8q9JQoYflOF8A%3D%3D; ServerPool=X; TACds=C.1.15458.5.2016-06-26; _em_vt=46bee6c80f92e7a71249c8cf658e578ab9e16cbd08-89490947578ab9e1; TAPD=cn.tripadvisor.com; TASSK=enc%3Aca9NZYoFQI7Xg6u%2BS30WxFrB7mIO388KaImrYl8UjYH9xKb1CA2WLOrgTp6Ytc55SJ7WynsLUvM%3D; TART=%1%enc%3Avxr%2Bnb91%2BHIaWREFTZrUFH%2F2jh50DPheMIDeveKhC7%2Fnk8YKNyF%2B0bYd%2BMSJ6ODwP8ROaCT7Qg8%3D; __gads=ID=40ab05409b5b2bb3:T=1468709351:S=ALNI_MaX_FlYgt3QsMTiDqaiMc87DHr22A; SecureLogin2=3.4%3AAO6tlObW%2FJ3zLGbLYaudQx0itTXasbT1xGjnG7LzGKwPza5u%2BmdCqxr82M6T0FMboncWqGnVk0LNXdYOWpNU9jOdpT3J%2FdjlWnxGLtAUczGC0IeOTyMOXWrnOqzggyb7usVamnbV%2BJbqn4yqrTc2XMIqOLqGNkHIwoeW5PptMyHxewKcGgWJtu%2BkA9wwvUX14Mq%2BrK9vcj506HywGlPKIKE%3D; TAAuth3=3%3Af0961f8a27251efa7d0ab2e4e2ac6b98%3AADPn1SxZRC2IebgUhZ6a88pugfb7LoJELa%2FoVUGJhFKK7%2BQN6Aa7f50N7E4o9IyW8kDXcJHOf%2FbqkNdFI8YnLmZvAKekYYf4M%2BfLuO0bZNWRQ4NhvNvnhhYeBcB1p6kET47CrokiRZINOP43BzSCfkvbEk8wmPPcqvzSBzI3oW%2BeuQDOgwp%2B9nLfxBCrxe5DPNhOYbzZH3APzpjbe82wkKk%3D; TATravelInfo=V2*AC.TYO*A.2*MG.-1*HP.2*FL.3*RVL.189843_198l7725202_198l60763_198l587661_198l105127_198l104365_198*RS.1; TAReturnTo=%1%%2FAttraction_Review-g60763-d104365-Reviews-Empire_State_Building-New_York_City_New_York.html; CM=%1%HanaPersist%2C%2C-1%7Cpu_vr2%2C%2C-1%7Ct4b-pc%2C%2C-1%7CHanaSession%2C%2C-1%7CRCPers%2C%2C-1%7CWShadeSeen%2C%2C-1%7Cpu_vr1%2C%2C-1%7CFtrPers%2C%2C-1%7CHomeASess%2C2%2C-1%7CAWPUPers%2C%2C-1%7Ccatchsess%2C7%2C-1%7Cbrandsess%2C%2C-1%7Csesscoestorem%2C%2C-1%7CCpmPopunder_1%2C1%2C1468799456%7CCCSess%2C%2C-1%7CCpmPopunder_2%2C1%2C-1%7Csesssticker%2C%2C-1%7C%24%2C%2C-1%7Ct4b-sc%2C%2C-1%7CMC_IB_UPSELL_IB_LOGOS2%2C%2C-1%7Cb2bmcpers%2C%2C-1%7CMC_IB_UPSELL_IB_LOGOS%2C%2C-1%7Csess_rev%2C3%2C-1%7Csessamex%2C%2C-1%7Cperscoestorem%2C%2C-1%7CSaveFtrPers%2C%2C-1%7Cpers_rev%2C%2C-1%7CMetaFtrSess%2C%2C-1%7CRBAPers%2C%2C-1%7CWAR_RESTAURANT_FOOTER_PERSISTANT%2C%2C-1%7CFtrSess%2C%2C-1%7CHomeAPers%2C%2C-1%7C+r_lf_1%2C%2C-1%7CRCSess%2C%2C-1%7C+r_lf_2%2C%2C-1%7Ccatchpers%2C3%2C1469314150%7CAWPUSess%2C%2C-1%7Cvr_npu2%2C%2C-1%7Csh%2C%2C-1%7CLastPopunderId%2C137-1859-null%2C-1%7Cpssamex%2C%2C-1%7C2016sticksess%2C%2C-1%7Cvr_npu1%2C%2C-1%7CCCPers%2C%2C-1%7CWAR_RESTAURANT_FOOTER_SESSION%2C%2C-1%7Cbrandpers%2C%2C-1%7Cb2bmcsess%2C%2C-1%7C2016stickpers%2C%2C-1%7CWarPopunder_Session%2C%2C-1%7CWarPopunder_Persist%2C%2C-1%7Cr_ta_2%2C%2C-1%7Cr_ta_1%2C%2C-1%7CSaveFtrSess%2C%2C-1%7CRBASess%2C%2C-1%7Cperssticker%2C%2C-1%7CMetaFtrPers%2C%2C-1%7C; roybatty=AF2SNoEyIwEidj20ficDwB48oi5p21wC4KxaUkzrjdUi%2FPXd0oGgg8EtYVdGmdgwYeewIRocL1fyEtTPRrOPq5j94vezWkn1W4CcDlennJER7Ad7t588TltSPd0TLxfiCcC7siprlO0r9tDjSJo%2FSQHYQiWyxf5%2FogwLeZ4N0JLw%2C1; NPID=; TASession=%1%V2ID.F6F67EB5AB75480A6A09B6D9D063EE48*SQ.51*MC.12082*PR.427%7C*LS.RecommendedAjax*GR.89*TCPAR.91*TBR.85*EXEX.23*ABTR.74*PPRP.92*PHTB.42*FS.25*CPU.91*HS.popularity*ES.popularity*AS.popularity*DS.5*SAS.popularity*FPS.oldFirst*TS.F49DA10D39DBF8F9EED32903CB1DACDC*LF.zhCN*FA.1*DF.0*LR.https%3A%2F%2Fwww%5C.tripadvisor%5C.com%2F*LP.%2F-m12082*IR.1*OD.null*FBH.2*MS.-1*RMS.-1*FLO.60763*TRA.true*LD.104365; TAUD=LA-1468709342997-1*LG-5773414-2.1.F.*LD-5773416-.....&apos;
+ }
+response = requests.get(url,headers=headers) #这里要在请求的时候就把我们的headers信息导进去
+soup = BeautifulSoup(response.text,&apos;lxml&apos;)
+
+titles = soup.select(&apos;span &gt; div.cvs-content &gt; div.info &gt; a[class=&quot;location-name&quot;]&apos;)
+images = soup.select(&apos;div.cvs-content &gt; div.photo &gt; div.sizedThumb &gt; img&apos;)#个人收藏中的图片并没有反爬取处理，所以我们可以正常的爬取
+stars = soup.select(&apos;div.cvs-content &gt; div.info &gt; div &gt; span &gt; img&apos;)
+addresses = soup.select(&apos;div.cvs-content &gt; div.info &gt; span&apos;)
+
+for title,image,star,address in zip(titles,images,stars,addresses):
+
+    address_result = list(address.stripped_strings)
+    str = &apos; &apos;
+    address = str.join(address_result) #提取出来的地址放在列表中会显得十分不美观，所以我们用join()将地址的字符串进行连接
+
+    data = {
+            &apos;title&apos; : title.get_text(),
+            &apos;image&apos; : image.get(&apos;src&apos;),
+            &apos;star&apos; : star.get(&apos;alt&apos;),
+            &apos;address&apos; : address
+            }
+
+    print(data)
+</code></pre><p>代码运行结果如下：</p>
+<pre><code>{&apos;title&apos;: &apos;帝国大厦&apos;, &apos;star&apos;: &apos;4.5分&apos;, &apos;address&apos;: &apos;350 Fifth Avenue , Between 33rd and 34th Streets , New York City , NY 10118&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-f/03/19/95/99/empire-state-building.jpg&apos;}
+{&apos;title&apos;: &apos;中央公园&apos;, &apos;star&apos;: &apos;4.5分&apos;, &apos;address&apos;: &apos;59th to 110th St., from Central Park West to 5th Ave. , Manhattan Borough , New York City , NY 10022&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-s/09/58/1e/b1/central-park.jpg&apos;}
+{&apos;title&apos;: &apos;峭石之巅观景台&apos;, &apos;star&apos;: &apos;4.5分&apos;, &apos;address&apos;: &apos;30 Rockefeller Center , New York City , NY&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-s/06/79/60/b4/observatorio-top-of-the.jpg&apos;}
+</code></pre><h2 id="2-3-爬取全部页面的景点信息"><a href="#2-3-爬取全部页面的景点信息" class="headerlink" title="2-3 爬取全部页面的景点信息"></a>2-3 爬取全部页面的景点信息</h2><p>我们在图二中其实可以看到纽约市的景点信息共有36页，那么我们如何对全部页面的信息进行爬取呢？<br>首先我们观察一下每一页的网址：</p>
+<pre><code>第一页：https://cn.tripadvisor.com/Attractions-g60763-Activities-New_York_City_New_York.html
+第二页：https://cn.tripadvisor.com/Attractions-g60763-Activities-oa30-New_York_City_New_York.html#ATTRACTION_LIST
+第三页：https://cn.tripadvisor.com/Attractions-g60763-Activities-oa60-New_York_City_New_York.html#ATTRACTION_LIST
+....
+第三十六页：https://cn.tripadvisor.com/Attractions-g60763-Activities-oa1050-New_York_City_New_York.html#ATTRACTION_LIST
+</code></pre><p>我们可以观察到其中的区别只有一个<code>oa30</code>,<code>oa60</code>…<code>oa1050</code>这些的区别，所以我们可以做一个url的集合。</p>
+<pre><code>urls = [&apos;https://cn.tripadvisor.com/Attractions-g60763-Activities-oa{}-New_York_City_New_York.html#ATTRACTION_LIST&apos;.format(str(i)) for i in range(0,1080,30)]
+</code></pre><p>然后将例一中的列表爬取封装成一个函数，在每一页进行一次调用。</p>
+<p>程序代码如下：</p>
+<pre><code>from bs4 import BeautifulSoup
+import requests
+import time
+
+url_saves = &apos;https://cn.tripadvisor.com/Saves#49366756&apos;
+url = &apos;https://cn.tripadvisor.com/Attractions-g60763-Activities-New_York_City_New_York.html&apos;
+#urls是一个列表，然后用format中的内容替换{}的内容
+urls = [&apos;https://cn.tripadvisor.com/Attractions-g60763-Activities-oa{}-New_York_City_New_York.html#ATTRACTION_LIST&apos;.format(str(i)) for i in range(0,1080,30)]
+
+headers = {
+    &apos;User-Agent&apos;: &apos;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36&apos;,
+    &apos;Cookie&apos;: &apos;TAUnique=%1%enc%3AkCg5dR1jOUE%2F57rnxvtkf3tMQUKjBViRwZXdKIpwu8q9JQoYflOF8A%3D%3D; ServerPool=X; TACds=C.1.15458.5.2016-06-26; _em_vt=46bee6c80f92e7a71249c8cf658e578ab9e16cbd08-89490947578ab9e1; TAPD=cn.tripadvisor.com; TASSK=enc%3Aca9NZYoFQI7Xg6u%2BS30WxFrB7mIO388KaImrYl8UjYH9xKb1CA2WLOrgTp6Ytc55SJ7WynsLUvM%3D; TART=%1%enc%3Avxr%2Bnb91%2BHIaWREFTZrUFH%2F2jh50DPheMIDeveKhC7%2Fnk8YKNyF%2B0bYd%2BMSJ6ODwP8ROaCT7Qg8%3D; __gads=ID=40ab05409b5b2bb3:T=1468709351:S=ALNI_MaX_FlYgt3QsMTiDqaiMc87DHr22A; SecureLogin2=3.4%3AAO6tlObW%2FJ3zLGbLYaudQx0itTXasbT1xGjnG7LzGKwPza5u%2BmdCqxr82M6T0FMboncWqGnVk0LNXdYOWpNU9jOdpT3J%2FdjlWnxGLtAUczGC0IeOTyMOXWrnOqzggyb7usVamnbV%2BJbqn4yqrTc2XMIqOLqGNkHIwoeW5PptMyHxewKcGgWJtu%2BkA9wwvUX14Mq%2BrK9vcj506HywGlPKIKE%3D; TAAuth3=3%3Af0961f8a27251efa7d0ab2e4e2ac6b98%3AADPn1SxZRC2IebgUhZ6a88pugfb7LoJELa%2FoVUGJhFKK7%2BQN6Aa7f50N7E4o9IyW8kDXcJHOf%2FbqkNdFI8YnLmZvAKekYYf4M%2BfLuO0bZNWRQ4NhvNvnhhYeBcB1p6kET47CrokiRZINOP43BzSCfkvbEk8wmPPcqvzSBzI3oW%2BeuQDOgwp%2B9nLfxBCrxe5DPNhOYbzZH3APzpjbe82wkKk%3D; TATravelInfo=V2*AC.TYO*A.2*MG.-1*HP.2*FL.3*RVL.189843_198l7725202_198l60763_198l587661_198l105127_198l104365_198*RS.1; TAReturnTo=%1%%2FAttraction_Review-g60763-d104365-Reviews-Empire_State_Building-New_York_City_New_York.html; CM=%1%HanaPersist%2C%2C-1%7Cpu_vr2%2C%2C-1%7Ct4b-pc%2C%2C-1%7CHanaSession%2C%2C-1%7CRCPers%2C%2C-1%7CWShadeSeen%2C%2C-1%7Cpu_vr1%2C%2C-1%7CFtrPers%2C%2C-1%7CHomeASess%2C2%2C-1%7CAWPUPers%2C%2C-1%7Ccatchsess%2C7%2C-1%7Cbrandsess%2C%2C-1%7Csesscoestorem%2C%2C-1%7CCpmPopunder_1%2C1%2C1468799456%7CCCSess%2C%2C-1%7CCpmPopunder_2%2C1%2C-1%7Csesssticker%2C%2C-1%7C%24%2C%2C-1%7Ct4b-sc%2C%2C-1%7CMC_IB_UPSELL_IB_LOGOS2%2C%2C-1%7Cb2bmcpers%2C%2C-1%7CMC_IB_UPSELL_IB_LOGOS%2C%2C-1%7Csess_rev%2C3%2C-1%7Csessamex%2C%2C-1%7Cperscoestorem%2C%2C-1%7CSaveFtrPers%2C%2C-1%7Cpers_rev%2C%2C-1%7CMetaFtrSess%2C%2C-1%7CRBAPers%2C%2C-1%7CWAR_RESTAURANT_FOOTER_PERSISTANT%2C%2C-1%7CFtrSess%2C%2C-1%7CHomeAPers%2C%2C-1%7C+r_lf_1%2C%2C-1%7CRCSess%2C%2C-1%7C+r_lf_2%2C%2C-1%7Ccatchpers%2C3%2C1469314150%7CAWPUSess%2C%2C-1%7Cvr_npu2%2C%2C-1%7Csh%2C%2C-1%7CLastPopunderId%2C137-1859-null%2C-1%7Cpssamex%2C%2C-1%7C2016sticksess%2C%2C-1%7Cvr_npu1%2C%2C-1%7CCCPers%2C%2C-1%7CWAR_RESTAURANT_FOOTER_SESSION%2C%2C-1%7Cbrandpers%2C%2C-1%7Cb2bmcsess%2C%2C-1%7C2016stickpers%2C%2C-1%7CWarPopunder_Session%2C%2C-1%7CWarPopunder_Persist%2C%2C-1%7Cr_ta_2%2C%2C-1%7Cr_ta_1%2C%2C-1%7CSaveFtrSess%2C%2C-1%7CRBASess%2C%2C-1%7Cperssticker%2C%2C-1%7CMetaFtrPers%2C%2C-1%7C; roybatty=AF2SNoEyIwEidj20ficDwB48oi5p21wC4KxaUkzrjdUi%2FPXd0oGgg8EtYVdGmdgwYeewIRocL1fyEtTPRrOPq5j94vezWkn1W4CcDlennJER7Ad7t588TltSPd0TLxfiCcC7siprlO0r9tDjSJo%2FSQHYQiWyxf5%2FogwLeZ4N0JLw%2C1; NPID=; TASession=%1%V2ID.F6F67EB5AB75480A6A09B6D9D063EE48*SQ.51*MC.12082*PR.427%7C*LS.RecommendedAjax*GR.89*TCPAR.91*TBR.85*EXEX.23*ABTR.74*PPRP.92*PHTB.42*FS.25*CPU.91*HS.popularity*ES.popularity*AS.popularity*DS.5*SAS.popularity*FPS.oldFirst*TS.F49DA10D39DBF8F9EED32903CB1DACDC*LF.zhCN*FA.1*DF.0*LR.https%3A%2F%2Fwww%5C.tripadvisor%5C.com%2F*LP.%2F-m12082*IR.1*OD.null*FBH.2*MS.-1*RMS.-1*FLO.60763*TRA.true*LD.104365; TAUD=LA-1468709342997-1*LG-5773414-2.1.F.*LD-5773416-.....&apos;
+}
+
+def scrapy_list(url,data=None):
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text,&apos;lxml&apos;)
+    time.sleep(4) #为了防止被网站封IP，我们可以设置每4秒爬取一次
+    images = soup.select(&apos;div.photo_booking.non_generic &gt; a &gt; img[width=&quot;160&quot;] &apos;)#图片暂时抓不到，因为有网站的反爬取，我们可以尝试抓取移动端
+    titles = soup.select(&apos;div.property_title &gt; a[target=&quot;_blank&quot;]&apos;)
+    cates = soup.select(&apos;div &gt; div.element_wrap &gt; div &gt; div.p13n_reasoning_v2 &apos;)
+    stars = soup.select(&apos;div &gt; div &gt; span.rate.rate_no &gt; img&apos;)
+
+    for title,cate,image,star in zip(titles,cates,images,stars):
+        data = {
+                &apos;title&apos; : title.get_text(),
+                &apos;cate&apos; : list(cate.stripped_strings),
+                &apos;image&apos; : image.get(&apos;src&apos;),
+                &apos;star&apos; : star.get(&apos;alt&apos;)
+                }
+        print(data)
+
+def scrapy_collect(url,data=None):
+    response = requests.get(url,headers=headers)
+    soup = BeautifulSoup(response.text,&apos;lxml&apos;)
+
+    titles = soup.select(&apos;span &gt; div.cvs-content &gt; div.info &gt; a[class=&quot;location-name&quot;]&apos;)
+    images = soup.select(&apos;div.cvs-content &gt; div.photo &gt; div.sizedThumb &gt; img&apos;)#存储中的图片并没有反爬取处理，所以我们可以正常的爬取
+    stars = soup.select(&apos;div.cvs-content &gt; div.info &gt; div &gt; span &gt; img&apos;)
+    addresses = soup.select(&apos;div.cvs-content &gt; div.info &gt; span&apos;)
+
+    for title,image,star,address in zip(titles,images,stars,addresses):
+        address_result = list(address.stripped_strings)
+        str = &apos; &apos;
+        address = str.join(address_result)
+
+        data = {
+                &apos;title&apos; : title.get_text(),
+                &apos;image&apos; : image.get(&apos;src&apos;),
+                &apos;star&apos; : star.get(&apos;alt&apos;),
+                &apos;address&apos; : address
+                }
+        print(data)
+
+for single_url in urls:
+    scrapy_list(single_url)
+</code></pre><p>代码运行结果如下：</p>
+<pre><code>{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;中央公园&apos;, &apos;cate&apos;: [&apos;公园&apos;, &apos;景点与地标&apos;], &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;大都会艺术博物馆&apos;, &apos;cate&apos;: [&apos;景点与地标&apos;, &apos;艺术博物馆&apos;], &apos;star&apos;: &apos;5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;9/11纪念馆&apos;, &apos;cate&apos;: [&apos;专业博物馆&apos;, &apos;景点与地标&apos;, &apos;纪念碑与雕像&apos;, &apos;历史景点&apos;], &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;峭石之巅观景台&apos;, &apos;cate&apos;: [&apos;观察台与观景塔&apos;, &apos;瞭望台&apos;], &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;曼哈顿天际线&apos;, &apos;cate&apos;: [&apos;景点与地标&apos;], &apos;star&apos;: &apos;5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;百老汇&apos;, &apos;cate&apos;: [&apos;景点与地标&apos;], &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;高线公园&apos;, &apos;cate&apos;: [&apos;景观步行区&apos;, &apos;公园&apos;], &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;大中央车站&apos;, &apos;cate&apos;: [&apos;建筑物&apos;, &apos;景点与地标&apos;], &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;弗里克美术收藏馆&apos;, &apos;cate&apos;: [&apos;艺术博物馆&apos;], &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;帝国大厦&apos;, &apos;cate&apos;: [&apos;建筑物&apos;, &apos;景点与地标&apos;, &apos;观察台与观景塔&apos;], &apos;star&apos;: &apos;4.5分&apos;}
+{&apos;image&apos;: &apos;https://static.tacdn.com/img2/x.gif&apos;, &apos;title&apos;: &apos;布莱恩公园&apos;, &apos;cate&apos;: [&apos;公园&apos;], &apos;star&apos;: &apos;4.5分&apos;}
+....
+</code></pre><p>程序将会每四秒爬取一页。</p>
+<h2 id="2-4-简易反爬取措施"><a href="#2-4-简易反爬取措施" class="headerlink" title="2-4 简易反爬取措施"></a>2-4 简易反爬取措施</h2><p>一般情况下网站的PC端都会比移动端的反爬取措施要严格，因为移动端要适配许多不同的手机型号，所以我们在遭受PC的反爬取情况下，可以尝试区爬取移动端的内容。<br>同样还是用Google Chrome来进行这项操作：<br><img src="/images/s5.png" alt="&quot;image5&quot;"><br>观察图中，我们选定的iphone6的型号进行适配，然后从<code>Network</code>中获取<code>User-Agent</code>的信息以便于伪装成移动端。</p>
+<p>程序代码如下：</p>
+<pre><code>from bs4 import BeautifulSoup 
+import requests
+
+headers = {
+    &apos;User-Agent&apos; : &apos;Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1&apos;
+}
+url = &quot;https://cn.tripadvisor.com/Attractions-g60763-Activities-New_York_City_New_York.html#ATTRACTION_LIST&quot;
+
+response = requests.get(url,headers=headers)
+soup = BeautifulSoup(response.text,&apos;lxml&apos;)
+
+# images = soup.select(&apos;div.thumb.thumbLLR.soThumb &gt; img&apos;) #开始我尝试直接爬取img信息，结果同样被反爬了，于是仔细观察图片处的代码，我们可以爬取旁边的div的属性
+images = soup.find_all(&quot;div&quot;,&quot;missing lazyMiss&quot;)
+titles = soup.select(&apos;div.container.containerLLR &gt; div.title.titleLLR &gt; div&apos;)
+
+# for i in images:
+#   print(i.get(&apos;src&apos;))
+# print(images)
+for image,title in zip(images,titles):
+    data = {
+        # &apos;image&apos; : image.get(&apos;src&apos;),
+        &apos;image&apos; : image.get(&apos;data-thumburl&apos;),
+        &apos;title&apos; : title.get_text()
+    }
+    print(data)
+</code></pre><p>这个在最初爬取时，还是会被反爬，所以失败了好多次，然后我们仔细观察图片处的代码：<br><img src="/images/s6.png" alt="&quot;image6&quot;"><br>会发现<code>div</code>下有<code>div</code>和<code>img</code>两个兄弟结点，而这两个兄弟结点中，<code>img</code>的<code>src</code>属性的内容与<code>div</code>的<code>data-thymburl</code>属性的内容相同，而且正好是我们所需要的图片地址链接，于是，我们可以放弃直接爬取<code>img</code>的<code>src</code>，转而爬取<code>div.missing lazyMiss</code>的<code>data-thumburl</code>属性的内容。然后完美的得到了想要的结果。</p>
+<p>代码运行结果如下：</p>
+<pre><code>{&apos;title&apos;: &apos;\n中央公园\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/09/58/1e/b1/central-park.jpg&apos;}
+{&apos;title&apos;: &apos;\n大都会艺术博物馆\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-f/04/22/1c/fc/metropolitan-museum-of.jpg&apos;}
+{&apos;title&apos;: &apos;\n9/11纪念馆\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/09/49/10/a9/img-20151021-134637-largejpg.jpg&apos;}
+{&apos;title&apos;: &apos;\n峭石之巅观景台\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/06/79/60/b4/observatorio-top-of-the.jpg&apos;}
+{&apos;title&apos;: &apos;\n曼哈顿天际线\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-f/01/b8/fc/53/manhattan-skyline.jpg&apos;}
+{&apos;title&apos;: &apos;\n百老汇\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/07/e1/9f/a5/broadway.jpg&apos;}
+{&apos;title&apos;: &apos;\n高线公园\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/08/f2/87/f7/the-high-line.jpg&apos;}
+{&apos;title&apos;: &apos;\n城市游览 (169)\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/09/11/29/93/real-new-york-tours.jpg&apos;}
+{&apos;title&apos;: &apos;\n大中央车站\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/08/8e/db/95/the-largest-tiffany-glass.jpg&apos;}
+{&apos;title&apos;: &apos;\n弗里克美术收藏馆\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/06/bf/9f/e1/the-garden-court-is-a.jpg&apos;}
+{&apos;title&apos;: &apos;\n百老汇歌舞剧 (168)\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/01/5e/fe/b8/lion-king-11-09.jpg&apos;}
+{&apos;title&apos;: &apos;\n帝国大厦\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/03/19/95/99/empire-state-building.jpg&apos;}
+{&apos;title&apos;: &apos;\n徒步游览 (160)\n&apos;, &apos;image&apos;: &apos;https://media-cdn.tripadvisor.com/media/photo-l/09/11/29/93/real-new-york-tours.jpg&apos;}
+....
+</code></pre><h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a>3 总结</h1><p>爬虫并没有固定的格式，只要能爬取到你所需要的信息，就是正确的。所以，我们要多观察，多尝试，学会从不同的角度看待问题。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/07/16/Python实战二：网页信息采集/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python实战二：网页信息采集</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+  
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+        <span class="donate_txt">
+            &uarr;<br>
+                    感谢您的支持！
+        </span>
+        <br>
+    </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+            <!-- 支付宝打赏图案 -->
+            <img src="/img/zhifubao.jpg" alt="支付宝打赏"> 
+            <!-- 微信打赏图案 -->
+            <img src="/img/weixin.jpg" alt="微信打赏">  
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+
+  
+  
+    <div class="article-footer-copyright">
+    <p><span>本文标题:</span><a href="/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/">python实战三：爬取tripadvisor网站列表和个人收藏部分</a></p>
+    <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
+    <p><span>发布时间:</span>2016/07/17 - 17:06:39</p>
+    <p><span>最后更新:</span>2016/07/17 - 18:56:31</p>
+    <p>
+        <span>原始链接:</span><a class="post-url" href="/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/" title="python实战三：爬取tripadvisor网站列表和个人收藏部分">http://chengblog.top/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/</a>
+        <span class="copy-path" data-clipboard-text="原文: http://chengblog.top/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        <script src="/js/clipboard.min.js"></script>
+        <script> var clipboard = new Clipboard('.copy-path'); </script>
+    </p>
+    <p>
+        <span>许可协议:</span><i class="fa fa-creative-commons"></i><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="中国大陆 (CC BY-NC-SA 4.0 CN)"> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </p>
+</div>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="python实战三：爬取tripadvisor网站列表和个人收藏部分" data-title="python实战三：爬取tripadvisor网站列表和个人收藏部分" data-url="http://chengblog.top/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Cheng Wang
+    	</div>
+        <div class="footer-center">
+            <span id="busuanzi_container_site_uv">
+            本站访客数<span id="busuanzi_value_site_uv"></span>人次
+            </span>
+            <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+            </span>
+        </div>
+    </div>
+  </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<div>
+   <a href="javascript:;" id="totop" title="回到顶部"></a> 
+</div>
+
+<script src="/js/totop.js"></script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>
