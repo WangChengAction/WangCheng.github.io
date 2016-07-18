@@ -124,7 +124,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/Fibonacci-Sequence/" style="font-size: 10px;">Fibonacci Sequence</a> <a href="/tags/Hanoi/" style="font-size: 10px;">Hanoi</a> <a href="/tags/Pascal-s-Triangle/" style="font-size: 10px;">Pascal's Triangle</a> <a href="/tags/Sweden/" style="font-size: 10px;">Sweden</a> <a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/notes/" style="font-size: 13.33px;">notes</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/requests/" style="font-size: 10px;">requests</a> <a href="/tags/scraping/" style="font-size: 16.67px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
+						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/Fibonacci-Sequence/" style="font-size: 10px;">Fibonacci Sequence</a> <a href="/tags/Hanoi/" style="font-size: 10px;">Hanoi</a> <a href="/tags/Pascal-s-Triangle/" style="font-size: 10px;">Pascal's Triangle</a> <a href="/tags/Sweden/" style="font-size: 10px;">Sweden</a> <a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/combat/" style="font-size: 10px;">combat</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 13.33px;">html</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/notes/" style="font-size: 13.33px;">notes</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/requests/" style="font-size: 10px;">requests</a> <a href="/tags/scraping/" style="font-size: 16.67px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
 					</div>
 				</section>
 				
@@ -205,6 +205,80 @@
 </nav>
 
       <div class="body-wrap">
+  
+    <article id="pages-Python递归：汉诺塔问题详解" class="article article-type-pages" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/15/Python递归：汉诺塔问题详解/" class="article-date">
+  	<time datetime="2016-06-15T01:58:30.000Z" itemprop="datePublished">2016-06-15</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/15/Python递归：汉诺塔问题详解/">Python递归：汉诺塔问题详解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>传说印度某间寺院有三根柱子，上串64个金盘。寺院里的僧侣依照一个古老的预言，以上述规则移动这些盘子；预言说当这些盘子移动完毕，世界就会灭亡。这个传说叫做梵天寺之塔问题(Tower of Brahma puzzle)。</p>
+</blockquote>
+<p>比如：我们现在定义：Hanoi(n,A,B,C)，其中n是圆盘的数量，A，B，C是三根柱子：</p>
+<ul>
+<li>当n = 1时：<strong>A –&gt; C</strong></li>
+<li>当n = 2时：A –&gt; B , <strong>A –&gt; C</strong> , B –&gt; C</li>
+<li>当n = 3时：A –&gt; C , A –&gt; B , C –&gt; B , <strong>A –&gt; C</strong> , B –&gt; A , B –&gt; C , A –&gt; C</li>
+</ul>
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hanoi/">Hanoi</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li></ul>
+	</div>
+
+      
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/python/">python</a>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a  href="/2016/06/15/Python递归：汉诺塔问题详解/#more">more >></a>
+        </p>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+  
+  
+</article>
+
+
+
+
+
+
+
+
+
   
     <article id="pages-瑞典留学签证攻略" class="article article-type-pages" itemscope itemprop="blogPost">
   
@@ -473,85 +547,6 @@
       
         <p class="article-more-link">
           <a  href="/2016/05/31/Python专栏之二:Urllib库/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-  
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="pages-Python专栏之一:初识爬虫" class="article article-type-pages" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/05/28/Python专栏之一:初识爬虫/" class="article-date">
-  	<time datetime="2016-05-28T15:15:14.000Z" itemprop="datePublished">2016-05-28</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/05/28/Python专栏之一:初识爬虫/">Python专栏之一：初识爬虫</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>学习爬虫，我们首先要对网页的构成有一定的了解，比如HTML的文本格式、CSS的样式和Javascript的格式等。然后我们还需要对网络连接有一些了解，这样说起来显着比较困难，但其实做起来很简单。</p>
-<p>好，让我们一步一步来。</p>
-<p>环境：Python3.5  | MacOs X EICaption</p>
-<h3 id="浏览器信息的获取过程"><a href="#浏览器信息的获取过程" class="headerlink" title="浏览器信息的获取过程:"></a>浏览器信息的获取过程:</h3><p>假设我有一台主机，然后准备连接一个服务器：</p>
-<ol>
-<li><p>首先我的主机会发送一连串的比特值，这些比特值构成的信息包括两个部分，一是请求头，二是消息体；其中，请求头中包括我的本地路由器的Mac地址以及我将要连接的服务器的IP地址，然后消息体中包含了我发出的请求；</p>
-</li>
-<li><p>当我的路由器收到这串比特值时，会将自己的Ip地址加进去，然后发出；</p>
-</li>
-<li>这段数据会经过许多中介服务器，然后最终会到达我所希望访问的服务器的Ip地址所在地；</li>
-<li>服务器在它的Ip地址收到这段数据后，服务器会读取请求头中的目标端口，然后将其传递到对应的网络服务器应用上；</li>
-<li>网络服务器收到服务器处理器传过来的数据：这是一个GET请求；请求文件index.html；</li>
-<li>网络服务器应用找到对应的html文件，然后打包成一个新的数据包发回到我的路由器中，然后传到我的主机，到这儿，浏览器的信息即获取成功。</li>
-</ol>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
-	</div>
-
-      
-	<div class="article-category tagcloud">
-	<a class="article-category-link" href="/categories/python/">python</a>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/05/28/Python专栏之一:初识爬虫/#more">more >></a>
         </p>
       
       <div class="clearfix"></div>
