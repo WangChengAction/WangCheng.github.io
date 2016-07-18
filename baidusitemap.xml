@@ -4,29 +4,8 @@
 
     
   <url>
-    <loc>http://chengblog.top/2016/07/18/python%E5%AE%9E%E6%88%98%E5%9B%9B%EF%BC%9A%E7%88%AC%E5%8F%96%E5%B0%8F%E7%8C%AA%E7%9F%AD%E7%A7%9F%E7%BD%91%E7%AB%99/</loc>
-    <lastmod>2016-07-18T03:08:24.000Z</lastmod>
-    <data>
-        <display>
-        <title>python实战四：爬取小猪短租网站</title>
-        <pubTime>2016-07-18T01:55:26.000Z</pubTime>
-        
-        <tag>python</tag>
-         
-        <tag>scraping</tag>
-         
-        <tag>combat</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://chengblog.top/2016/07/17/python%E5%AE%9E%E6%88%98%E4%B8%89%EF%BC%9A%E7%88%AC%E5%8F%96tripadvisor%E7%BD%91%E7%AB%99%E5%88%97%E8%A1%A8%E5%92%8C%E4%B8%AA%E4%BA%BA%E6%94%B6%E8%97%8F%E9%83%A8%E5%88%86/</loc>
-    <lastmod>2016-07-17T10:56:31.000Z</lastmod>
+    <lastmod>2016-07-18T13:29:58.000Z</lastmod>
     <data>
         <display>
         <title>python实战三：爬取tripadvisor网站列表和个人收藏部分</title>
@@ -35,6 +14,8 @@
         <tag>python</tag>
          
         <tag>scraping</tag>
+         
+        <tag>combat</tag>
          
         <tag>requests</tag>
          
@@ -47,7 +28,7 @@
     
   <url>
     <loc>http://chengblog.top/2016/07/16/Python%E5%AE%9E%E6%88%98%E4%BA%8C%EF%BC%9A%E7%BD%91%E9%A1%B5%E4%BF%A1%E6%81%AF%E9%87%87%E9%9B%86/</loc>
-    <lastmod>2016-07-17T08:54:33.000Z</lastmod>
+    <lastmod>2016-07-18T13:29:33.000Z</lastmod>
     <data>
         <display>
         <title>Python实战二：网页信息采集</title>
@@ -56,6 +37,8 @@
         <tag>python</tag>
          
         <tag>html</tag>
+         
+        <tag>combat</tag>
          
          
            
@@ -66,7 +49,7 @@
     
   <url>
     <loc>http://chengblog.top/2016/07/16/python%E5%AE%9E%E6%88%98%E4%B8%80%EF%BC%9A%E5%9F%BA%E7%A1%80%E7%BD%91%E9%A1%B5%E5%88%B6%E4%BD%9C/</loc>
-    <lastmod>2016-07-17T08:10:50.000Z</lastmod>
+    <lastmod>2016-07-18T13:29:11.000Z</lastmod>
     <data>
         <display>
         <title>python实战一：基础网页制作</title>
@@ -75,6 +58,29 @@
         <tag>python</tag>
          
         <tag>html</tag>
+         
+        <tag>combat</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://chengblog.top/2016/07/18/python%E5%AE%9E%E6%88%98%E5%9B%9B%EF%BC%9A%E7%88%AC%E5%8F%96%E5%B0%8F%E7%8C%AA%E7%9F%AD%E7%A7%9F%E7%BD%91%E7%AB%99/</loc>
+    <lastmod>2016-07-18T03:08:24.000Z</lastmod>
+    <data>
+        <display>
+        <title>python实战四：爬取小猪短租网站</title>
+        <pubTime>2016-07-18T01:55:26.000Z</pubTime>
+        
+        <tag>python</tag>
+         
+        <tag>scraping</tag>
+         
+        <tag>combat</tag>
          
          
            
