@@ -24,7 +24,7 @@
 爬取所有页面">
 <meta property="og:image" content="http://chengblog.top/images/58_1.png">
 <meta property="og:image" content="http://chengblog.top/images/58_2.png">
-<meta property="og:updated_time" content="2016-07-21T00:31:06.000Z">
+<meta property="og:updated_time" content="2016-07-21T03:30:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python实战六：爬取58同城列表及详情页">
 <meta name="twitter:description" content="第一周的大作业准备的目标的58同城，其实感觉难度还不如煎蛋。。煎蛋的反爬折腾了我两天，这个半天就搞定了，中间只有卖家标签那里卡住了一段时间，主要是有些页面并没有这一项，所以在标签中就没有这个标签，爬的时候呢，爬虫并不会自动跳过，而是根本就不爬这个详情页了，找了一阵子才找到这个原因，后来加了个if..else搞定。
@@ -260,7 +260,7 @@
         
             <div id="toc" class="toc-article">
                 <strong class="toc-title">文章目录</strong>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码改良"><span class="toc-text">代码改良</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#修改一"><span class="toc-text">修改一</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改二"><span class="toc-text">修改二</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改三"><span class="toc-text">修改三</span></a></li></ol></li></ol>
             </div>
         
         <p>第一周的大作业准备的目标的58同城，其实感觉难度还不如煎蛋。。煎蛋的反爬折腾了我两天，这个半天就搞定了，中间只有卖家标签那里卡住了一段时间，主要是有些页面并没有这一项，所以在标签中就没有这个标签，爬的时候呢，爬虫并不会自动跳过，而是根本就不爬这个详情页了，找了一阵子才找到这个原因，后来加了个<code>if..else</code>搞定。</p>
@@ -455,7 +455,101 @@ for url in base_url:
                 host_tag_str = host_tag_str + str(s) + &quot;,&quot;
         else:
             host_tag_str = &quot;卖家暂无评价&quot;
-</code></pre>
+</code></pre><p>============================</p>
+<h1 id="代码改良"><a href="#代码改良" class="headerlink" title="代码改良"></a>代码改良</h1><p>看了一遍解析视频，发现自己的程序十分的粗糙，于是做了几个改变，虽然我知道改完之后的代码肯定还是比较粗糙。。。</p>
+<p>代码如下：</p>
+<pre><code>from bs4 import BeautifulSoup
+import requests
+import time
+
+base_url = [&quot;http://bj.58.com/pbdn/0/pn{}/&quot;.format(str(i)) for i in range(0,30)]
+
+headers = {
+    &apos;Cookie&apos;:&apos;myfeet_tooltip=end; ipcity=bj%7C%u5317%u4EAC; f=n; bj58_id58s=&quot;VnQ9ekdrbWdGbTVqMzI2MA==&quot;; sessionid=b9a624a1-db52-497c-a4b5-ea3a5db2f01c; id58=c5/njVeO1bVZGR3RETXeAg==; als=0; zz_download=2; f=n; bj58_new_session=0; bj58_init_refer=&quot;http://bj.58.com/pbdn/0/pn3/?PGTID=0d305a36-0000-11d5-2100-370b4a7f1406&amp;ClickID=2&quot;; bj58_new_uv=3; 58tj_uuid=6b2d33c6-3037-4a01-b33d-4094fa6290cd; new_session=0; new_uv=3; utm_source=; spm=; init_refer=http%253A%252F%252Fbj.58.com%252Fpbdn%252F0%252Fpn3%252F%253FPGTID%253D0d305a36-0000-11d5-2100-370b4a7f1406%2526ClickID%253D2&apos;,
+    &apos;User-Agent&apos;:&apos;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36&apos;
+}
+
+def get_detail(url):
+    resp = requests.get(url,headers=headers)
+    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
+    time.sleep(2)
+
+
+    data = {
+        #&apos;标题&apos;:soup.title.text.strip(),会有多于的字，筛选起来更麻烦
+        &apos;标题&apos;:soup.select(&apos;h1.info_titile&apos;)[0].text.strip(),
+        &apos;类目&apos;:soup.select(&apos;div &gt; span:nth-of-type(4) &gt; a&apos;)[0].text.strip(),
+        &apos;标签&apos;:list(soup.select(&apos;div.biaoqian_li&apos;)[0].stripped_strings),
+        &apos;价格&apos;:soup.select(&apos;span.price_now &gt; i&apos;)[0].text,
+        &apos;区域&apos;:soup.select(&apos;div.palce_li &gt; span &gt; i&apos;)[0].text,
+        &apos;卖家&apos;:soup.select(&apos;div.personal_jieshao &gt; p.personal_name&apos;)[0].text,
+        &apos;浏览量&apos;:soup.select(&apos;div.box_left_top &gt; p &gt; span.look_time&apos;)[0].text,
+        &apos;卖家标签&apos;:list(soup.select(&apos;div.personal_pingjia &gt; ul.clearfix&apos;)[0].stripped_strings) if soup.find_all(&apos;div&apos;,&apos;personal_pingjia&apos;) else None
+
+    }
+
+    string = &quot;&quot;
+    for l in data[&quot;标签&quot;]:
+        string = string + str(l) + &quot;,&quot;
+
+    print(&quot;类目：&quot; + data[&quot;类目&quot;] + &apos;\n&apos; + &quot;标题：&quot; + data[&quot;标题&quot;]+ &apos;\n&apos; + &quot;浏览量：&quot; + data[&quot;浏览量&quot;] + &apos;\n&apos; + &quot;标签：&quot; + string + &apos;\n&apos; + &quot;价格：&quot; + data[&quot;价格&quot;]+ &apos;\n&apos; + &quot;区域：&quot; + data[&quot;区域&quot;]+ &apos;\n&apos; + &quot;卖家：&quot; + data[&quot;卖家&quot;]+ &apos;\n&apos; + &quot;卖家标签：&quot; + str(data[&quot;卖家标签&quot;]))
+    print(&quot;=======================&quot;)
+
+
+def get_url(url):
+
+    resp = requests.get(url,headers=headers)
+    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
+
+    links = soup.select(&quot;tr.zzinfo &gt; td.img &gt; a&quot;)
+
+
+    for l in links:
+        url_pages = l.get(&apos;href&apos;)
+        get_detail(url_pages)
+
+for url in base_url:
+    get_url(url)
+</code></pre><p>然后运行成果如下：</p>
+<pre><code>类目：北京平板电脑
+标题：平板电脑保护套，用于8寸9寸10寸平板电脑，全新，二手商品售出不退不换。
+浏览量：225次浏览
+标签：全新未用,快递包邮,一口价,
+价格：38
+区域：上海-崇明
+卖家：高晓峰峰
+卖家标签：[&apos;物美价廉&apos;, &apos;1&apos;]
+=======================
+类目：北京平板电脑
+标题：Thinkpad tablet 2，Z2760 1.8g CPU，2g内存，64g固态硬盘(应该是有隐藏的系统恢复区，从win系统里看硬盘是49.5g)。美国买的保证原装，英文win8系统，是有手写笔的那种，套套是联想官网买的正货。买来给老人用，结果她不怎么用，我也觉得慢就闲置了大概2年，功能一切正常，9成新，上上网看看电影还行，做其它的就慢了，我感觉要重装才行，懒得弄了。低价卖给需要的人。
+浏览量：432次浏览
+标签：真实个人,担保交易,支持全国,
+价格：950
+区域：上海-浦东
+卖家：飞人归来
+卖家标签：[&apos;很靠谱&apos;, &apos;2&apos;, &apos;闲置达人&apos;, &apos;2&apos;, &apos;超爽快&apos;, &apos;1&apos;, &apos;聊得来&apos;, &apos;1&apos;, &apos;好品味先生&apos;, &apos;1&apos;]
+=======================
+类目：北京平板电脑
+标题：三星T7O5C平板电脑可插卡打电话，内存16G运行4G,15年初买的3299元，一点都不卡，玩游戏没问题，信号超级好，由于屏碎只卖980块，换屏220块一直没有去换，不影响使用！江浙沪包邮
+浏览量：1144次浏览
+标签：验货面付,快递包邮,一口价,保修期内,无拆无修,正版系统,大陆行货,
+价格：980
+区域：上海-南汇
+卖家：买家f7ded32
+卖家标签：None
+.....
+</code></pre><p>总体来看，改动的地方主要在详情页的获取部分：</p>
+<h2 id="修改一"><a href="#修改一" class="headerlink" title="修改一"></a>修改一</h2><p>首先获取信息时，我最初采用的是复制全部的CSS Selector，后来发现一些唯一特征的标签其实并没有必要写这么多，只需要写上最关键的一两个即可。</p>
+<h2 id="修改二"><a href="#修改二" class="headerlink" title="修改二"></a>修改二</h2><p>然后之前由于<code>select</code>返回的是个列表，我为了将这些内容放入字典中，用了一个<code>zip()</code>函数，但是随后又发现，这种只有单个内容的列表其实并没有必要用<code>zip</code>，直接用一个data构造字典即可。这样我们爬取信息时候，其实可以将步骤集中到data中完成</p>
+<pre><code>#&apos;标题&apos;:soup.title.text.strip(),会有多于的字，筛选起来更麻烦
+&apos;标题&apos;:soup.select(&apos;h1.info_titile&apos;)[0].text.strip(),
+&apos;类目&apos;:soup.select(&apos;div &gt; span:nth-of-type(4) &gt; a&apos;)[0].text.strip(),
+&apos;标签&apos;:list(soup.select(&apos;div.biaoqian_li&apos;)[0].stripped_strings),
+</code></pre><p>比如这样，注意列表要选中<code>[0]</code>才是选中列表的首项。然后标题老师是直接爬取的页面的题目，但我发现这样会多很多信息，比如卖家姓名，区域等，这个筛选起来不太方便，所以还是采用了CSS Selector。</p>
+<h2 id="修改三"><a href="#修改三" class="headerlink" title="修改三"></a>修改三</h2><p>最后就是<code>data[&quot;卖家标签&quot;]</code>的处理，这个我最初是用一个额外的<code>if ... else</code>进行处理的，这里我们可以这样：</p>
+<pre><code>&apos;卖家标签&apos;:list(soup.select(&apos;div.personal_pingjia &gt; ul.clearfix&apos;)[0].stripped_strings) if soup.find_all(&apos;div&apos;,&apos;personal_pingjia&apos;) else None
+</code></pre><p>如果页面中能找到属性为<code>personal_pingjia</code>的div标签，就爬它的内容，如果找不到，就返回None。</p>
+
       
     </div>
     
@@ -504,7 +598,7 @@ for url in base_url:
     <p><span>本文标题:</span><a href="/2016/07/20/python实战六：爬取58同城列表及详情页/">python实战六：爬取58同城列表及详情页</a></p>
     <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
     <p><span>发布时间:</span>2016/07/20 - 20:50:41</p>
-    <p><span>最后更新:</span>2016/07/21 - 08:31:06</p>
+    <p><span>最后更新:</span>2016/07/21 - 11:30:17</p>
     <p>
         <span>原始链接:</span><a class="post-url" href="/2016/07/20/python实战六：爬取58同城列表及详情页/" title="python实战六：爬取58同城列表及详情页">http://chengblog.top/2016/07/20/python实战六：爬取58同城列表及详情页/</a>
         <span class="copy-path" data-clipboard-text="原文: http://chengblog.top/2016/07/20/python实战六：爬取58同城列表及详情页/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
