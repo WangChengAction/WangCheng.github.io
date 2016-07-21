@@ -232,204 +232,12 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-            <div id="toc" class="toc-article">
-                <strong class="toc-title">文章目录</strong>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#目标"><span class="toc-text">目标</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
-            </div>
-        
         <p>第一周的大作业准备的目标的58同城，其实感觉难度还不如煎蛋。。煎蛋的反爬折腾了我两天，这个半天就搞定了，中间只有卖家标签那里卡住了一段时间，主要是有些页面并没有这一项，所以在标签中就没有这个标签，爬的时候呢，爬虫并不会自动跳过，而是根本就不爬这个详情页了，找了一阵子才找到这个原因，后来加了个<code>if..else</code>搞定。</p>
 <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
 <li>爬取每个页面的所有详情的链接</li>
 <li>对每个链接爬取其详情信息</li>
 <li>爬取所有页面</li>
 </ul>
-<p>这是列表页面，每个页面大概有50个左右的商品的详情链接，我们要注意只爬取转转商品，而不爬取商家的推广商品。</p>
-<p><img src="/images/58_1.png" alt="&quot;image1&quot;"></p>
-<p>这是商品的详情页面：</p>
-<p><img src="/images/58_2.png" alt="&quot;image2&quot;"></p>
-<p>如上图所示：我们要爬取商品的类目，标题，浏览量，价格，区域，商品标签，卖家姓名和卖家标签等内容。<br>代码如下：</p>
-<pre><code>from bs4 import BeautifulSoup
-import requests
-import time
-
-base_url = [&quot;http://bj.58.com/pbdn/0/pn{}/&quot;.format(str(i)) for i in range(0,30)]
-
-headers = {
-    &apos;Cookie&apos;:&apos;myfeet_tooltip=end; ipcity=bj%7C%u5317%u4EAC; f=n; bj58_id58s=&quot;VnQ9ekdrbWdGbTVqMzI2MA==&quot;; sessionid=b9a624a1-db52-497c-a4b5-ea3a5db2f01c; id58=c5/njVeO1bVZGR3RETXeAg==; als=0; zz_download=2; f=n; bj58_new_session=0; bj58_init_refer=&quot;http://bj.58.com/pbdn/0/pn3/?PGTID=0d305a36-0000-11d5-2100-370b4a7f1406&amp;ClickID=2&quot;; bj58_new_uv=3; 58tj_uuid=6b2d33c6-3037-4a01-b33d-4094fa6290cd; new_session=0; new_uv=3; utm_source=; spm=; init_refer=http%253A%252F%252Fbj.58.com%252Fpbdn%252F0%252Fpn3%252F%253FPGTID%253D0d305a36-0000-11d5-2100-370b4a7f1406%2526ClickID%253D2&apos;,
-    &apos;User-Agent&apos;:&apos;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36&apos;
-}
-def get_detail(url):
-
-    resp = requests.get(url,headers=headers)
-    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
-    time.sleep(2)
-
-    titles = soup.select(&apos;body &gt; div.content &gt; div &gt; div.box_left &gt; div.info_lubotu.clearfix &gt; div.box_left_top &gt; h1&apos;)
-    lclasses = soup.select(&apos;div &gt; span:nth-of-type(4) &gt; a&apos;)
-    prices = soup.select(&apos;body &gt; div.content &gt; div &gt; div.box_left &gt; div.info_lubotu.clearfix &gt; div.info_massege.left &gt; div.price_li &gt; span.price_now &gt; i&apos;)
-    areas = soup.select(&apos;body &gt; div.content &gt; div &gt; div.box_left &gt; div.info_lubotu.clearfix &gt; div.info_massege.left &gt; div.palce_li &gt; span &gt; i&apos;)
-    tags = soup.select(&apos;body &gt; div.content &gt; div &gt; div.box_left &gt; div.info_lubotu.clearfix &gt; div.info_massege.left &gt; div.biaoqian_li&apos;)
-    hosts = soup.select(&apos;body &gt; div.content &gt; div &gt; div.box_right &gt; div.personal.jieshao_div &gt; div.personal_jieshao &gt; p.personal_name&apos;)
-    look_times = soup.select(&apos;body &gt; div.content &gt; div &gt; div.box_left &gt; div.info_lubotu.clearfix &gt; div.box_left_top &gt; p &gt; span.look_time&apos;)
-    host_tags = soup.select(&apos;body &gt; div.content &gt; div &gt; div.box_right &gt; div.personal.jieshao_div &gt; div:nth-of-type(2)&apos;)
-
-    # print(host_tags)
-    for title,lclass,price,area,tag,host,look_time,host_tag in zip(titles,lclasses,prices,areas,tags,hosts,look_times,host_tags):
-
-        #解决了有些页面有卖家评价，有些页面没有的问题
-        host_tag_str = &quot;&quot;
-        for s in host_tag.get(&apos;class&apos;):
-            if s == &apos;personal_pingjia&apos;:
-                for s in list(host_tag.stripped_strings)[1:]:
-                    host_tag_str = host_tag_str + str(s) + &quot;,&quot;
-            else:
-                host_tag_str = &quot;卖家暂无评价&quot;
-
-
-        data = {
-            &apos;标题&apos;:title.get_text().strip(),
-            &apos;类目&apos;:lclass.get_text().strip(),
-            &apos;标签&apos;:list(tag.stripped_strings),
-            &apos;价格&apos;:price.get_text(),
-            &apos;区域&apos;:area.get_text(),
-            &apos;卖家&apos;:host.get_text(),
-            &apos;浏览量&apos;:look_time.get_text(),
-            &apos;卖家标签&apos;:host_tag_str
-        }
-
-        # 将标签从列表中取出，并用字符串连接
-        string = &quot;&quot;
-        for l in data[&quot;标签&quot;]:
-            string = string + str(l) + &quot;,&quot;
-
-
-        # print(data[&quot;标签&quot;])
-        print(&quot;类目：&quot; + data[&quot;类目&quot;] + &apos;\n&apos; + &quot;标题：&quot; + data[&quot;标题&quot;]+ &apos;\n&apos; + &quot;浏览量：&quot; + data[&quot;浏览量&quot;] + &apos;\n&apos; + &quot;标签：&quot; + string + &apos;\n&apos; + &quot;价格：&quot; + data[&quot;价格&quot;]+ &apos;\n&apos; + &quot;区域：&quot; + data[&quot;区域&quot;]+ &apos;\n&apos; + &quot;卖家：&quot; + data[&quot;卖家&quot;]+ &apos;\n&apos; + &quot;卖家标签：&quot; + str(host_tag_str))
-        print(&quot;=======================&quot;)
-
-def get_url(url):
-    resp = requests.get(url,headers=headers)
-    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
-
-    links = soup.select(&quot;tr.zzinfo &gt; td.img &gt; a&quot;)
-
-    for l in links:
-        url_pages = l.get(&apos;href&apos;)
-        get_detail(url_pages)
-        # print(url_pages)
-
-for url in base_url:
-    get_url(url)
-</code></pre><p>代码运行如下所示：</p>
-<pre><code>类目：北京平板电脑
-标题：苹果迷你2转让
-浏览量：37次浏览
-标签：验货面付,快递包邮,一口价,配件齐全,无拆无修,正版系统,大陆行货,
-价格：1500
-区域：北京-朝阳
-卖家：万国击剑馆一张教练
-卖家标签：中国好卖家,1,超爽快,1,好品味先生,1,好想和他做朋友,1,卖家超帅,1,
-=======================
-类目：北京平板电脑
-标题：收安卓平板。限华为三星。配件发票齐深圳的优先。
-浏览量：154次浏览
-标签：验货面付,无拆无修,正版系统,
-价格：1000
-区域：深圳-南山
-卖家：收个平板
-卖家标签：卖家暂无评价
-=======================
-类目：北京平板电脑
-标题：四核9.7寸2gRAM16gROM平板电脑
-浏览量：901次浏览
-标签：验货面付,一口价,配件齐全,无拆无修,
-价格：150
-区域：深圳-宝安
-卖家：✔华易科技✔
-卖家标签：卖家暂无评价
-=======================
-类目：北京平板电脑
-标题：acer tab 7平板电脑全套，7寸，几乎全新，一手自用行货，已贴膜。
-浏览量：2110次浏览
-标签：验货面付,一口价,配件齐全,无拆无修,大陆行货,
-价格：380
-区域：深圳-龙华新区
-卖家：坚韧刚强
-卖家标签：超爽快,3,好品味先生,3,中国好买家,2,买家超帅,2,很靠谱,2,
-=======================
-类目：北京平板电脑
-标题：台电平板电脑
-浏览量：575次浏览
-标签：全新未用,验货面付,配件齐全,无拆无修,
-价格：350
-区域：南宁-西乡塘
-卖家：握住的小草
-卖家标签：卖家暂无评价
-=======================
-类目：北京平板电脑
-标题：三星 Galaxy note10.1GT-N8000平板
-浏览量：271次浏览
-标签：验货面付,快递包邮,配件齐全,无拆无修,正版系统,大陆行货,
-价格：850
-区域：北京-朝阳
-卖家：宋现令
-卖家标签：卖家暂无评价
-=======================
-类目：北京平板电脑
-标题：深圳，用了不超过10根手指，这价不秒啊！？
-浏览量：389次浏览
-标签：验货面付,快递包邮,一口价,配件齐全,保修期内,无拆无修,正版系统,大陆行货,
-价格：1599
-区域：深圳-福田
-卖家：pinn
-卖家标签：卖家暂无评价
-=======================
-类目：北京平板电脑
-标题：超值处理，有想要平板的都看看！！！
-浏览量：582次浏览
-标签：配件齐全,保修期内,无拆无修,正版系统,大陆行货,
-价格：1100
-区域：深圳-布吉
-卖家：恒心呈现
-卖家标签：卖家暂无评价
-.....
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>总体上和之前爬小猪短租差不多，然后这个并没有遭遇反爬，不过还是把headers加上了，为了保险。<br>难点主要在标签和卖家标签的处理上。<br>首先是标签，标签获取之后用一个<code>list</code>装着，但是显示的时候有个列表会十分不美观，于是我就想怎么才能去除列表，只显示里面的内容，然后用<code>,</code>将内容连接起来，于是想到for循环加字符串，最后在加上逗号。<br>然后卖家标签那里，因为有的页面并没有这一项，所以失败了好多次，然后我们观察下面代码：<br>首先是有卖家标签的HTML代码：</p>
-<pre><code>&lt;div class=&quot;personal jieshao_div&quot;&gt;
-    &lt;div class=&quot;personal_jieshao&quot;&gt;
-       ...
-    &lt;/div&gt;
-    &lt;div class=&quot;personal_pingjia&quot;&gt;
-        &lt;h3 class=&quot;box_title&quot;&gt;大家这么评价他&lt;/h3&gt;
-            &lt;ul class=&quot;clearfix&quot;&gt;
-                &lt;li&gt;很靠谱&lt;i&gt;1&lt;/i&gt;&lt;/li&gt;
-                &lt;li&gt;好品味先生&lt;i&gt;1&lt;/i&gt;&lt;/li&gt;
-            &lt;/ul&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;personal_salebaby&quot;&gt;
-    ...
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre><p>然后是没有卖家标签的HTML代码：</p>
-<pre><code>&lt;div class=&quot;personal jieshao_div&quot;&gt;
-    &lt;div class=&quot;personal_jieshao&quot;&gt;
-       ...
-    &lt;/div&gt;
-    &lt;div class=&quot;personal_salebaby&quot;&gt;
-    ...
-    &lt;/div&gt;
-&lt;/div&gt;
-</code></pre><p>可以很清楚的看到不同,<code>div.personal jieshao_div</code>下的第二个div是关键，所以我们可以这样进行爬取：</p>
-<pre><code>host_tags = soup.select(&apos;body &gt; div.content &gt; div &gt; div.box_right &gt; div.personal.jieshao_div &gt; div:nth-of-type(2)&apos;)
-</code></pre><p>然后在后面做如下判断：</p>
-<pre><code>host_tag_str = &quot;&quot;
-    for s in host_tag.get(&apos;class&apos;):
-        if s == &apos;personal_pingjia&apos;:
-            for s in list(host_tag.stripped_strings)[1:]: #这里的[1:]是为了把最开始那句“我们这样评价他”去掉
-                host_tag_str = host_tag_str + str(s) + &quot;,&quot;
-        else:
-            host_tag_str = &quot;卖家暂无评价&quot;
-</code></pre>
       
     </div>
     
@@ -442,6 +250,10 @@ for url in base_url:
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/20/python实战六：爬取58同城列表及详情页/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
