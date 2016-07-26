@@ -232,172 +232,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
-            <div id="toc" class="toc-article">
-                <strong class="toc-title">文章目录</strong>
-                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-text">代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Request-post-url-data-data"><span class="toc-text">Request.post(url,data=data)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB数据库"><span class="toc-text">MongoDB数据库</span></a></li></ol></li></ol>
-            </div>
-        
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p> 这个网站的爬取和之前的网站的总体上并没有什么太大的区别，那么，为什么我们还要爬取这个网站呢。主要是由于在爬取每一页的时候，我们发现第一页，第二页乃至最后一页都是同样的一个网址，为什么不同的页面会有相同的网址呢？网址相同我们还怎么进行爬取？于是，问题来了。<br>这个网站与我们之前遇到的网站的最大不同就是这个网站是采用的<code>POST</code>请求,而我们之前爬取的比如小猪短租，比如58同城这些的网页请求都是<code>GET</code>请求，这两种请求的区别是：Get一般用于获取/查询资源信息，而Post一般用于更新资源信息。而表面现像上看，GET请求的数据会附在URL之后（就是把数据放置在HTTP协议头中），以?分割URL和传输数据，参数之间以&amp;相连，如：<br><code>login.action?name=hyddd&amp;password=idontknow&amp;verify=%E4%BD%A0%E5%A5%BD</code>。如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密，得出如：%E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。而POST把提交的数据则放置在是HTTP包的包体中，并没有显示在连接之中。<br>所以，我们在使用<code>requests</code>时，不再使用get，而是使用<code>requests.post</code>，并将图中数据放在一个字典中，post进去。<img src="/images/caijing1.png" alt="&quot;image1&quot;"></p>
-<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code>from bs4 import BeautifulSoup
-import requests
-import time,re
-import pymongo
-
-
-#存储在MongoDb中
-client = pymongo.MongoClient(&apos;localhost&apos;,27017)
-caijing = client[&apos;caijing&apos;]
-
-#创建两个Mongodb表单，一个存储链接，一个存储详情
-sheet_caijing_list = caijing[&apos;sheet_caijing_list&apos;]
-sheet_caijing_detail = caijing[&apos;sheet_caijing_detail&apos;]
-
-url = &apos;http://data.01caijing.com/p2p/index.html&apos;
-base_url = &apos;http://data.01caijing.com&apos;
-
-#POST的数据
-data = {
-    &quot;platformName&quot;: &quot;&quot;,
-    &quot;p&quot;: &quot;2&quot;,  # 第二页
-    &quot;sortcolumn&quot;: &quot;2&quot;,
-    &quot;sort&quot;: &quot;desc&quot;,
-    &quot;selectdate&quot;: &quot;月&quot;,
-    &quot;check_page&quot;: &quot;2&quot;,
-    &quot;startOnlineTime&quot;: &quot;2007&quot;,
-    &quot;endOnlineTime&quot;: &quot;2016&quot;,
-    &quot;startCapital&quot;: &quot;1&quot;,
-    &quot;endCapital&quot;: &quot;10000000000&quot;,
-    &quot;data&quot;: &quot;全部&quot;,
-    &quot;newlist&quot;: &quot;1,2,4,5,6,19&quot;,
-}
-
-def get_detail(url):
-
-    resp = requests.get(url)
-    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
-    time.sleep(2)
-
-    data = {
-        &apos;host&apos;:soup.select(&apos;#main &gt; div.container &gt; div:nth-of-type(2) &gt; div &gt; ul &gt; li:nth-of-type(2)&apos;)[0].get_text(),
-        &apos;capital&apos;:soup.select(&apos;#main &gt; div.container &gt; div:nth-of-type(2) &gt; div &gt; ul &gt; li:nth-of-type(3)&apos;)[0].get_text(),
-        &apos;area&apos;:soup.select(&apos;#main &gt; div.container &gt; div:nth-of-type(2) &gt; div &gt; ul &gt; li:nth-of-type(4)&apos;)[0].get_text(),
-        &apos;company&apos;:soup.select(&apos;#main &gt; div.container &gt; div:nth-of-type(2) &gt; div &gt; ul &gt; li:nth-of-type(5)&apos;)[0].get_text(),
-        &apos;address&apos;:soup.select(&apos;#main &gt; div.container &gt; div:nth-of-type(2) &gt; div &gt; ul &gt; li:nth-of-type(6)&apos;)[0].get_text()
-    }
-
-    c_str=&quot;&quot;
-    c = data[&apos;capital&apos;].split(&apos;\r&apos;)
-    c_str = c[0]+c[1].strip()
-    data[&apos;capital&apos;] = c_str
-
-    a_str=&quot;&quot;
-    a = data[&apos;area&apos;].split(&apos;\r&apos;)
-    a_str = a[0] + a[1].strip()
-    data[&apos;area&apos;] = a_str
-
-    #将数据插入至detail表
-    sheet_caijing_detail.insert_one(data)
-
-def get_pages(url,data=data):
-    resp = requests.post(url,data=data)
-    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
-
-    data_max = soup.select(&apos;ul.pagination &gt; li:nth-of-type(13) &gt; a&apos;)
-
-    page_href = data_max[0].get(&quot;href&quot;)
-    page = re.search(&quot;setpage\(([0-9]{2})\)&quot;, page_href)
-    page1 = page.group(1)  # 最大的页数
-    page1 = int(page1)
-    pages = 1
-
-    while pages &lt; 3:#这里如果填page1的话是爬取全部页面，但由于时间太长，我们这里取前3页
-    data = {
-        &apos;platformName&apos;:&apos;&apos;,
-        &apos;p&apos;:str(pages),
-        &apos;sortcolumn&apos;:&apos;2&apos;,
-        &apos;sort&apos;:&apos;desc&apos;,
-        &apos;selectdate&apos;:&apos;月&apos;,
-        &apos;check_page&apos;:&apos;1&apos;,
-        &apos;startOnlineTime&apos;:&apos;2007&apos;,
-        &apos;endOnlineTime&apos;:&apos;2016&apos;,
-        &apos;startCapital&apos;:&apos;1&apos;,
-        &apos;endCapital&apos;:&apos;10000000000&apos;,
-        &apos;data&apos;:&apos;全部&apos;,
-        &apos;newlist&apos;:&apos;1,2,4,5,6,19&apos;
-    }
-
-    resp = requests.post(url,data=data)
-    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
-    pages += 1
-
-    if soup:
-        titles = soup.select(&apos;span.title &gt; a&apos;)
-        links = soup.select(&apos;span.title &gt; a&apos;)
-        counts = soup.select(&apos;td.td_1 &gt; div &gt; span.font_16_orange&apos;)
-        totals = soup.select(&apos;td.td_2 &gt; div &gt; span.font_16_orange&apos;)
-        rates = soup.select(&apos;td.td_4 &gt; div &gt; span.font_16_orange&apos;)
-        borrow_persons = soup.select(&apos;td.td_5 &gt; div &gt; span.font_16_orange&apos;)
-        investment_persons = soup.select(&apos;td.td_6 &gt; div &gt; span.font_16_orange&apos;)
-        times = soup.select(&apos;td.td_19 &gt; div &gt; span&apos;)
-        for title,count,total,rate,borrow_person,investment_person,time,link in zip(titles,counts,totals,rates,borrow_persons,investment_persons,times,links):
-
-            data = {
-
-                &apos;平台&apos;:title.get_text(),
-                &apos;成交量&apos;:count.get_text(),
-                &apos;成交额&apos;:total.get_text().strip(),
-                &apos;名义利率&apos;:rate.get_text(),
-                &apos;借款人数&apos;:borrow_person.get_text(),
-                &apos;投资人数&apos;:investment_person.get_text(),
-                &apos;上线时间&apos;:time.get_text(),
-                &apos;详情&apos;:link.get(&apos;href&apos;)
-
-            }
-
-
-            get_detail(base_url + data[&apos;详情&apos;])
-
-            #将数据插入至list表
-            sheet_caijing_list.insert_one(data)
-
-get_pages(url)
-</code></pre><p>这段程序运行的结果与之前也不一样，它是将运行结果存储在数据库中，我们可以看一些运行结果：</p>
-<p>首先是每一页的列表的数据集合：</p>
-<pre><code>db.sheet_caijing_list.find()
-{ &quot;_id&quot; : ObjectId(&quot;5795d2bf421aa97230f403ed&quot;), &quot;成交量&quot; : &quot;212082&quot;, &quot;成交额&quot; : &quot;723,569.93&quot;, &quot;投资人数&quot; : &quot;92967&quot;, &quot;上线时间&quot; : &quot;2009-03&quot;, &quot;名义利率&quot; : &quot;9.15&quot;, &quot;平台&quot; : &quot;红岭创投&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-12410.html&quot;, &quot;借款人数&quot; : &quot;9301&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c1421aa97230f403ef&quot;), &quot;成交量&quot; : &quot;5744&quot;, &quot;成交额&quot; : &quot;535,529.97&quot;, &quot;投资人数&quot; : &quot;-&quot;, &quot;上线时间&quot; : &quot;2013-08&quot;, &quot;名义利率&quot; : &quot;10.79&quot;, &quot;平台&quot; : &quot;网信理财&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-13125.html&quot;, &quot;借款人数&quot; : &quot;-&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c3421aa97230f403f1&quot;), &quot;成交量&quot; : &quot;55490&quot;, &quot;成交额&quot; : &quot;362,667.82&quot;, &quot;投资人数&quot; : &quot;79283&quot;, &quot;上线时间&quot; : &quot;2011-08&quot;, &quot;名义利率&quot; : &quot;9.71&quot;, &quot;平台&quot; : &quot;微贷网（浙）&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-12067.html&quot;, &quot;借款人数&quot; : &quot;54286&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c5421aa97230f403f3&quot;), &quot;成交量&quot; : &quot;415&quot;, &quot;成交额&quot; : &quot;294,039.03&quot;, &quot;投资人数&quot; : &quot;798&quot;, &quot;上线时间&quot; : &quot;2013-12&quot;, &quot;名义利率&quot; : &quot;8.93&quot;, &quot;平台&quot; : &quot;鑫合汇&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-13655.html&quot;, &quot;借款人数&quot; : &quot;-&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c7421aa97230f403f5&quot;), &quot;成交量&quot; : &quot;11983&quot;, &quot;成交额&quot; : &quot;272,302.56&quot;, &quot;投资人数&quot; : &quot;102153&quot;, &quot;上线时间&quot; : &quot;2013-06&quot;, &quot;名义利率&quot; : &quot;11.87&quot;, &quot;平台&quot; : &quot;小牛在线&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-13072.html&quot;, &quot;借款人数&quot; : &quot;11938&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c9421aa97230f403f7&quot;), &quot;成交量&quot; : &quot;44007&quot;, &quot;成交额&quot; : &quot;254,395.19&quot;, &quot;投资人数&quot; : &quot;94887&quot;, &quot;上线时间&quot; : &quot;2012-12&quot;, &quot;名义利率&quot; : &quot;6.27&quot;, &quot;平台&quot; : &quot;PPmoney&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-13714.html&quot;, &quot;借款人数&quot; : &quot;22095&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2cc421aa97230f403f9&quot;), &quot;成交量&quot; : &quot;44017&quot;, &quot;成交额&quot; : &quot;241,057.12&quot;, &quot;投资人数&quot; : &quot;72921&quot;, &quot;上线时间&quot; : &quot;2012-07&quot;, &quot;名义利率&quot; : &quot;11.48&quot;, &quot;平台&quot; : &quot;团贷网&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-12007.html&quot;, &quot;借款人数&quot; : &quot;7923&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2ce421aa97230f403fb&quot;), &quot;成交量&quot; : &quot;23698&quot;, &quot;成交额&quot; : &quot;188,866.78&quot;, &quot;投资人数&quot; : &quot;42840&quot;, &quot;上线时间&quot; : &quot;2011-10&quot;, &quot;名义利率&quot; : &quot;8.58&quot;, &quot;平台&quot; : &quot;翼龙贷&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-13976.html&quot;, &quot;借款人数&quot; : &quot;21794&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2d0421aa97230f403fd&quot;), &quot;成交量&quot; : &quot;28267&quot;, &quot;成交额&quot; : &quot;173,084.42&quot;, &quot;投资人数&quot; : &quot;174089&quot;, &quot;上线时间&quot; : &quot;2012-03&quot;, &quot;名义利率&quot; : &quot;11.48&quot;, &quot;平台&quot; : &quot;宜人贷&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-13974.html&quot;, &quot;借款人数&quot; : &quot;28260&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2d2421aa97230f403ff&quot;), &quot;成交量&quot; : &quot;4165&quot;, &quot;成交额&quot; : &quot;138,656.08&quot;, &quot;投资人数&quot; : &quot;55287&quot;, &quot;上线时间&quot; : &quot;2014-09&quot;, &quot;名义利率&quot; : &quot;7.87&quot;, &quot;平台&quot; : &quot;搜易贷&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-12930.html&quot;, &quot;借款人数&quot; : &quot;3457&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2d4421aa97230f40401&quot;), &quot;成交量&quot; : &quot;1438&quot;, &quot;成交额&quot; : &quot;122,803.00&quot;, &quot;投资人数&quot; : &quot;8476&quot;, &quot;上线时间&quot; : &quot;2014-11&quot;, &quot;名义利率&quot; : &quot;7.94&quot;, &quot;平台&quot; : &quot;链家理财&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-16056.html&quot;, &quot;借款人数&quot; : &quot;1343&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2d6421aa97230f40403&quot;), &quot;成交量&quot; : &quot;24185&quot;, &quot;成交额&quot; : &quot;122,761.11&quot;, &quot;投资人数&quot; : &quot;72014&quot;, &quot;上线时间&quot; : &quot;2012-08&quot;, &quot;名义利率&quot; : &quot;10.82&quot;, &quot;平台&quot; : &quot;投哪网&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-13067.html&quot;, &quot;借款人数&quot; : &quot;22729&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2d8421aa97230f40405&quot;), &quot;成交量&quot; : &quot;3749&quot;, &quot;成交额&quot; : &quot;121,228.23&quot;, &quot;投资人数&quot; : &quot;21490&quot;, &quot;上线时间&quot; : &quot;2014-08&quot;, &quot;名义利率&quot; : &quot;6.99&quot;, &quot;平台&quot; : &quot;小赢理财&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-14562.html&quot;, &quot;借款人数&quot; : &quot;2118&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2db421aa97230f40407&quot;), &quot;成交量&quot; : &quot;1820&quot;, &quot;成交额&quot; : &quot;119,155.17&quot;, &quot;投资人数&quot; : &quot;-&quot;, &quot;上线时间&quot; : &quot;2014-08&quot;, &quot;名义利率&quot; : &quot;9.3&quot;, &quot;平台&quot; : &quot;聚财猫&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-14738.html&quot;, &quot;借款人数&quot; : &quot;-&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2dd421aa97230f40409&quot;), &quot;成交量&quot; : &quot;32390&quot;, &quot;成交额&quot; : &quot;97,623.49&quot;, &quot;投资人数&quot; : &quot;7493&quot;, &quot;上线时间&quot; : &quot;2012-06&quot;, &quot;名义利率&quot; : &quot;13.1&quot;, &quot;平台&quot; : &quot;雅堂金融&quot;, &quot;详情&quot; : &quot;/p2p/website/platform-details-12797.html&quot;, &quot;借款人数&quot; : &quot;1597&quot; }
-....
-</code></pre><p>然后是每个平台的详情的数据集合：</p>
-<pre><code>db.sheet_caijing_detail.find()
-{ &quot;_id&quot; : ObjectId(&quot;5795d2bf421aa97230f403ec&quot;), &quot;company&quot; : &quot;所属公司：红岭创投电子商务股份有限公司&quot;, &quot;address&quot; : &quot;公司地址：深圳市益田创新科技园（福田区益田花园二期19栋7-13楼）&quot;, &quot;host&quot; : &quot;法人代表：周世平&quot;, &quot;capital&quot; : &quot;注册资本：6000万&quot;, &quot;area&quot; : &quot;注册地点：广东深圳&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c1421aa97230f403ee&quot;), &quot;company&quot; : &quot;所属公司：北京东方联合投资管理有限公司&quot;, &quot;address&quot; : &quot;公司地址：北京市朝阳区酒仙桥中路24号院4号楼5层A5-01&quot;, &quot;host&quot; : &quot;法人代表：李焕香&quot;, &quot;capital&quot; : &quot;注册资本：5000万&quot;, &quot;area&quot; : &quot;注册地点：直辖市北京&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c3421aa97230f403f0&quot;), &quot;company&quot; : &quot;所属公司：微贷（杭州）金融信息服务有限公司&quot;, &quot;address&quot; : &quot;公司地址：浙江财富金融中心25层，50层（杭州市江干区解放东路33号）&quot;, &quot;host&quot; : &quot;法人代表：姚宏&quot;, &quot;capital&quot; : &quot;注册资本：12195万&quot;, &quot;area&quot; : &quot;注册地点：浙江杭州&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c5421aa97230f403f2&quot;), &quot;company&quot; : &quot;所属公司：杭州鑫合汇网络科技有限公司&quot;, &quot;address&quot; : &quot;公司地址：杭州市拱墅区祥园路88号杭州智慧信息产业园5#8F&quot;, &quot;host&quot; : &quot;法人代表：胡德华&quot;, &quot;capital&quot; : &quot;注册资本：5000万&quot;, &quot;area&quot; : &quot;注册地点：浙江杭州&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c7421aa97230f403f4&quot;), &quot;company&quot; : &quot;所属公司：深圳市小牛在线互联网信息咨询有限公司&quot;, &quot;address&quot; : &quot;公司地址：广东省深圳市南山区高新园高新南一道富诚科技大厦四楼&quot;, &quot;host&quot; : &quot;法人代表：彭钢&quot;, &quot;capital&quot; : &quot;注册资本：10300万&quot;, &quot;area&quot; : &quot;注册地点：广东深圳&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2c9421aa97230f403f6&quot;), &quot;company&quot; : &quot;所属公司：广州万惠投资管理有限公司&quot;, &quot;address&quot; : &quot;公司地址：广州市天河区体育西路153号 新天河大厦6、10楼&quot;, &quot;host&quot; : &quot;法人代表：陈宝国&quot;, &quot;capital&quot; : &quot;注册资本：15000万&quot;, &quot;area&quot; : &quot;注册地点：广东广州&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2cc421aa97230f403f8&quot;), &quot;company&quot; : &quot;所属公司：东莞团贷网互联网科技服务有限公司&quot;, &quot;address&quot; : &quot;公司地址：东莞市南城区新城鸿福路102号汇成大厦102A号&quot;, &quot;host&quot; : &quot;法人代表：张林&quot;, &quot;capital&quot; : &quot;注册资本：10000万&quot;, &quot;area&quot; : &quot;注册地点：广东东莞&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2ce421aa97230f403fa&quot;), &quot;company&quot; : &quot;所属公司：北京同城翼龙网络科技有限公司&quot;, &quot;address&quot; : &quot;公司地址：北京市海淀区中关村南大街17号韦伯时代中心C座4层&quot;, &quot;host&quot; : &quot;法人代表：王思聪&quot;, &quot;capital&quot; : &quot;注册资本：10000万&quot;, &quot;area&quot; : &quot;注册地点：直辖市北京&quot; }
-{ &quot;_id&quot; : ObjectId(&quot;5795d2d0421aa97230f403fc&quot;), &quot;company&quot; : &quot;所属公司：恒诚科技发展（北京）有限公司&quot;, &quot;address&quot; : &quot;公司地址：北京市朝阳区通惠河北路朗园vintage 2号楼 A座 3-4层&quot;, &quot;host&quot; : &quot;法人代表：唐宁&quot;, &quot;capital&quot; : &quot;注册资本：3000万&quot;, &quot;area&quot; : &quot;注册地点：直辖市北京&quot; }
-....
-</code></pre><h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>这次的爬取主要有两个关键点，首先是POST请求不显示在URL上导致的链接不变问题，然后是MongoDB的连接和存储问题。</p>
-<h2 id="Request-post-url-data-data"><a href="#Request-post-url-data-data" class="headerlink" title="Request.post(url,data=data)"></a>Request.post(url,data=data)</h2><p>当我们发现翻页时页面链接不变的时候，就要考虑下是否是post的问题，可以点开Network，然后查看headers是否是post请求还是get请求，若是post的话，继续下翻，将data数据放在一个字典中，post进去。<br>在页面增加部分，可以借助正则表达式，匹配页数，然后进行自增。</p>
-<h2 id="MongoDB数据库"><a href="#MongoDB数据库" class="headerlink" title="MongoDB数据库"></a>MongoDB数据库</h2><p>这里我们首先要打开Mongo连接，在python中使用mongodb，我们要首先导入pymongo包，然后创建本地的MongoDB客户端<code>client = pymongo.MongoClient(&#39;localhost&#39;,27017)</code>，然后创建一个新的数据库caijing用来存储我们的数据<code>caijing = client[&#39;caijing&#39;]</code>，接着，在这个数据库中再创建两个表，第一个表list存储每页的数据<code>sheet_caijing_list = caijing[&#39;sheet_caijing_list&#39;]</code>，第二个表detail用来存储每个平台的一些详细信息<code>sheet_caijing_detail = caijing[&#39;sheet_caijing_detail&#39;]</code>。</p>
-<p>注意，新值无法覆盖旧值，可以在数据库中进行修改。<br>具体信息可以在<a href="http://www.runoob.com/mongodb/mongodb-tutorial.html" target="_blank" rel="external">菜鸟教程</a>中进行查询。</p>
-
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p> 这个网站的爬取和之前的网站的总体上并没有什么太大的区别，那么，为什么我们还要爬取这个网站呢。主要是由于在爬取每一页的时候，我们发现第一页，第二页乃至最后一页都是同样的一个网址，为什么不同的页面会有相同的网址呢？网址相同我们还怎么进行爬取？于是，问题来了。<br>这个网站与我们之前遇到的网站的最大不同就是这个网站是采用的<code>POST</code>请求,而我们之前爬取的比如小猪短租，比如58同城这些的网页请求都是<code>GET</code>请求，这两种请求的区别是：Get一般用于获取/查询资源信息，而Post一般用于更新资源信息。而表面现像上看，GET请求的数据会附在URL之后（就是把数据放置在HTTP协议头中），以?分割URL和传输数据，参数之间以&amp;相连，如：<br><code>login.action?name=hyddd&amp;password=idontknow&amp;verify=%E4%BD%A0%E5%A5%BD</code>。如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密，得出如：%E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。而POST把提交的数据则放置在是HTTP包的包体中，并没有显示在连接之中。<br>所以，我们在使用<code>requests</code>时，不再使用get，而是使用<code>requests.post</code>，并将图中数据放在一个字典中，post进去。</p>
       
     </div>
     
@@ -410,6 +245,10 @@ get_pages(url)
 
       
 
+      
+        <p class="article-more-link">
+          <a  href="/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>

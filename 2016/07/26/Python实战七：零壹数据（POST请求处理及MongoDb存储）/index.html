@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="code_Wang Site">
 <meta property="og:description" content="背景 这个网站的爬取和之前的网站的总体上并没有什么太大的区别，那么，为什么我们还要爬取这个网站呢。主要是由于在爬取每一页的时候，我们发现第一页，第二页乃至最后一页都是同样的一个网址，为什么不同的页面会有相同的网址呢？网址相同我们还怎么进行爬取？于是，问题来了。这个网站与我们之前遇到的网站的最大不同就是这个网站是采用的POST请求,而我们之前爬取的比如小猪短租，比如58同城这些的网页请求都是GET请">
 <meta property="og:image" content="http://chengblog.top/images/caijing1.png">
-<meta property="og:updated_time" content="2016-07-26T09:10:50.000Z">
+<meta property="og:updated_time" content="2016-07-26T09:13:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python实战七：零壹数据（POST请求处理及MongoDb存储）">
 <meta name="twitter:description" content="背景 这个网站的爬取和之前的网站的总体上并没有什么太大的区别，那么，为什么我们还要爬取这个网站呢。主要是由于在爬取每一页的时候，我们发现第一页，第二页乃至最后一页都是同样的一个网址，为什么不同的页面会有相同的网址呢？网址相同我们还怎么进行爬取？于是，问题来了。这个网站与我们之前遇到的网站的最大不同就是这个网站是采用的POST请求,而我们之前爬取的比如小猪短租，比如58同城这些的网页请求都是GET请">
@@ -250,7 +250,9 @@
                 <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-text">代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Request-post-url-data-data"><span class="toc-text">Request.post(url,data=data)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MongoDB数据库"><span class="toc-text">MongoDB数据库</span></a></li></ol></li></ol>
             </div>
         
-        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p> 这个网站的爬取和之前的网站的总体上并没有什么太大的区别，那么，为什么我们还要爬取这个网站呢。主要是由于在爬取每一页的时候，我们发现第一页，第二页乃至最后一页都是同样的一个网址，为什么不同的页面会有相同的网址呢？网址相同我们还怎么进行爬取？于是，问题来了。<br>这个网站与我们之前遇到的网站的最大不同就是这个网站是采用的<code>POST</code>请求,而我们之前爬取的比如小猪短租，比如58同城这些的网页请求都是<code>GET</code>请求，这两种请求的区别是：Get一般用于获取/查询资源信息，而Post一般用于更新资源信息。而表面现像上看，GET请求的数据会附在URL之后（就是把数据放置在HTTP协议头中），以?分割URL和传输数据，参数之间以&amp;相连，如：<br><code>login.action?name=hyddd&amp;password=idontknow&amp;verify=%E4%BD%A0%E5%A5%BD</code>。如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密，得出如：%E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。而POST把提交的数据则放置在是HTTP包的包体中，并没有显示在连接之中。<br>所以，我们在使用<code>requests</code>时，不再使用get，而是使用<code>requests.post</code>，并将图中数据放在一个字典中，post进去。<img src="/images/caijing1.png" alt="&quot;image1&quot;"></p>
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p> 这个网站的爬取和之前的网站的总体上并没有什么太大的区别，那么，为什么我们还要爬取这个网站呢。主要是由于在爬取每一页的时候，我们发现第一页，第二页乃至最后一页都是同样的一个网址，为什么不同的页面会有相同的网址呢？网址相同我们还怎么进行爬取？于是，问题来了。<br>这个网站与我们之前遇到的网站的最大不同就是这个网站是采用的<code>POST</code>请求,而我们之前爬取的比如小猪短租，比如58同城这些的网页请求都是<code>GET</code>请求，这两种请求的区别是：Get一般用于获取/查询资源信息，而Post一般用于更新资源信息。而表面现像上看，GET请求的数据会附在URL之后（就是把数据放置在HTTP协议头中），以?分割URL和传输数据，参数之间以&amp;相连，如：<br><code>login.action?name=hyddd&amp;password=idontknow&amp;verify=%E4%BD%A0%E5%A5%BD</code>。如果数据是英文字母/数字，原样发送，如果是空格，转换为+，如果是中文/其他字符，则直接把字符串用BASE64加密，得出如：%E4%BD%A0%E5%A5%BD，其中％XX中的XX为该符号以16进制表示的ASCII。而POST把提交的数据则放置在是HTTP包的包体中，并没有显示在连接之中。<br>所以，我们在使用<code>requests</code>时，不再使用get，而是使用<code>requests.post</code>，并将图中数据放在一个字典中，post进去。</p>
+<a id="more"></a>
+<p><img src="/images/caijing1.png" alt="&quot;image1&quot;"></p>
 <h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><pre><code>from bs4 import BeautifulSoup
 import requests
 import time,re
@@ -458,7 +460,7 @@ get_pages(url)
     <p><span>本文标题:</span><a href="/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/">Python实战七：零壹数据（POST请求处理及MongoDb存储）</a></p>
     <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
     <p><span>发布时间:</span>2016/07/26 - 15:40:06</p>
-    <p><span>最后更新:</span>2016/07/26 - 17:10:50</p>
+    <p><span>最后更新:</span>2016/07/26 - 17:13:58</p>
     <p>
         <span>原始链接:</span><a class="post-url" href="/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/" title="Python实战七：零壹数据（POST请求处理及MongoDb存储）">http://chengblog.top/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/</a>
         <span class="copy-path" data-clipboard-text="原文: http://chengblog.top/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
