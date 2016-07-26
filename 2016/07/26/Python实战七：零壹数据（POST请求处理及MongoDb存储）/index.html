@@ -6,17 +6,20 @@
   <meta charset="utf-8">
   
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>code_Wang Site</title>
+  <title>Python实战七：零壹数据（POST请求处理及MongoDb存储） | code_Wang Site</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Never Give Up!">
-<meta property="og:type" content="website">
-<meta property="og:title" content="code_Wang Site">
-<meta property="og:url" content="http://chengblog.top/index.html">
+  <meta name="description" content="背景 这个网站的爬取和之前的网站的总体上并没有什么太大的区别，那么，为什么我们还要爬取这个网站呢。主要是由于在爬取每一页的时候，我们发现第一页，第二页乃至最后一页都是同样的一个网址，为什么不同的页面会有相同的网址呢？网址相同我们还怎么进行爬取？于是，问题来了。这个网站与我们之前遇到的网站的最大不同就是这个网站是采用的POST请求,而我们之前爬取的比如小猪短租，比如58同城这些的网页请求都是GET请">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实战七：零壹数据（POST请求处理及MongoDb存储）">
+<meta property="og:url" content="http://chengblog.top/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/index.html">
 <meta property="og:site_name" content="code_Wang Site">
-<meta property="og:description" content="Never Give Up!">
+<meta property="og:description" content="背景 这个网站的爬取和之前的网站的总体上并没有什么太大的区别，那么，为什么我们还要爬取这个网站呢。主要是由于在爬取每一页的时候，我们发现第一页，第二页乃至最后一页都是同样的一个网址，为什么不同的页面会有相同的网址呢？网址相同我们还怎么进行爬取？于是，问题来了。这个网站与我们之前遇到的网站的最大不同就是这个网站是采用的POST请求,而我们之前爬取的比如小猪短租，比如58同城这些的网页请求都是GET请">
+<meta property="og:image" content="http://chengblog.top/images/caijing1.png">
+<meta property="og:updated_time" content="2016-07-26T09:10:50.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="code_Wang Site">
-<meta name="twitter:description" content="Never Give Up!">
+<meta name="twitter:title" content="Python实战七：零壹数据（POST请求处理及MongoDb存储）">
+<meta name="twitter:description" content="背景 这个网站的爬取和之前的网站的总体上并没有什么太大的区别，那么，为什么我们还要爬取这个网站呢。主要是由于在爬取每一页的时候，我们发现第一页，第二页乃至最后一页都是同样的一个网址，为什么不同的页面会有相同的网址呢？网址相同我们还怎么进行爬取？于是，问题来了。这个网站与我们之前遇到的网站的最大不同就是这个网站是采用的POST请求,而我们之前爬取的比如小猪短租，比如58同城这些的网页请求都是GET请">
+<meta name="twitter:image" content="http://chengblog.top/images/caijing1.png">
   
     <link rel="alternative" href="/atom.xml" title="code_Wang Site" type="application/atom+xml">
   
@@ -204,9 +207,7 @@
 	</div>
 </nav>
 
-      <div class="body-wrap">
-  
-    <article id="pages-Python实战七：零壹数据（POST请求处理及MongoDb存储）" class="article article-type-pages" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="pages-Python实战七：零壹数据（POST请求处理及MongoDb存储）" class="article article-type-pages" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/" class="article-date">
@@ -222,12 +223,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/">Python实战七：零壹数据（POST请求处理及MongoDb存储）</a>
+    <h1 class="article-title" itemprop="name">
+      Python实战七：零壹数据（POST请求处理及MongoDb存储）
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/combat/">combat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -401,294 +413,112 @@ get_pages(url)
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/combat/">combat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
   
+    
+<nav id="article-nav">
   
+  
+    <a href="/2016/07/20/python实战六：爬取58同城列表及详情页/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python实战六：爬取58同城列表及详情页</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+  
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+        <span class="donate_txt">
+            &uarr;<br>
+                    感谢您的支持！
+        </span>
+        <br>
+    </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+            <!-- 支付宝打赏图案 -->
+            <img src="/img/zhifubao.jpg" alt="支付宝打赏"> 
+            <!-- 微信打赏图案 -->
+            <img src="/img/weixin.jpg" alt="微信打赏">  
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+
+  
+  
+    <div class="article-footer-copyright">
+    <p><span>本文标题:</span><a href="/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/">Python实战七：零壹数据（POST请求处理及MongoDb存储）</a></p>
+    <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
+    <p><span>发布时间:</span>2016/07/26 - 15:40:06</p>
+    <p><span>最后更新:</span>2016/07/26 - 17:10:50</p>
+    <p>
+        <span>原始链接:</span><a class="post-url" href="/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/" title="Python实战七：零壹数据（POST请求处理及MongoDb存储）">http://chengblog.top/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/</a>
+        <span class="copy-path" data-clipboard-text="原文: http://chengblog.top/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        <script src="/js/clipboard.min.js"></script>
+        <script> var clipboard = new Clipboard('.copy-path'); </script>
+    </p>
+    <p>
+        <span>许可协议:</span><i class="fa fa-creative-commons"></i><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="中国大陆 (CC BY-NC-SA 4.0 CN)"> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </p>
+</div>
+
   
 </article>
 
 
-
-
-
-
-
-
-
-  
-    <article id="pages-python实战六：爬取58同城列表及详情页" class="article article-type-pages" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/20/python实战六：爬取58同城列表及详情页/" class="article-date">
-  	<time datetime="2016-07-20T12:50:41.000Z" itemprop="datePublished">2016-07-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/20/python实战六：爬取58同城列表及详情页/">python实战六：爬取58同城列表及详情页</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>第一周的大作业准备的目标的58同城，其实感觉难度还不如煎蛋。。煎蛋的反爬折腾了我两天，这个半天就搞定了，中间只有卖家标签那里卡住了一段时间，主要是有些页面并没有这一项，所以在标签中就没有这个标签，爬的时候呢，爬虫并不会自动跳过，而是根本就不爬这个详情页了，找了一阵子才找到这个原因，后来加了个<code>if..else</code>搞定。</p>
-<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><ul>
-<li>爬取每个页面的所有详情的链接</li>
-<li>对每个链接爬取其详情信息</li>
-<li>爬取所有页面</li>
-</ul>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/combat/">combat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
 	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/20/python实战六：爬取58同城列表及详情页/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-  
-  
-</article>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
 
 
 
 
 
 
-
-
-
-  
-    <article id="pages-python实战五：爬取煎蛋网妹子图" class="article article-type-pages" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/20/python实战五：爬取煎蛋网妹子图/" class="article-date">
-  	<time datetime="2016-07-20T11:36:24.000Z" itemprop="datePublished">2016-07-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/20/python实战五：爬取煎蛋网妹子图/">python实战五：爬取煎蛋网妹子图</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="研究情况"><a href="#研究情况" class="headerlink" title="研究情况"></a>研究情况</h1><p>爬煎蛋网真是爬的我外焦内嫩，第一次按照之前爬别的网站的模式进行爬取，大概爬了60来张图片就被封IP了，于是开始学习构建IP代理池，经过一系列的鼓捣（感谢麻瓜编程），加上了IP代理池，然后继续爬，爬了大概100多张后又给我禁了，然后在知乎上搜了搜，正好发现一篇描述煎蛋网反爬机制<a href="https://www.zhihu.com/question/37982503/answer/108680919?from=profile_answer_card">文章</a>,发现可能是UA的问题，通过 User-Agent 判定是不是同一个用户访问的,于是研究了下答主的代码，加入了一个UA池，现在暂时是一直爬着没出现被封的问题，只是发现会出现图片重复下载的现象，我想着把待下载的链接放在一个<code>set</code>内，但还是没有用。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/combat/">combat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/20/python实战五：爬取煎蛋网妹子图/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-  
-  
-</article>
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Python实战七：零壹数据（POST请求处理及MongoDb存储）" data-title="Python实战七：零壹数据（POST请求处理及MongoDb存储）" data-url="http://chengblog.top/2016/07/26/Python实战七：零壹数据（POST请求处理及MongoDb存储）/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-
-
-
-
-
-  
-    <article id="pages-python实战四：爬取小猪短租网站" class="article article-type-pages" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/18/python实战四：爬取小猪短租网站/" class="article-date">
-  	<time datetime="2016-07-18T01:55:26.000Z" itemprop="datePublished">2016-07-18</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/18/python实战四：爬取小猪短租网站/">python实战四：爬取小猪短租网站</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>今天我们尝试爬取租房网站小猪短租的一些信息，小猪短租网站的大体构成如下图所示网站的左侧是房源的实时地图，右侧是房源链接：</p>
-<p><img src="/images/xiaozhu2.png" alt="&quot;image2&quot;"></p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/combat/">combat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/18/python实战四：爬取小猪短租网站/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-  
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-    <article id="pages-python实战三：爬取tripadvisor网站列表和个人收藏部分" class="article article-type-pages" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/" class="article-date">
-  	<time datetime="2016-07-17T09:06:39.000Z" itemprop="datePublished">2016-07-17</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/">python实战三：爬取tripadvisor网站列表和个人收藏部分</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>之前我们爬取的都是本地自己制作的一些简单网页，接下来我们尝试对真实世界的网页进行爬取。<br>今天的主题是猫途鹰网站：”<a href="https://cn.tripadvisor.com/">https://cn.tripadvisor.com/</a>“</p>
-<h1 id="1-背景介绍"><a href="#1-背景介绍" class="headerlink" title="1 背景介绍"></a>1 背景介绍</h1><p>首先我们要了解的是服务器与本地的交换机制，大致就是我们个人PC向服务器发送一个Requests，服务器收到这个Requests后，会对我们做出回应，返回一个Response。<br>这一步我们的关注点在Requests上面，在Http1.1的时代，<code>Request请求目前有八种方法：Post,Get,Head,Put,Options,Connect,Trace,delete</code>。但是最常用的仍然只有Post和Get，而我呢用Python爬取信息的时候，其实就是模拟的这两种方法。</p>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/combat/">combat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/requests/">requests</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/17/python实战三：爬取tripadvisor网站列表和个人收藏部分/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-  
-  
-</article>
-
-
-
-
-
-
-
-
-
-  
-  
-    <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -720,8 +550,8 @@ get_pages(url)
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
