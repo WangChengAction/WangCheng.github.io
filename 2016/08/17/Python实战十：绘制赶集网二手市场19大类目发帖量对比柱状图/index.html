@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="baidu-site-verification" content="9dtmr2U4H5" />
+        <meta name="google-site-verification" content="x6k7knkmpTCLh6kFNs3JZVS6wUmetVakl9PNI3qMT_0" />
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图 | code_Wang Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="1、前情提要从这一部分开始，我们要进行的是数据统计和分析部分，主要就是对之前我们爬取的数据做一个可视化的处理，使其更具有可看性，更容易去发现数据的价值。开始之前，我们首先需要安装这么两个东西：
+
+安装网页编辑器Jupyter Notebook（其实就是之前的Ipython Notebook）
+安装数据可视化的库 Highchart">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图">
+<meta property="og:url" content="http://chengblog.top/2016/08/17/Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图/index.html">
+<meta property="og:site_name" content="code_Wang Site">
+<meta property="og:description" content="1、前情提要从这一部分开始，我们要进行的是数据统计和分析部分，主要就是对之前我们爬取的数据做一个可视化的处理，使其更具有可看性，更容易去发现数据的价值。开始之前，我们首先需要安装这么两个东西：
+
+安装网页编辑器Jupyter Notebook（其实就是之前的Ipython Notebook）
+安装数据可视化的库 Highchart">
+<meta property="og:image" content="http://chengblog.top/images/ganji_data.png">
+<meta property="og:updated_time" content="2016-08-18T12:12:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图">
+<meta name="twitter:description" content="1、前情提要从这一部分开始，我们要进行的是数据统计和分析部分，主要就是对之前我们爬取的数据做一个可视化的处理，使其更具有可看性，更容易去发现数据的价值。开始之前，我们首先需要安装这么两个东西：
+
+安装网页编辑器Jupyter Notebook（其实就是之前的Ipython Notebook）
+安装数据可视化的库 Highchart">
+<meta name="twitter:image" content="http://chengblog.top/images/ganji_data.png">
+  
+    <link rel="alternative" href="/atom.xml" title="code_Wang Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/photo.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Cheng Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/categories/notes">Notes</a></li>
+				        
+							<li><a href="/categories/python">Python</a></li>
+				        
+							<li><a href="/categories/html">Html</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/Fibonacci-Sequence/" style="font-size: 10px;">Fibonacci Sequence</a> <a href="/tags/Hanoi/" style="font-size: 10px;">Hanoi</a> <a href="/tags/Pascal-s-Triangle/" style="font-size: 10px;">Pascal's Triangle</a> <a href="/tags/Sweden/" style="font-size: 10px;">Sweden</a> <a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/combat/" style="font-size: 15px;">combat</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/highchart/" style="font-size: 10px;">highchart</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/notes/" style="font-size: 12.5px;">notes</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/requests/" style="font-size: 10px;">requests</a> <a href="/tags/scraping/" style="font-size: 17.5px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/WangChengAction">我的github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">BTH软工小硕一枚、喜欢吃东西、喜欢跑步、喜欢我女朋友~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Cheng Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/photo.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Cheng Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/categories/notes">Notes</a></li>
+		        
+					<li><a href="/categories/python">Python</a></li>
+		        
+					<li><a href="/categories/html">Html</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="pages-Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图" class="article article-type-pages" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/17/Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图/" class="article-date">
+  	<time datetime="2016-08-17T07:14:01.000Z" itemprop="datePublished">2016-08-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/combat/">combat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/highchart/">highchart</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+            <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1、前情提要"><span class="toc-text">1、前情提要</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2、安装"><span class="toc-text">2、安装</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-Jupyter-Notebook安装"><span class="toc-text">2.1 Jupyter Notebook安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-Highchart安装"><span class="toc-text">2.2 Highchart安装</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3、绘制赶集网二手市场各大类目发帖量对比的柱状图"><span class="toc-text">3、绘制赶集网二手市场各大类目发帖量对比的柱状图</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4、总结"><span class="toc-text">4、总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-难点一：Highchart导入时，有时会出现这种错误："><span class="toc-text">4.1 难点一：Highchart导入时，有时会出现这种错误：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-难点二：索引，每个类目发帖量的获取"><span class="toc-text">4.2 难点二：索引，每个类目发帖量的获取</span></a></li></ol></li></ol>
+            </div>
+        
+        <h1 id="1、前情提要"><a href="#1、前情提要" class="headerlink" title="1、前情提要"></a>1、前情提要</h1><p>从这一部分开始，我们要进行的是数据统计和分析部分，主要就是对之前我们爬取的数据做一个可视化的处理，使其更具有可看性，更容易去发现数据的价值。<br>开始之前，我们首先需要安装这么两个东西：</p>
+<ul>
+<li>安装网页编辑器Jupyter Notebook（其实就是之前的Ipython Notebook）</li>
+<li>安装数据可视化的库 Highchart</li>
+</ul>
+<a id="more"></a>
+<h1 id="2、安装"><a href="#2、安装" class="headerlink" title="2、安装"></a>2、安装</h1><h2 id="2-1-Jupyter-Notebook安装"><a href="#2-1-Jupyter-Notebook安装" class="headerlink" title="2.1 Jupyter Notebook安装"></a>2.1 Jupyter Notebook安装</h2><p>很简单，直接使用<code>pip</code>即可，因为我是Mac，所以想要安装到Python3版本中的话，需要</p>
+<pre><code>pip3 install jupyter
+</code></pre><p>安装好之后，我的是在命令行输入：</p>
+<pre><code>python -m IPython notebook
+</code></pre><p>就会跳转到jupyter的网页，上面会显示我本地的文件，这样就说明安装成功了。</p>
+<h2 id="2-2-Highchart安装"><a href="#2-2-Highchart安装" class="headerlink" title="2.2 Highchart安装"></a>2.2 Highchart安装</h2><p>同样，这个我们也是采用<code>pip</code>进行安装:</p>
+<pre><code>pip3 install charts
+</code></pre><p>安装完成后，打开<code>Jupyter</code>，点击<code>new &gt; python3</code>，然后在新页面中输入<code>import charts</code>，然后按<code>crtl + 回车</code>，若是出现类似这种结果：<code>Server running in the folder /Users/wangcheng at 127.0.0.1:54485</code> 则代表安装成功。<br>其他一些具体问题或者图表的问题，我们可查询<a href="http://www.highcharts.com" target="_blank" rel="external">Highchart 的官方网站</a></p>
+<h1 id="3、绘制赶集网二手市场各大类目发帖量对比的柱状图"><a href="#3、绘制赶集网二手市场各大类目发帖量对比的柱状图" class="headerlink" title="3、绘制赶集网二手市场各大类目发帖量对比的柱状图"></a>3、绘制赶集网二手市场各大类目发帖量对比的柱状图</h1><p>上周完成的最后一项任务就是爬取赶集网二手市场的十万数据（其实爬取完发现并不足十万，一是其中有四个类目的不规则页面，懒得一一设计了，二是赶集貌似只存留一段时间内的数据，超过时间的帖子都被删除了），这周，将尝试着对这些数据进行处理，首先就是统计一下其各大类目的发帖量的多少。<br>首先导入需要的包：</p>
+<pre><code>import pymongo
+import chart
+</code></pre><p>然后导入我们之前存在数据库中的数据：</p>
+<pre><code>client = pymongo.MongoClient(&apos;localhost&apos;,27017)
+ganji_data = client[&apos;ganji_data&apos;]
+sheet_detail = ganji_data[&apos;sheet_detail&apos;]
+</code></pre><p>我们可以先看一下数据库中的数据是怎样一个形式：</p>
+<pre><code>for i in sheet_detail.find().limit(300):
+    print(i)
+</code></pre><p>会发现结果为：</p>
+<pre><code>{&apos;price&apos;: &apos;600&apos;, &apos;types&apos;: &apos;双人床&apos;, &apos;degree&apos;: &apos;95成新&apos;, &apos;time&apos;: &apos;08-18&apos;, &apos;class_name&apos;: &apos;二手家具&apos;, &apos;title&apos;: &apos;腾房 转让两居室欧式家具双人床衣柜餐桌椅 - 600元&apos;, &apos;_id&apos;: ObjectId(&apos;57b574c9d38f541a5ca7ef69&apos;), &apos;link&apos;: &apos;http://bj.ganji.com/jiaju/2269117506x.htm&apos;, &apos;area&apos;: [&apos; 北京&apos;, &apos;大兴&apos;, &apos;西红门&apos;]}
+{&apos;price&apos;: &apos;2800&apos;, &apos;types&apos;: &apos;电视柜&apos;, &apos;degree&apos;: &apos;95成新&apos;, &apos;time&apos;: &apos;08-18&apos;, &apos;class_name&apos;: &apos;二手家具&apos;, &apos;title&apos;: &apos;搬家急处理一套使用一年多的古典实木家具 - 2800元&apos;, &apos;_id&apos;: ObjectId(&apos;57b574c9d38f541a5da7ef69&apos;), &apos;link&apos;: &apos;http://bj.ganji.com/jiaju/2249884898x.htm&apos;, &apos;area&apos;: [&apos; 北京&apos;, &apos;朝阳&apos;]}
+{&apos;price&apos;: &apos;550&apos;, &apos;types&apos;: &apos;双人床&apos;, &apos;degree&apos;: &apos;95成新&apos;, &apos;time&apos;: &apos;08-18&apos;, &apos;class_name&apos;: &apos;二手家具&apos;, &apos;title&apos;: &apos;便宜处理闲置沙发餐桌椅、二门三门衣柜、双人床、写字台等,能送 - 550元&apos;, &apos;_id&apos;: ObjectId(&apos;57b574c9d38f541a5ba7ef69&apos;), &apos;link&apos;: &apos;http://bj.ganji.com/jiaju/2229437184x.htm&apos;, &apos;area&apos;: [&apos; 北京&apos;, &apos;朝阳&apos;, &apos;安贞&apos;]}
+{&apos;price&apos;: &apos;260&apos;, &apos;types&apos;: &apos;其他办公家具&apos;, &apos;degree&apos;: &apos;9成新&apos;, &apos;time&apos;: &apos;08-18&apos;, &apos;class_name&apos;: &apos;二手家具&apos;, &apos;title&apos;: &apos;投资公司急转办公家具和电器设备9新 - 260元&apos;, &apos;_id&apos;: ObjectId(&apos;57b574c9d38f541a5aa7ef69&apos;), &apos;link&apos;: &apos;http://bj.ganji.com/jiaju/2254975448x.htm&apos;, &apos;area&apos;: [&apos; 北京&apos;, &apos;朝阳&apos;]}
+{&apos;price&apos;: &apos;280&apos;, &apos;types&apos;: &apos;柜台&apos;, &apos;degree&apos;: &apos;95成新&apos;, &apos;time&apos;: &apos;08-18&apos;, &apos;class_name&apos;: &apos;二手家具&apos;, &apos;title&apos;: &apos;北京二手珠宝柜台出售二手珠宝柜台出售二手柜台出售 - 280元&apos;, &apos;_id&apos;: ObjectId(&apos;57b574c9d38f541a5da7ef6a&apos;), &apos;link&apos;: &apos;http://bj.ganji.com/jiaju/2142996161x.htm&apos;, &apos;area&apos;: [&apos; 北京&apos;, &apos;朝阳&apos;, &apos;欢乐谷&apos;]}
+{&apos;price&apos;: &apos;65&apos;, &apos;types&apos;: &apos;培训桌&apos;, &apos;degree&apos;: &apos;99成新&apos;, &apos;time&apos;: &apos;08-18&apos;, &apos;class_name&apos;: &apos;二手家具&apos;, &apos;title&apos;: &apos;折叠桌/培训桌 - 65元&apos;, &apos;_id&apos;: ObjectId(&apos;57b574c9d38f541a5ca7ef6a&apos;), &apos;link&apos;: &apos;http://bj.ganji.com/jiaju/2187178393x.htm&apos;, &apos;area&apos;: [&apos; 北京&apos;, &apos;海淀&apos;, &apos;学院路&apos;]}
+</code></pre><p>然后我们要找的是其中的<code>class_name</code>的值，思路就是先将所有的class_name放入一个列表，然后置入一个数组进行去重，这样就可以知道一共有几个大类，再用类别进行索引：</p>
+<pre><code>class_list = []
+for i in sheet_detail.find():
+    class_list.append(i[&apos;class_name&apos;])
+
+class_index = list(set(class_list))
+print(class_index)  
+</code></pre><p>这样就获得了类别的索引：</p>
+<pre><code>[&apos;二手手机&apos;, &apos;家用电器&apos;, &apos;图书/音乐/运动&apos;, &apos;母婴/儿童用品&apos;, &apos;二手家具&apos;, &apos;二手笔记本&apos;, &apos;农用品&apos;, &apos;美容护肤/化妆品&apos;, &apos;虚拟物品&apos;, &apos;家居百货&apos;, &apos;闲置礼品&apos;, &apos;电子数码&apos;, &apos;老年用品&apos;, &apos;设备/办公用品&apos;, &apos;服饰/箱包&apos;, &apos;台式电脑/网络&apos;]
+</code></pre><p>然后获取每个类别有多少个帖子：</p>
+<pre><code>class_count = []
+for index in class_index:
+    class_count.append(class_list.count(index))
+print(class_count)
+</code></pre><p>得到结果：</p>
+<pre><code>[1548, 1534, 1548, 1575, 1535, 1327, 1186, 1534, 1889, 1539, 3761, 1536, 1290, 3766, 1539, 1535]
+</code></pre><p>最后开始准备构建生成图表所需的内容：</p>
+<pre><code>def get_chart(types):
+    length = 0
+    if length &lt; len(class_index):
+        for index,num in zip(class_index,class_count):
+            data = {
+                &apos;name&apos;:index,
+                &apos;data&apos;:[num],
+                &apos;type&apos;:types
+            }
+            yield data
+            length += 1
+</code></pre><p>这里边主要就是构件一个字典，让它持续不断的返回字典中的内容，所以这里用了一个生成器，然后字典中的<code>key</code>值是<code>Highchart</code>规定的，不能更改。</p>
+<pre><code>series = [i for i in get_chart(&apos;column&apos;)]
+charts.plot(series,show=&apos;inline&apos;,options=dict(title=dict(text=&apos;赶集网二手市场十六大类目发帖量比较&apos;)))
+</code></pre><p>将字典传入一个列表中，调用charts的plot即可绘制出柱状图：<br><img src="/images/ganji_data.png" alt="image1"></p>
+<h1 id="4、总结"><a href="#4、总结" class="headerlink" title="4、总结"></a>4、总结</h1><h2 id="4-1-难点一：Highchart导入时，有时会出现这种错误："><a href="#4-1-难点一：Highchart导入时，有时会出现这种错误：" class="headerlink" title="4.1 难点一：Highchart导入时，有时会出现这种错误："></a>4.1 难点一：Highchart导入时，有时会出现这种错误：</h2><pre><code>ImportError: No module named &apos;plot&apos;
+</code></pre><p>这时候我们要将本机中的charts文件夹中的文件进行替换，替换文件可以在<a href="https://github.com/mugglecoding/Plan-for-combating" target="_blank" rel="external">麻瓜编程的Github中寻找</a>，替换完成后再重新导入charts即可。</p>
+<h2 id="4-2-难点二：索引，每个类目发帖量的获取"><a href="#4-2-难点二：索引，每个类目发帖量的获取" class="headerlink" title="4.2 难点二：索引，每个类目发帖量的获取"></a>4.2 难点二：索引，每个类目发帖量的获取</h2><p>这部分其实关键点就两个：</p>
+<ul>
+<li><code>set</code>的使用.</li>
+<li><code>count</code>的使用</li>
+</ul>
+<p>观察之前代码即可了解这两个方法的应用情况，注意练习即可。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/08/04/Python实战九：爬取58同城手机号页面/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Python实战九：爬取58同城手机号页面</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+  
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+        <span class="donate_txt">
+            &uarr;<br>
+                    感谢您的支持！
+        </span>
+        <br>
+    </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+            <!-- 支付宝打赏图案 -->
+            <img src="/img/zhifubao.jpg" alt="支付宝打赏"> 
+            <!-- 微信打赏图案 -->
+            <img src="/img/weixin.jpg" alt="微信打赏">  
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+
+  
+  
+    <div class="article-footer-copyright">
+    <p><span>本文标题:</span><a href="/2016/08/17/Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图/">Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图</a></p>
+    <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
+    <p><span>发布时间:</span>2016/08/17 - 15:14:01</p>
+    <p><span>最后更新:</span>2016/08/18 - 20:12:24</p>
+    <p>
+        <span>原始链接:</span><a class="post-url" href="/2016/08/17/Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图/" title="Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图">http://chengblog.top/2016/08/17/Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图/</a>
+        <span class="copy-path" data-clipboard-text="原文: http://chengblog.top/2016/08/17/Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        <script src="/js/clipboard.min.js"></script>
+        <script> var clipboard = new Clipboard('.copy-path'); </script>
+    </p>
+    <p>
+        <span>许可协议:</span><i class="fa fa-creative-commons"></i><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="中国大陆 (CC BY-NC-SA 4.0 CN)"> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </p>
+</div>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图" data-title="Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图" data-url="http://chengblog.top/2016/08/17/Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Cheng Wang
+    	</div>
+        <div class="footer-center">
+            <span id="busuanzi_container_site_uv">
+            本站访客数<span id="busuanzi_value_site_uv"></span>人次
+            </span>
+            <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+            </span>
+        </div>
+    </div>
+  </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<div>
+   <a href="javascript:;" id="totop" title="回到顶部"></a> 
+</div>
+
+<script src="/js/totop.js"></script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>

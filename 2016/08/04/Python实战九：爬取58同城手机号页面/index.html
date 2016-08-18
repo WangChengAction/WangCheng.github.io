@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="baidu-site-verification" content="9dtmr2U4H5" />
+        <meta name="google-site-verification" content="x6k7knkmpTCLh6kFNs3JZVS6wUmetVakl9PNI3qMT_0" />
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>Python实战九：爬取58同城手机号页面 | code_Wang Site</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="背景我们在爬取58的时候，会发现二手手机号码页面与其他的页面完全的不同，整个页面是由一个个的手机号码组成，所以，为了完整的爬取58的内容，我们需要对手机号码的页面进行单独的爬取。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python实战九：爬取58同城手机号页面">
+<meta property="og:url" content="http://chengblog.top/2016/08/04/Python实战九：爬取58同城手机号页面/index.html">
+<meta property="og:site_name" content="code_Wang Site">
+<meta property="og:description" content="背景我们在爬取58的时候，会发现二手手机号码页面与其他的页面完全的不同，整个页面是由一个个的手机号码组成，所以，为了完整的爬取58的内容，我们需要对手机号码的页面进行单独的爬取。">
+<meta property="og:image" content="http://chengblog.top/images/haoma_1.png">
+<meta property="og:image" content="http://chengblog.top/images/haoma_2.png">
+<meta property="og:image" content="http://chengblog.top/images/haoma_3.png">
+<meta property="og:updated_time" content="2016-08-04T10:07:42.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python实战九：爬取58同城手机号页面">
+<meta name="twitter:description" content="背景我们在爬取58的时候，会发现二手手机号码页面与其他的页面完全的不同，整个页面是由一个个的手机号码组成，所以，为了完整的爬取58的内容，我们需要对手机号码的页面进行单独的爬取。">
+<meta name="twitter:image" content="http://chengblog.top/images/haoma_1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="code_Wang Site" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/photo.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Cheng Wang</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/categories/notes">Notes</a></li>
+				        
+							<li><a href="/categories/python">Python</a></li>
+				        
+							<li><a href="/categories/html">Html</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+					        
+								<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+					        
+								<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/BeautifulSoup/" style="font-size: 10px;">BeautifulSoup</a> <a href="/tags/Fibonacci-Sequence/" style="font-size: 10px;">Fibonacci Sequence</a> <a href="/tags/Hanoi/" style="font-size: 10px;">Hanoi</a> <a href="/tags/Pascal-s-Triangle/" style="font-size: 10px;">Pascal's Triangle</a> <a href="/tags/Sweden/" style="font-size: 10px;">Sweden</a> <a href="/tags/blog-test/" style="font-size: 10px;">blog_test</a> <a href="/tags/combat/" style="font-size: 15px;">combat</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/highchart/" style="font-size: 10px;">highchart</a> <a href="/tags/html/" style="font-size: 12.5px;">html</a> <a href="/tags/mongodb/" style="font-size: 10px;">mongodb</a> <a href="/tags/mysql/" style="font-size: 10px;">mysql</a> <a href="/tags/notes/" style="font-size: 12.5px;">notes</a> <a href="/tags/python/" style="font-size: 20px;">python</a> <a href="/tags/requests/" style="font-size: 10px;">requests</a> <a href="/tags/scraping/" style="font-size: 17.5px;">scraping</a> <a href="/tags/urllib/" style="font-size: 10px;">urllib</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="https://github.com/WangChengAction">我的github</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">BTH软工小硕一枚、喜欢吃东西、喜欢跑步、喜欢我女朋友~~</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Cheng Wang</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+			
+				<img lazy-src="/img/photo.jpg" class="js-avatar">
+			
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Cheng Wang</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">python | html5 | javascript | database | Everything I Want</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/categories/notes">Notes</a></li>
+		        
+					<li><a href="/categories/python">Python</a></li>
+		        
+					<li><a href="/categories/html">Html</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/WangChengAction" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/wc1121" title="weibo">weibo</a>
+			        
+						<a class="zhihu" target="_blank" href="https://www.zhihu.com/people/wang-cheng-19-62" title="zhihu">zhihu</a>
+			        
+						<a class="mail" target="_blank" href="/378716031@qq.com" title="mail">mail</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="pages-Python实战九：爬取58同城手机号页面" class="article article-type-pages" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/04/Python实战九：爬取58同城手机号页面/" class="article-date">
+  	<time datetime="2016-08-04T07:17:08.000Z" itemprop="datePublished">2016-08-04</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Python实战九：爬取58同城手机号页面
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/combat/">combat</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/">python</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/scraping/">scraping</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+            <div id="toc" class="toc-article">
+                <strong class="toc-title">文章目录</strong>
+                <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#背景"><span class="toc-text">背景</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#代码"><span class="toc-text">代码</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-数据库重复检测"><span class="toc-text">1-数据库重复检测</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-多进程"><span class="toc-text">2-多进程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-multiprocessing模块"><span class="toc-text">2-1 multiprocessing模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-Pool进程池"><span class="toc-text">2-2 Pool进程池</span></a></li></ol></li></ol></li></ol>
+            </div>
+        
+        <h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>我们在爬取58的时候，会发现二手手机号码页面与其他的页面完全的不同，整个页面是由一个个的手机号码组成，所以，为了完整的爬取58的内容，我们需要对手机号码的页面进行单独的爬取。</p>
+<a id="more"></a>
+<p>我们首先要爬的就是这个充满标题与链接的页面: <img src="/images/haoma_1.png" alt="&#39;image1&#39;">，这里面我们要注意不能爬取商家的链接，因为商家的链接基本都指向了不同架构的页面，而且并不具备二手商品的爬取价值，所以我们不做考虑。那么如何区分商家和个人呢，我们发现，商家推广的方框右上角会有一个数字的角标，而个人的并没有，我们就可以根据这个来做判定。这部分我们可以写一个函数：</p>
+<pre><code>urls = [&apos;http://bj.58.com/shoujihao/pn{}&apos;.format(str(i)) for i in range(1,100)]
+
+def get_phone_no(url):
+
+    resp = requests.get(url)
+    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
+    # time.sleep(2) 
+
+    titles = soup.select(&apos;#infolist &gt; div.boxlist &gt; ul &gt; div.boxlist &gt; ul &gt; li &gt; a.t &gt; strong.number&apos;)
+    links = soup.select(&apos;#infolist &gt; div.boxlist &gt; ul &gt; div.boxlist &gt; ul &gt; li &gt; a.t&apos;)
+
+    for title,link in zip(titles,links):
+        data = {
+            &apos;title&apos;:title.get_text(),
+            &apos;link&apos;:link.get(&apos;href&apos;).split(&apos;?&apos;)[0]
+        }
+        # 这里我们要桌一个判断，如果获取的链接是这种跳转到外部链接的商家链接，就不往数据库中存
+        if data[&apos;link&apos;] == &apos;http://jump.zhineng.58.com/clk&apos;:
+            pass
+        else:
+            sheet_phone_url.insert_one(data)
+            print(data)
+</code></pre><p>这样就成功的获取了100页内的所有的个人的手机号的链接和标题，然后我们再写一个用于爬取详情页的函数，将这里面爬取到的链接传入这个函数，即可爬取到所有链接的详情页：<img src="/images/haoma_2.png" alt="&#39;image2&#39;"></p>
+<h1 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h1><p>整个的代码如下所示：</p>
+<pre><code>from bs4 import BeautifulSoup
+import requests
+import time
+import pymongo
+
+client = pymongo.MongoClient(&apos;localhost&apos;,27017,connect=False)
+phone_no = client[&apos;phone_no&apos;]
+sheet_phone_url = phone_no[&apos;sheet_phone_url&apos;]
+sheet_phone_detail = phone_no[&apos;sheet_phone_detail&apos;]
+
+try:
+    sheet_phone_url.ensure_index(&apos;link&apos;, unique=True,dropDups=True)  # 如果有重复的url 写进去 会报错
+    sheet_phone_detail.ensure_index(&apos;link&apos;, unique=True,dropDups=True)  # 如果有重复的url 写进去 会报错
+except:
+    pass
+
+urls = [&apos;http://bj.58.com/shoujihao/pn{}&apos;.format(str(i)) for i in range(1,100)]
+
+def get_phone_no(url):
+
+    resp = requests.get(url)
+    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
+    # time.sleep(2) 
+
+    titles = soup.select(&apos;#infolist &gt; div.boxlist &gt; ul &gt; div.boxlist &gt; ul &gt; li &gt; a.t &gt; strong.number&apos;)
+    links = soup.select(&apos;#infolist &gt; div.boxlist &gt; ul &gt; div.boxlist &gt; ul &gt; li &gt; a.t&apos;)
+
+    for title,link in zip(titles,links):
+        data = {
+            &apos;title&apos;:title.get_text(),
+            &apos;link&apos;:link.get(&apos;href&apos;).split(&apos;?&apos;)[0]
+        }
+        if data[&apos;link&apos;] == &apos;http://jump.zhineng.58.com/clk&apos;:
+            pass
+        else:
+            sheet_phone_url.insert_one(data)
+        print(data)
+
+def get_phone_detail(url):
+
+    resp = requests.get(url)
+    soup = BeautifulSoup(resp.text,&apos;lxml&apos;)
+
+    data = {
+        &apos;title&apos;: soup.select(&apos;div.col.detailPrimary.mb15 &gt; div.col_sub.mainTitle &gt; h1&apos;)[0].get_text().replace(&apos;\n&apos;,&apos;&apos;).replace(&apos; &apos;,&apos;&apos;).replace(&apos;\t&apos;,&apos;&apos;),
+        &apos;time&apos;: soup.select(&apos;div.col_sub.mainTitle &gt; div &gt; ul.mtit_con_left.fl &gt; li.time&apos;)[0].get_text().strip(),
+        &apos;price&apos;:soup.select(&apos;ul.suUl &gt; li &gt; div.su_con &gt; span.price&apos;)[0].get_text().replace(&apos;\n&apos;,&apos;&apos;).replace(&apos; &apos;,&apos;&apos;).replace(&apos;\t&apos;,&apos;&apos;),
+        &apos;area&apos;:soup.select(&apos;ul.suUl &gt; li:nth-of-type(2) &gt; div.su_con &gt; a&apos;)[0].get_text() if soup.find(text=&apos;区域：&apos;) else None,
+        &apos;host&apos;:soup.select(&apos;ul.userinfo &gt; ul.vcard &gt; li &gt; a&apos;)[0].get(&apos;title&apos;),
+        &apos;telephone&apos;:soup.select(&apos;#t_phone&apos;)[0].get_text().strip(),
+        &apos;link&apos;:url
+    }
+    try:
+        sheet_phone_detail.insert(data)
+    except pymongo.errors.DuplicateKeyError as ex:
+        pass
+    print(data)
+</code></pre><p>然后在Main函数中运行：</p>
+<pre><code>from multiprocessing import Pool#帮助python程序调用主机的多个内核来完成任务
+from channel_link import channel_list
+from phone_no import get_phone_no,get_phone_detail,sheet_phone_detail,sheet_phone_url
+
+import multiprocessing
+import time
+
+shoujihao_url = &apos;http://bj.58.com/shoujihao/&apos; 
+urls = [&apos;http://bj.58.com/shoujihao/pn{}&apos;.format(str(i)) for i in range(1,100)]
+
+#页码的获取
+def get_all_links_from(channel):
+    for num in range(1,100):
+        if channel == shoujihao_url:
+            for url in urls:
+                get_phone_no(url)
+        else:
+            pass
+
+
+ if __name__ == &apos;__main__&apos;:
+
+    #创建进程池
+    pool = Pool()
+
+    #获取全部连接
+    pool.map(get_all_links_from,channel_list.split())
+
+    for link in sheet_phone_url.find():
+        try:
+            pool.apply_async(get_phone_detail,args = (link[&apos;link&apos;],))
+        except IndexError as Index:
+            print(Index)
+
+
+    pool.close()
+    pool.join()
+</code></pre><p>然后我们可以从下图中看到我们的运行结果：<br><img src="/images/haoma_3.png" alt="&#39;image_3&#39;"><br>运行结果分成两部分，左半部分是爬取的内容，右半部分是数据库中数据的数目，我们可以看到共有40422条url链接，然后爬取到了其中40380条数据的详情。</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>首先在爬取页面部分，并没有遇到太大的困难，和之前的步骤基本相同，这里加入的新东西有这么几个，首先就是数据库的重复检测，然后是多进程。</p>
+<h2 id="1-数据库重复检测"><a href="#1-数据库重复检测" class="headerlink" title="1-数据库重复检测"></a>1-数据库重复检测</h2><p>看这两句代码：</p>
+<pre><code>sheet_phone_url.ensure_index(&apos;link&apos;,unique=True,dropDups=True)
+sheet_phone_detail.ensure_index(&apos;link&apos;,unique=True,dropDups=True)
+</code></pre><p>这句是对数据库中的数据进行重复检测，这里最好是采用唯一的值，比如我们这个程序中的网址，每个项目的网址肯定是唯一的，然后<code>dropDups=True</code>是保证若有重复的项插入时，删除重复的数据，若是不加入这句的话，当插入重复数据时程序会报错。<br>当然，为了是程序更加健壮，可以再加入一个<code>try..except..</code>：</p>
+<pre><code>try:
+    sheet_phone_detail.insert(data)
+except pymongo.errors.DuplicateKeyError as ex:
+    pass
+</code></pre><h2 id="2-多进程"><a href="#2-多进程" class="headerlink" title="2-多进程"></a>2-多进程</h2><blockquote>
+<p>以下内容参考自<a href="http://www.liaoxuefeng.com/wiki/0014316089557264a6b348958f449949df42a6d3a2e542c000/001431927781401bb47ccf187b24c3b955157bb12c5882d000" target="_blank" rel="external">廖学峰Python教程</a>，感谢作者</p>
+</blockquote>
+<p>我们简单介绍下进程和线程。<br>对于操作系统来说，一个任务就是一个<code>进程</code>，比如开一个浏览器就是启动一个浏览器进程，开一个word就是启动一个word进程。有些进程还不止同时干一件事，比如Word，它可以同时进行打字、拼写检查、打印等事情。在一个进程内部，要同时干多件事，就需要同时运行多个“子任务”，我们把进程中的这些“子任务”称为<code>线程</code>。</p>
+<h3 id="2-1-multiprocessing模块"><a href="#2-1-multiprocessing模块" class="headerlink" title="2-1 multiprocessing模块"></a>2-1 multiprocessing模块</h3><p>要让Python程序实现多进程(Multiprocessing)，我们先来看一下<code>multiprocessing</code>模块。<br><code>multiprocessing</code>模块提供了一个<code>Process</code>类来代表一个进程对象，下面例子演示了启动一个子进程并等待其结束：</p>
+<pre><code>from multiprocessing import Process
+import os
+
+# 子进程要执行的代码
+def run_proc(name):
+    print(&apos;Run child process %s (%s)...&apos; % (name, os.getpid()))
+
+if __name__==&apos;__main__&apos;:
+    print(&apos;Parent process %s.&apos; % os.getpid())
+
+    #创建Process实例
+    p = Process(target=run_proc, args=(&apos;test&apos;,))
+    print(&apos;Child process will start.&apos;)
+    #启动      
+    p.start()
+    p.join()
+    print(&apos;Child process end.&apos;)
+</code></pre><p>运行结果如下：</p>
+<pre><code>Parent process 928.
+Process will start.
+Run child process test (929)...
+Process end
+</code></pre><p>创建子进程时，只需要传入一个执行函数和函数的参数，创建一个<code>Process</code>实例，用<code>start()</code>方法启动，这样创建进程比fork()还要简单。<code>join()</code>方法可以等待子进程结束后再继续往下运行，通常用于进程间的同步。</p>
+<h3 id="2-2-Pool进程池"><a href="#2-2-Pool进程池" class="headerlink" title="2-2 Pool进程池"></a>2-2 Pool进程池</h3><p>如果要启动大量的子进程，可以用进程池的方式批量创建子进程:</p>
+<pre><code>from multiprocessing import Pool
+import os, time, random
+
+def long_time_task(name):
+    print(&apos;Run task %s (%s)...&apos; % (name, os.getpid()))
+    start = time.time()
+    time.sleep(random.random() * 3)
+    end = time.time()
+    print(&apos;Task %s runs %0.2f seconds.&apos; % (name, (end - start)))
+
+if __name__==&apos;__main__&apos;:
+    print(&apos;Parent process %s.&apos; % os.getpid())
+    p = Pool(4)
+    for i in range(5):
+        p.apply_async(long_time_task, args=(i,))
+    print(&apos;Waiting for all subprocesses done...&apos;)
+    p.close()
+    p.join()
+    print(&apos;All subprocesses done.&apos;)
+</code></pre><p>运行结果：</p>
+<pre><code>Parent process 4002.
+Waiting for all subprocesses done...
+Run task 0 (4003)...
+Run task 1 (4004)...
+Run task 2 (4005)...
+Run task 3 (4006)...
+Task 2 runs 0.70 seconds.
+Run task 4 (4005)...
+Task 3 runs 1.45 seconds.
+Task 1 runs 1.91 seconds.
+Task 4 runs 1.87 seconds.
+Task 0 runs 2.85 seconds.
+All subprocesses done.
+</code></pre><p>对Pool对象调用join()方法会等待所有子进程执行完毕，调用join()之前必须先调用close()，调用close()之后就不能继续添加新的Process了。</p>
+<p>请注意输出的结果，task 0，1，2，3是立刻执行的，而task4要等待前面某个task完成后才执行，这是因为Pool的默认大小在我的电脑上是4，因此，最多同时执行4个进程。这是Pool有意设计的限制，并不是操作系统的限制。如果改成：</p>
+<pre><code>p = Pool(5)
+</code></pre><p>就可以同时跑5个进程。由于Pool的默认大小是CPU的核数，如果你不幸拥有8核CPU，你要提交至少9个子进程才能看到上面的等待效果。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/17/Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          Python实战十：绘制赶集网二手市场19大类目发帖量对比柱状图
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/26/python实战八：在MongoDB中筛选房源/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">python实战八：在MongoDB中筛选房源</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+
+  
+  
+    <div class ="post-donate">
+    <div id="donate_board" class="donate_bar center">
+        <a id="btn_donate" class="btn_donate" href="javascript:;" title="打赏"></a>
+        <span class="donate_txt">
+            &uarr;<br>
+                    感谢您的支持！
+        </span>
+        <br>
+    </div>  
+    <div id="donate_guide" class="donate_bar center hidden" >
+            <!-- 支付宝打赏图案 -->
+            <img src="/img/zhifubao.jpg" alt="支付宝打赏"> 
+            <!-- 微信打赏图案 -->
+            <img src="/img/weixin.jpg" alt="微信打赏">  
+    </div>
+    <script type="text/javascript">
+        document.getElementById('btn_donate').onclick = function(){
+            $('#donate_board').addClass('hidden');
+            $('#donate_guide').removeClass('hidden');
+        }
+    </script>
+</div>
+
+  
+  
+    <div class="article-footer-copyright">
+    <p><span>本文标题:</span><a href="/2016/08/04/Python实战九：爬取58同城手机号页面/">Python实战九：爬取58同城手机号页面</a></p>
+    <p><span>文章作者:</span><a href="/" title="请访问 Cheng Wang 博客">Cheng Wang</a></p>
+    <p><span>发布时间:</span>2016/08/04 - 15:17:08</p>
+    <p><span>最后更新:</span>2016/08/04 - 18:07:42</p>
+    <p>
+        <span>原始链接:</span><a class="post-url" href="/2016/08/04/Python实战九：爬取58同城手机号页面/" title="Python实战九：爬取58同城手机号页面">http://chengblog.top/2016/08/04/Python实战九：爬取58同城手机号页面/</a>
+        <span class="copy-path" data-clipboard-text="原文: http://chengblog.top/2016/08/04/Python实战九：爬取58同城手机号页面/　　作者: Cheng Wang" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+        <script src="/js/clipboard.min.js"></script>
+        <script> var clipboard = new Clipboard('.copy-path'); </script>
+    </p>
+    <p>
+        <span>许可协议:</span><i class="fa fa-creative-commons"></i><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知识共享许可协议" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" title="中国大陆 (CC BY-NC-SA 4.0 CN)"> 知识共享署名-非商业性使用-相同方式共享 4.0 国际许可协议</a>
+    </p>
+</div>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Python实战九：爬取58同城手机号页面" data-title="Python实战九：爬取58同城手机号页面" data-url="http://chengblog.top/2016/08/04/Python实战九：爬取58同城手机号页面/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Cheng Wang
+    	</div>
+        <div class="footer-center">
+            <span id="busuanzi_container_site_uv">
+            本站访客数<span id="busuanzi_value_site_uv"></span>人次
+            </span>
+            <span id="busuanzi_container_page_pv">
+            本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+            </span>
+        </div>
+    </div>
+  </div>
+</footer>
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script src="/js/main.js"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+<div>
+   <a href="javascript:;" id="totop" title="回到顶部"></a> 
+</div>
+
+<script src="/js/totop.js"></script>
+
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  </div>
+</body>
+</html>
